@@ -2,4 +2,7 @@
     <string name="app_name">RackIT</string>
     <string name="comecar">Começar</string>
     <string name="textoWelcome">O RackIT é um sistema de gestão de inventario doméstico feito para facilitar a vida do utilizador. Pretende poupar tempo e dinheiro do utilizador</string>
+    <string name="rackIT">rackIT</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
 </resources>

@@ -2,7 +2,10 @@
 <resources>
     <color name="primary">#0756F1</color>
     <color name="primaryLight">#6982FF</color>
-
+    <color name="colorEditText">#14000000</color>
+    <color name="colorPlaceholder">#505050</color>
+    <color name="colorTextBlack">#000000</color>
+    <color name="colorBlack">#000000</color>
     <color name="defaultText">#424242</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>

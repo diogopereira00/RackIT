@@ -1,2 +1,10 @@
 com/diogo/rackit/BuildConfig.java
  com.diogo.rackit.BuildConfig
+com/diogo/rackit/databinding/ActivityWelcomeBinding.java
+ com.diogo.rackit.databinding.ActivityWelcomeBinding
+com/diogo/rackit/databinding/ActivityLoginBinding.java
+ com.diogo.rackit.databinding.ActivityLoginBinding
+com/diogo/rackit/databinding/ActivityMainBinding.java
+ com.diogo.rackit.databinding.ActivityMainBinding
+com/diogo/rackit/databinding/ActivityAuthenticationBinding.java
+ com.diogo.rackit.databinding.ActivityAuthenticationBinding

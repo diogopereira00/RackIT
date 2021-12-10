@@ -22,6 +22,12 @@
         android:testOnly="true"
         android:theme="@style/Theme.RackIT" >
         <activity
+            android:name="com.diogo.rackit.LoginActivity"
+            android:exported="true" />
+        <activity
+            android:name="com.diogo.rackit.AuthenticationActivity"
+            android:exported="true" />
+        <activity
             android:name="com.diogo.rackit.MainActivity"
             android:exported="false" />
         <activity

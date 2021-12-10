@@ -1,0 +1,2 @@
+com/diogo/rackit/BuildConfig.java
+ com.diogo.rackit.BuildConfig

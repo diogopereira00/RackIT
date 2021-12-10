@@ -1,9 +1,10 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-26:12
+ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-32:12
+MERGED from [androidx.databinding:viewbinding:7.0.3] C:\Users\dmcpe\.gradle\caches\transforms-3\ddcfc7a832aed1726236c89c695a92cf\transformed\jetified-viewbinding-7.0.3\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core-ktx:1.7.0] C:\Users\dmcpe\.gradle\caches\transforms-3\4fbbfabdbd723c11822c9139f0ef3385\transformed\jetified-core-ktx-1.7.0\AndroidManifest.xml:2:1-9:12
 MERGED from [com.google.android.material:material:1.4.0] C:\Users\dmcpe\.gradle\caches\transforms-3\65c896cd2c399c1b5172132e223045bc\transformed\material-1.4.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.2] C:\Users\dmcpe\.gradle\caches\transforms-3\d6dc5a621f74a6a07078a85502dcf5c4\transformed\constraintlayout-2.1.2\AndroidManifest.xml:2:1-11:12
@@ -58,25 +59,25 @@ MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\dmcpe\.gradle\ca
 MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\dmcpe\.gradle\caches\transforms-3\9ea84c333698cec2b9b8274f222c285a\transformed\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] C:\Users\dmcpe\.gradle\caches\transforms-3\ce5fedd2ae2ff1134121bf9351e2cac1\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] C:\Users\dmcpe\.gradle\caches\transforms-3\4c9cbc32a8d8d3a87d79895ebce57f86\transformed\jetified-annotation-experimental-1.1.0\AndroidManifest.xml:17:1-24:12
-INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-26:12
-INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-26:12
+INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-32:12
+INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-32:12
 	package
 		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:3:5-31
 		INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml
 		INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml
-		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-26:12
+		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-32:12
 		INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml
-		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-26:12
+		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:1-32:12
 		INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:2:11-69
 application
-ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:5:5-24:19
+ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:5:5-30:19
 MERGED from [com.google.android.material:material:1.4.0] C:\Users\dmcpe\.gradle\caches\transforms-3\65c896cd2c399c1b5172132e223045bc\transformed\material-1.4.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.4.0] C:\Users\dmcpe\.gradle\caches\transforms-3\65c896cd2c399c1b5172132e223045bc\transformed\material-1.4.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.2] C:\Users\dmcpe\.gradle\caches\transforms-3\d6dc5a621f74a6a07078a85502dcf5c4\transformed\constraintlayout-2.1.2\AndroidManifest.xml:9:5-20
@@ -119,32 +120,46 @@ MERGED from [androidx.startup:startup-runtime:1.0.0] C:\Users\dmcpe\.gradle\cach
 		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:6:9-35
 	android:theme
 		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:11:9-44
-activity#com.diogo.rackit.MainActivity
-ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:12:9-14:40
+activity#com.diogo.rackit.LoginActivity
+ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:12:9-14:39
 	android:exported
-		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:14:13-37
+		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:14:13-36
 	android:name
-		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:13:13-41
-activity#com.diogo.rackit.WelcomeActivity
-ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:15:9-23:20
+		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:13:13-42
+activity#com.diogo.rackit.AuthenticationActivity
+ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:15:9-17:39
 	android:exported
 		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:17:13-36
 	android:name
-		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:16:13-44
+		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:16:13-51
+activity#com.diogo.rackit.MainActivity
+ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:18:9-20:40
+	android:exported
+		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:20:13-37
+	android:name
+		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:19:13-41
+activity#com.diogo.rackit.WelcomeActivity
+ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:21:9-29:20
+	android:exported
+		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:23:13-36
+	android:name
+		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:22:13-44
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:18:13-22:29
+ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:24:13-28:29
 action#android.intent.action.MAIN
-ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:19:17-69
+ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:25:17-69
 	android:name
-		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:19:25-66
+		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:25:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:21:17-77
+ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:27:17-77
 	android:name
-		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:21:27-74
+		ADDED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml:27:27-74
 uses-sdk
 INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml
 INJECTED from C:\RackIT\rackit\app\src\main\AndroidManifest.xml
+MERGED from [androidx.databinding:viewbinding:7.0.3] C:\Users\dmcpe\.gradle\caches\transforms-3\ddcfc7a832aed1726236c89c695a92cf\transformed\jetified-viewbinding-7.0.3\AndroidManifest.xml:20:5-44
+MERGED from [androidx.databinding:viewbinding:7.0.3] C:\Users\dmcpe\.gradle\caches\transforms-3\ddcfc7a832aed1726236c89c695a92cf\transformed\jetified-viewbinding-7.0.3\AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core-ktx:1.7.0] C:\Users\dmcpe\.gradle\caches\transforms-3\4fbbfabdbd723c11822c9139f0ef3385\transformed\jetified-core-ktx-1.7.0\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.core:core-ktx:1.7.0] C:\Users\dmcpe\.gradle\caches\transforms-3\4fbbfabdbd723c11822c9139f0ef3385\transformed\jetified-core-ktx-1.7.0\AndroidManifest.xml:5:5-7:41
 MERGED from [com.google.android.material:material:1.4.0] C:\Users\dmcpe\.gradle\caches\transforms-3\65c896cd2c399c1b5172132e223045bc\transformed\material-1.4.0\AndroidManifest.xml:20:5-44

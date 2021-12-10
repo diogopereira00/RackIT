@@ -3,6 +3,13 @@
     <string name="comecar">Começar</string>
     <string name="textoWelcome">O RackIT é um sistema de gestão de inventario doméstico feito para facilitar a vida do utilizador. Pretende poupar tempo e dinheiro do utilizador</string>
     <string name="rackIT">rackIT</string>
-    <string name="login">Login</string>
-    <string name="register">Register</string>
+    <string name="login">Iniciar Sessão</string>
+    <string name="register">Criar conta</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="noAccount">Ainda não tens uma conta?</string>
+    <string name="registHere">Cria aqui</string>
+    <string name="enter_your_email">Insere aqui o teu email...</string>
+    <string name="password_insert">Insere aqui a tua password...</string>
+    <string name="remember_me">Mantenha-me conectado</string>
 </resources>

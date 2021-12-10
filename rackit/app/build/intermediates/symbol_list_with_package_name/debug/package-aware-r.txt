@@ -1116,6 +1116,10 @@ color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
 color checkbox_themeable_attribute_color
+color colorBlack
+color colorEditText
+color colorPlaceholder
+color colorTextBlack
 color common_google_signin_btn_text_dark
 color common_google_signin_btn_text_dark_default
 color common_google_signin_btn_text_dark_disabled
@@ -1264,6 +1268,7 @@ color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
 color primary
+color primaryLight
 color primary_dark_material_dark
 color primary_dark_material_light
 color primary_material_dark
@@ -1808,6 +1813,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable button_primary_background
 drawable common_full_open_on_phone
 drawable common_google_signin_btn_icon_dark
 drawable common_google_signin_btn_icon_dark_focused
@@ -1832,9 +1838,11 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable edit_text_background
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_clock_black_24dp
+drawable ic_hello_re_3evm
 drawable ic_keyboard_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
@@ -1842,6 +1850,7 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable locker_icon
 drawable material_cursor_drawable
 drawable material_ic_calendar_black_24dp
 drawable material_ic_clear_black_24dp
@@ -1880,6 +1889,10 @@ drawable test_custom_background
 drawable test_level_drawable
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
+drawable user_icon
+font seg_ui_semibold
+font segoe_ui_bold
+font segoe_ui_regular
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -2060,8 +2073,10 @@ id easeIn
 id easeInOut
 id easeOut
 id east
+id editText2
 id edit_query
 id elastic
+id emailText
 id end
 id endToStart
 id enterAlways
@@ -2104,6 +2119,7 @@ id ignore
 id ignoreRequest
 id image
 id imageView
+id imagemWelcome
 id immediateStop
 id included
 id info
@@ -2128,6 +2144,9 @@ id line3
 id linear
 id listMode
 id list_item
+id loginButton
+id loginText
+id logoText
 id masked
 id match_constraint
 id match_parent
@@ -2212,6 +2231,8 @@ id parent
 id parentPanel
 id parentRelative
 id parent_matrix
+id passwordEdit
+id passwordText
 id password_toggle
 id path
 id pathRelative
@@ -2225,6 +2246,9 @@ id progress_horizontal
 id radio
 id ratio
 id rectangles
+id registHereTextView
+id registerButton
+id rememberMe
 id reverseSawtooth
 id right
 id rightToLeft
@@ -2357,6 +2381,7 @@ id view_tree_saved_state_registry_owner
 id view_tree_view_model_store_owner
 id visible
 id visible_removing_fragment_view_tag
+id welcomeButton
 id west
 id wide
 id withText
@@ -2435,6 +2460,8 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_authentication
+layout activity_login
 layout activity_main
 layout activity_welcome
 layout browser_actions_context_menu_page
@@ -2585,6 +2612,8 @@ string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
 string default_web_client_id
+string email
+string enter_your_email
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
@@ -2597,6 +2626,7 @@ string google_storage_bucket
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
+string login
 string material_clock_display_divider
 string material_clock_toggle_content_description
 string material_hour_selection
@@ -2652,12 +2682,19 @@ string mtrl_picker_toggle_to_calendar_input_mode
 string mtrl_picker_toggle_to_day_selection
 string mtrl_picker_toggle_to_text_input_mode
 string mtrl_picker_toggle_to_year_selection
+string noAccount
+string password
+string password_insert
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
 string project_id
+string rackIT
+string registHere
+string register
+string remember_me
 string search_menu_title
 string status_bar_notification_info_overflow
 string textoWelcome

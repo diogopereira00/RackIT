@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:text="@string/rackIT"
         android:textColor="@color/primary"
+
         android:textSize="45dp"
         android:textStyle="bold"
         android:layout_marginLeft="50dp"
@@ -39,23 +40,24 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_hello_re_3evm" />
 
+
     <Button
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="224dp"
+
+        android:background="@drawable/button_primary_background"
         android:backgroundTint="@color/primary"
         android:text="@string/login"
         android:textColor="@color/white"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imagemWelcome"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.188" />
 
     <Button
         android:id="@+id/registerButton"
@@ -63,14 +65,17 @@
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:backgroundTint="@color/primaryLight"
+
+        android:background="@drawable/button_primary_background"
+        android:backgroundTint="@color/white"
         android:text="@string/register"
-        android:textColor="@color/white"
+        android:textColor="@color/defaultText"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.058" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

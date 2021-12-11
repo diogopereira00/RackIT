@@ -12,4 +12,5 @@
     <string name="enter_your_email">Insere aqui o teu email…</string>
     <string name="password_insert">Insere aqui a tua password…</string>
     <string name="remember_me">Mantenha-me conectado</string>
+    <string name="welcome">Bem-vindo</string>
 </resources>

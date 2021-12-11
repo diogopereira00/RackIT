@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".RegisterActivity">
 
     <TextView
-        android:id="@+id/loginText"
+        android:id="@+id/regiterText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login"
+        android:text="@string/register"
         android:textColor="@color/defaultText"
         android:textSize="40sp"
         android:textStyle="bold"
@@ -22,15 +22,38 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.15" />
 
-
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/usernameRegister"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:background="@drawable/edit_text_background"
         android:drawableEnd="@drawable/user_icon"
+        android:drawableTint="@color/colorTextBlack"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:hint="@string/enter_your_username"
+        android:inputType="textPersonName"
+        android:paddingLeft="26dp"
+        android:paddingRight="26dp"
+        android:textColor="@color/defaultText"
+        android:textColorHint="@color/colorPlaceholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.62"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regiterText"
+        app:layout_constraintVertical_bias="0.11"
+        tools:ignore="Autofill,UnusedAttribute" />
+
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableEnd="@drawable/email_icon"
         android:drawableTint="@color/colorTextBlack"
         android:fontFamily="@font/seg_ui_semibold"
         android:hint="@string/enter_your_email"
@@ -41,11 +64,25 @@
         android:textColorHint="@color/colorPlaceholder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.62"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginText"
-        app:layout_constraintVertical_bias="0.11"
+        app:layout_constraintTop_toBottomOf="@+id/usernameRegister"
+        app:layout_constraintVertical_bias="0.079"
         tools:ignore="Autofill,UnusedAttribute" />
+
+    <TextView
+
+        android:id="@+id/emailText"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:text="Email"
+        app:layout_constraintBottom_toTopOf="@+id/emailEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameRegister"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/passwordEdit"
@@ -66,41 +103,27 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText"
         app:layout_constraintVertical_bias="0.106"
         tools:targetApi="m"
         tools:ignore="Autofill" />
 
-    <CheckBox
-        android:id="@+id/rememberMe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:buttonTint="@color/primary"
-        android:fontFamily="@font/seg_ui_semibold"
-        android:text="@string/remember_me"
-        android:textColor="@color/defaultText"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.115"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEdit"
-        app:layout_constraintVertical_bias="0.041" />
+
 
     <TextView
 
-        android:id="@+id/emailText"
+        android:id="@+id/usernameText"
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/seg_ui_semibold"
-        android:text="@string/email"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        android:text="Nome de utilizador"
+        app:layout_constraintBottom_toTopOf="@+id/usernameRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.079"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginText" />
+        app:layout_constraintTop_toBottomOf="@+id/regiterText" />
 
     <TextView
 
@@ -114,29 +137,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText"
         app:layout_constraintVertical_bias="0.681" />
 
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:fontFamily="@font/seg_ui_semibold"
-
         android:background="@drawable/button_primary_background"
+
         android:backgroundTint="@color/primary"
-        android:text="@string/login"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:text="@string/criar_conta"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEdit"
-        app:layout_constraintVertical_bias="0.27" />
+        app:layout_constraintVertical_bias="0.172" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -155,17 +178,17 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:fontFamily="@font/seg_ui_semibold"
-            android:text="@string/noAccount"
+            android:text="@string/haveAccount"
             android:textColor="@color/colorTextBlack"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/registHereTextView"
+            android:id="@+id/loginHereTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:fontFamily="@font/segoe_ui_bold"
-            android:text="@string/registHere"
+            android:text="@string/loginHere"
             android:textColor="@color/primary"
             android:textSize="18sp" />
     </LinearLayout>

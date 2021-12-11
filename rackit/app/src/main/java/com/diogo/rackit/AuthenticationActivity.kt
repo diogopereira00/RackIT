@@ -9,6 +9,8 @@ import com.diogo.rackit.databinding.ActivityAuthenticationBinding
 
 class AuthenticationActivity : AppCompatActivity() {
     lateinit var botaoLogin: Button
+    lateinit var botaoRegister: Button
+
     private lateinit var binding: ActivityAuthenticationBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +22,10 @@ class AuthenticationActivity : AppCompatActivity() {
         botaoLogin.setOnClickListener{
             executarOutraActivity(outraActivity = LoginActivity::class.java)
 
+        }
+        botaoRegister = binding.registerButton
+        botaoRegister.setOnClickListener{
+            executarOutraActivity(outraActivity = RegisterActivity::class.java)
         }
     }
 

@@ -33,7 +33,7 @@
         android:layout_marginRight="20dp"
         android:fontFamily="@font/seg_ui_semibold"
         android:text="@string/textoWelcome"
-
+        android:textColor="@color/defaultText"
         android:textAlignment="center"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"

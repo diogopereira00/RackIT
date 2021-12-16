@@ -16,19 +16,40 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import android.R
+import android.app.Application
+
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import java.lang.Exception
+
+public class VariaveisGlobais : Application() {
+    public var nEcra: Int = 0
+    public var indiceItemSelecionado: Int = -1
+    public var showUserPosition = true
+    public var gpsEstaAtivo = true
+    public var latitudeUser: Double = 41.21
+    public var longitudeuser: Double = -8.5617
+    public var username = "avs"
+    public var loggedEmail : String = ""
+}
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var botaoRegister: Button
     private lateinit var email : String
     private lateinit var username: String
     private lateinit var password : String
-
+    lateinit var gv: VariaveisGlobais
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var auth: FirebaseAuth
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        gv = application as VariaveisGlobais
         super.onCreate(savedInstanceState)
         this.binding = ActivityRegisterBinding.inflate(layoutInflater)
         val view = binding.root
@@ -82,9 +103,24 @@ class RegisterActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
+                    gv.loggedEmail = email
+                    //closeOpenActivity(outraActivity = MainActivity::class.java)
+
                     updateUI(user)
                 } else {
-                    // If sign in fails, display a message to the user.
+                    // If sign in fails, display a message to the user
+                    try {
+                        throw task.exception!!
+                    } catch (e: FirebaseAuthWeakPasswordException) {
+                        binding.passwordEditText.error="A password é demasiado fraca"
+                        binding.passwordEditText.requestFocus()
+                    } catch (e: FirebaseAuthUserCollisionException) {
+                        binding.emailEditText.error="Já existe uma conta com este email"
+                        binding.emailEditText.requestFocus()
+                    } catch (e: Exception) {
+                        Log.e(TAG, e.message!!)
+                    }
+
                     Log.w(TAG, "createUserWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
@@ -94,8 +130,9 @@ class RegisterActivity : AppCompatActivity() {
         // [END create_user_with_email]
     }
     private fun updateUI(user: FirebaseUser?) {
-        closeOpenActivity(outraActivity = AuthenticationActivity::class.java)
-
+        if(user !=null) {
+            closeOpenActivity(outraActivity = MainActivity::class.java)
+        }
 
     }
     private fun executarOutraActivity(outraActivity: Class<*>) {

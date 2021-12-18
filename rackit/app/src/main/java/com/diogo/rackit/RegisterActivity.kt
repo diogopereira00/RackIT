@@ -8,33 +8,22 @@ import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import com.diogo.rackit.databinding.ActivityRegisterBinding
-import com.diogo.rackit.databinding.ActivityWelcomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import android.R
 import android.app.Application
 
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import java.lang.Exception
 
-public class VariaveisGlobais : Application() {
-    public var nEcra: Int = 0
-    public var indiceItemSelecionado: Int = -1
-    public var showUserPosition = true
-    public var gpsEstaAtivo = true
-    public var latitudeUser: Double = 41.21
-    public var longitudeuser: Double = -8.5617
-    public var username = "avs"
-    public var loggedEmail : String = ""
+class VariaveisGlobais : Application() {
+     var loggedEmail : String = ""
 }
 
 class RegisterActivity : AppCompatActivity() {
@@ -55,7 +44,6 @@ class RegisterActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         botaoRegister = binding.registerButton
-
 
         auth = Firebase.auth
 

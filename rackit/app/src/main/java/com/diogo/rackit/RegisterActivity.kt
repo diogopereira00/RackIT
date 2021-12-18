@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 
 
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import com.google.firebase.firestore.FirebaseFirestore
 import java.lang.Exception
 
 class VariaveisGlobais : Application() {
@@ -117,6 +118,15 @@ class RegisterActivity : AppCompatActivity() {
             }
         // [END create_user_with_email]
     }
+
+//    private fun GuardarUtilizadorBD(){
+//        var db = FirebaseFirestore.getInstance()
+//        var users =  HashMap<String,Users>()
+//
+//
+//    }
+
+
     private fun updateUI(user: FirebaseUser?) {
         if(user !=null) {
             closeOpenActivity(outraActivity = MainActivity::class.java)

@@ -14,18 +14,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var  teste : TextView
     lateinit var gv: VariaveisGlobais
-    // override fun onStart() {
-      //  super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        //val currentUser = auth.currentUser
-
-        //if(currentUser != null){
-          //  reload();
-       // }
-    //}
-
-    private fun reload() {
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +22,24 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.teste.setText(gv.loggedEmail)
         auth = Firebase.auth
 
     }
+     override fun onStart() {
+         super.onStart()
+         // Check if user is signed in (non-null) and update UI accordingly.
+         val currentUser = auth.currentUser
+
+         if (currentUser != null) {
+
+         }
+         binding.teste.text = gv.loggedEmail
+
+     }
+    //}
+
+    private fun reload() {
+    }
+
+
 }

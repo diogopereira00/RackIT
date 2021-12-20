@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">RackIT</string>
     <string name="comecar">Começar</string>
     <string name="textoWelcome">O RackIT é um sistema de gestão de inventario doméstico feito para facilitar a vida do utilizador. Pretende poupar tempo e dinheiro do utilizador</string>
@@ -9,7 +9,12 @@
     <string name="password">Password</string>
     <string name="noAccount">Ainda não tens uma conta?</string>
     <string name="registHere">Cria aqui</string>
-    <string name="enter_your_email">Insere aqui o teu email...</string>
-    <string name="password_insert">Insere aqui a tua password...</string>
+    <string name="enter_your_email">Insere aqui o teu email…</string>
+    <string name="password_insert">Insere aqui a tua password…</string>
     <string name="remember_me">Mantenha-me conectado</string>
+    <string name="welcome">Bem-vindo</string>
+    <string name="enter_your_username">Insere aqui o teu username...</string>
+    <string name="haveAccount">Ja tens conta?</string>
+    <string name="loginHere">Inicia sessão aqui.</string>
+    <string name="criar_conta">Criar conta</string>
 </resources>

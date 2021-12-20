@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 
 
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import java.lang.Exception
 
@@ -33,7 +35,10 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var username: String
     private lateinit var password : String
     lateinit var gv: VariaveisGlobais
+
+
     private lateinit var binding: ActivityRegisterBinding
+    private  lateinit var  database: DatabaseReference
     private lateinit var auth: FirebaseAuth
 
 
@@ -81,10 +86,10 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun firebaseSignUp() {
-        createAccount(email=email,password=password)
+        createAccount(email=email,password=password, nome = username)
     }
 
-    private fun createAccount(email: String, password: String) {
+    private fun createAccount(email: String, password: String, nome : String) {
         // [START create_user_with_email]
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
@@ -92,7 +97,19 @@ class RegisterActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
-                    gv.loggedEmail = email
+
+                    val utilizador = User(name = nome, email= email, uid = user?.uid)
+                    if (user != null) {
+                        gv.loggedEmail = email
+                        database = FirebaseDatabase.getInstance().getReference("Users")
+                        database.child(user?.uid).setValue(utilizador)
+//                            .addOnSuccessListener {
+//                            Toast.makeText(this,"Algo deu errado",Toast.LENGTH_SHORT).show()
+//
+                    .addOnFailureListener{
+                           Toast.makeText(this,"Algo deu errado",Toast.LENGTH_SHORT).show()
+                        }
+                    }
                     //closeOpenActivity(outraActivity = MainActivity::class.java)
 
                     updateUI(user)

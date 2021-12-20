@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "641462738606",
+    "firebase_url": "https://rackit-74f4d-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "rackit-74f4d",
     "storage_bucket": "rackit-74f4d.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "641462738606-2c9gjn09ohtf2ls5gto7g7jt7qa3719p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.diogo.rackit",
+            "certificate_hash": "656974bb267f5f78142b093f4ee31a2255283127"
+          }
+        },
         {
           "client_id": "641462738606-925vkrovar94qks6g0psp496dq13ftjm.apps.googleusercontent.com",
           "client_type": 3

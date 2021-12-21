@@ -24,9 +24,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.ioweyou.PasswordStrength
 import java.lang.Exception
 
-class VariaveisGlobais : Application() {
-    lateinit var user: User
-}
+
 
 class RegisterActivity : AppCompatActivity(), TextWatcher {
     private lateinit var binding: ActivityRegisterBinding

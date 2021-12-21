@@ -67,9 +67,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
-        app:layout_constraintVertical_bias="0.106"
-        tools:targetApi="m"
-        tools:ignore="Autofill" />
+        app:layout_constraintVertical_bias="0.071"
+        tools:ignore="Autofill"
+        tools:targetApi="m" />
 
     <CheckBox
         android:id="@+id/rememberMe"
@@ -87,6 +87,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
         app:layout_constraintVertical_bias="0.041" />
 
+
     <TextView
 
         android:id="@+id/emailText"
@@ -98,9 +99,10 @@
         android:text="@string/email"
         app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginText" />
+        app:layout_constraintTop_toBottomOf="@+id/loginText"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
 
@@ -112,11 +114,10 @@
         android:text="@string/password"
         app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
-        app:layout_constraintVertical_bias="0.681" />
-
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/loginButton"

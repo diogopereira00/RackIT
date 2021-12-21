@@ -10,7 +10,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityMainBinding
     private lateinit var  teste : TextView
     lateinit var gv: VariaveisGlobais
@@ -21,8 +20,7 @@ class MainActivity : AppCompatActivity() {
         this.binding = ActivityMainBinding.inflate(layoutInflater) // getLayoutInflater()
         val view = binding.root
         setContentView(view)
-
-        auth = Firebase.auth
+        binding.teste.text = gv.user.email
 
     }
 //     override fun onStart() {

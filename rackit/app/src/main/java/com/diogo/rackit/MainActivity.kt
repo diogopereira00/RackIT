@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
          if (currentUser != null) {
 
          }
-         binding.teste.text = gv.loggedEmail
+         binding.teste.text = gv.user.email
 
      }
     //}

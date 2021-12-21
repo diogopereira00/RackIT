@@ -15,46 +15,47 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import android.app.Application
-
+import android.widget.EditText
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
-
-
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import java.lang.Exception
 
 class VariaveisGlobais : Application() {
-     var loggedEmail : String = ""
+     lateinit var user : User
 }
 
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var botaoRegister: Button
-    private lateinit var email : String
-    private lateinit var username: String
-    private lateinit var password : String
+    private lateinit var binding: ActivityRegisterBinding
+    private  lateinit var  db: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
+
     lateinit var gv: VariaveisGlobais
 
+    private lateinit var botaoRegister: Button
+    private lateinit var editTextNome : EditText
+    private lateinit var editTextEmail : EditText
+    private lateinit var editTextPassword : EditText
 
-    private lateinit var binding: ActivityRegisterBinding
-    private  lateinit var  database: DatabaseReference
-    private lateinit var auth: FirebaseAuth
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         gv = application as VariaveisGlobais
+
         super.onCreate(savedInstanceState)
         this.binding = ActivityRegisterBinding.inflate(layoutInflater)
         val view = binding.root
+
         setContentView(view)
+
         botaoRegister = binding.registerButton
-
+        editTextEmail = binding.emailEditText
+        editTextNome  = binding.usernameEditText
+        editTextPassword = binding.passwordEditText
+        db = Firebase.firestore
         auth = Firebase.auth
-
-
-
 
 
         botaoRegister.setOnClickListener{
@@ -63,30 +64,26 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun validateData(){
-        email  = binding.emailEditText.text.toString().trim()
-        password  = binding.passwordEditText.text.toString().trim()
-        username = binding.usernameEditText.text.toString().trim()
+        val email  = editTextEmail.text.toString().trim()
+        val password  = editTextPassword.text.toString().trim()
+        val username = editTextNome.text.toString().trim()
 
         //validar dados
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
             //invalido
-            binding.emailEditText.error ="Introduza um email valido"
+            editTextEmail.error ="Introduza um email valido"
 
             }
         else if(TextUtils.isEmpty(password)){
-            binding.passwordEditText.error ="Por favor introduza uma password"
+            editTextPassword.error ="Por favor introduza uma password"
         }
         else if(password.length<6){
-            binding.passwordEditText.error ="A sua password deve ter pelo menos 6 caracteres"
+            editTextPassword.error ="A sua password deve ter pelo menos 6 caracteres"
         }
         else{
             //valido continua signup
-            firebaseSignUp()
+            createAccount(email,password, username)
         }
-    }
-
-    private fun firebaseSignUp() {
-        createAccount(email=email,password=password, nome = username)
     }
 
     private fun createAccount(email: String, password: String, nome : String) {
@@ -98,18 +95,15 @@ class RegisterActivity : AppCompatActivity() {
                     Log.d(TAG, "createUserWithEmail:success")
                     val user = auth.currentUser
 
-                    val utilizador = User(name = nome, email= email, uid = user?.uid)
+                    //crio utilizador e guardo na base de dados se !=null
+                    val userInfo = User(nome, email,user?.uid)
                     if (user != null) {
-                        gv.loggedEmail = email
-                        database = FirebaseDatabase.getInstance().getReference("Users")
-                        database.child(user?.uid).setValue(utilizador)
-//                            .addOnSuccessListener {
-//                            Toast.makeText(this,"Algo deu errado",Toast.LENGTH_SHORT).show()
-//
-                    .addOnFailureListener{
-                           Toast.makeText(this,"Algo deu errado",Toast.LENGTH_SHORT).show()
+                        gv.user = userInfo
+
+                        db.collection("Users").document(email).set(userInfo)
+
                         }
-                    }
+
                     //closeOpenActivity(outraActivity = MainActivity::class.java)
 
                     updateUI(user)
@@ -118,11 +112,11 @@ class RegisterActivity : AppCompatActivity() {
                     try {
                         throw task.exception!!
                     } catch (e: FirebaseAuthWeakPasswordException) {
-                        binding.passwordEditText.error="A password é demasiado fraca"
-                        binding.passwordEditText.requestFocus()
+                        editTextPassword.error="A password é demasiado fraca"
+                        editTextPassword.requestFocus()
                     } catch (e: FirebaseAuthUserCollisionException) {
-                        binding.emailEditText.error="Já existe uma conta com este email"
-                        binding.emailEditText.requestFocus()
+                        editTextEmail.error="Já existe uma conta com este email"
+                        editTextEmail.requestFocus()
                     } catch (e: Exception) {
                         Log.e(TAG, e.message!!)
                     }
@@ -133,26 +127,13 @@ class RegisterActivity : AppCompatActivity() {
                     updateUI(null)
                 }
             }
-        // [END create_user_with_email]
     }
-
-//    private fun GuardarUtilizadorBD(){
-//        var db = FirebaseFirestore.getInstance()
-//        var users =  HashMap<String,Users>()
-//
-//
-//    }
-
 
     private fun updateUI(user: FirebaseUser?) {
         if(user !=null) {
             closeOpenActivity(outraActivity = MainActivity::class.java)
         }
 
-    }
-    private fun executarOutraActivity(outraActivity: Class<*>) {
-        val x = Intent(this, outraActivity)
-        startActivity(x)
     }
     private fun closeOpenActivity(outraActivity: Class<*>) {
         val x = Intent(this, outraActivity)

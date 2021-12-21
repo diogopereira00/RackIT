@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/RackIT/rackit/app/src/main/res/drawable/ic_hello_re_3evm.xml" value="0.18640350877192982" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_authentication.xml" value="0.3425925925925926" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_register.xml" value="0.5" />
+        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_register.xml" value="0.33" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_welcome.xml" value="0.25" />
       </map>
     </option>

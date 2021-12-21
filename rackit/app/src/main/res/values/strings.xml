@@ -17,4 +17,17 @@
     <string name="haveAccount">Ja tens conta?</string>
     <string name="loginHere">Inicia sessão aqui.</string>
     <string name="criar_conta">Criar conta</string>
+
+
+    <!--    Password-->
+    <string name="password_strength_caption">Password Strength: {0}</string>
+    <string name="password_strength_weak">Weak</string>
+    <string name="password_strength_medium">Medium</string>
+    <string name="password_strength_strong">Strong</string>
+    <string name="password_strength_very_strong">Very Strong</string>
+    <string name="confirmar_password">Confirmar password</string>
+    <string name="confirma_a_password">Confirma a password...</string>
+    <string name="aceitar_termos">Aceitar <u><font color='#0F6DD2'>termos e condições</font></u></string>
+    <string name="nome_de_utilizador">Nome de utilizador</string>
+    <string name="weak">Weak</string>
 </resources>

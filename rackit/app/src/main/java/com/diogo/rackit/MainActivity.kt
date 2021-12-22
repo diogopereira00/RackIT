@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         this.binding = ActivityMainBinding.inflate(layoutInflater) // getLayoutInflater()
         val view = binding.root
         setContentView(view)
-        binding.teste.text = gv.user.email
+        //binding.teste.text = gv.user.email
 
     }
 //     override fun onStart() {

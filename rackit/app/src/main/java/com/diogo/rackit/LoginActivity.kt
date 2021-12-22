@@ -68,9 +68,9 @@ class LoginActivity : AppCompatActivity() {
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
                     //closeOpenActivity(outraActivity = MainActivity::class.java)
-
+                    // TODO: 22/12/2021 Adicionar utilizador a gv.user, pois crasha no main -> gv.user vazia 
                     updateUI(user)
-                    openActivity(outraActivity = MainActivity::class.java)
+                    //openActivity(outraActivity = MainActivity::class.java)
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -86,7 +86,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
-            //openActivity(outraActivity = MainActivity::class.java)
+            openActivity(outraActivity = MainActivity::class.java)
             Toast.makeText(
                 baseContext, "OK.",
                 Toast.LENGTH_SHORT

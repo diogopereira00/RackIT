@@ -1,11 +1,10 @@
-package com.diogo.rackit
+package com.diogopereira.rackit
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import com.diogo.rackit.databinding.ActivityAuthenticationBinding.inflate
-import com.diogo.rackit.databinding.ActivityAuthenticationBinding
+import com.diogopereira.rackit.v2.databinding.ActivityAuthenticationBinding
 
 class AuthenticationActivity : AppCompatActivity() {
     lateinit var botaoLogin: Button
@@ -33,4 +32,4 @@ class AuthenticationActivity : AppCompatActivity() {
         val x = Intent(this, outraActivity)
         startActivity(x)
     }
-    }
+}

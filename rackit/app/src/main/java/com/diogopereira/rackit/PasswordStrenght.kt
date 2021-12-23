@@ -1,6 +1,6 @@
-package com.ioweyou
+package com.diogopereira.rackit
 import android.graphics.Color
-import com.diogo.rackit.R
+import com.diogopereira.rackit.v2.R
 
 enum class PasswordStrength private constructor(internal var resId: Int, color: Int) {
 

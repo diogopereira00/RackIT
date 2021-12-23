@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context="com.diogopereira.rackit.LoginActivity">
 
     <TextView
         android:id="@+id/loginText"
@@ -24,7 +24,7 @@
 
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginLeft="25dp"
@@ -48,7 +48,7 @@
         tools:ignore="Autofill,UnusedAttribute" />
 
     <EditText
-        android:id="@+id/passwordEdit"
+        android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginLeft="25dp"
@@ -66,10 +66,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.106"
-        tools:targetApi="m"
-        tools:ignore="Autofill" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+        app:layout_constraintVertical_bias="0.071"
+        tools:ignore="Autofill"
+        tools:targetApi="m" />
 
     <CheckBox
         android:id="@+id/rememberMe"
@@ -84,8 +84,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.115"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEdit"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
         app:layout_constraintVertical_bias="0.041" />
+
 
     <TextView
 
@@ -96,11 +97,12 @@
         android:layout_marginTop="28dp"
         android:fontFamily="@font/seg_ui_semibold"
         android:text="@string/email"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintBottom_toTopOf="@+id/editTextEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginText" />
+        app:layout_constraintTop_toBottomOf="@+id/loginText"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
 
@@ -110,13 +112,12 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/seg_ui_semibold"
         android:text="@string/password"
-        app:layout_constraintBottom_toTopOf="@+id/passwordEdit"
+        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
-        app:layout_constraintVertical_bias="0.681" />
-
+        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/loginButton"
@@ -135,7 +136,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.275"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEdit"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPassword"
         app:layout_constraintVertical_bias="0.27" />
 
     <LinearLayout

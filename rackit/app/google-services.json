@@ -1,42 +1,71 @@
 {
   "project_info": {
-    "project_number": "641462738606",
-    "firebase_url": "https://rackit-74f4d-default-rtdb.europe-west1.firebasedatabase.app",
-    "project_id": "rackit-74f4d",
-    "storage_bucket": "rackit-74f4d.appspot.com"
+    "project_number": "812355499513",
+    "firebase_url": "https://rackit-v2-default-rtdb.firebaseio.com",
+    "project_id": "rackit-v2",
+    "storage_bucket": "rackit-v2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:641462738606:android:3fc9e56fbac41704f7973f",
+        "mobilesdk_app_id": "1:812355499513:android:4f859758d1cc9a81ad7928",
         "android_client_info": {
-          "package_name": "com.diogo.rackit"
+          "package_name": "com.diogopereira.rackit"
         }
       },
       "oauth_client": [
         {
-          "client_id": "641462738606-2c9gjn09ohtf2ls5gto7g7jt7qa3719p.apps.googleusercontent.com",
+          "client_id": "812355499513-1dhke8grq81l8u24ot6ala09cts9f6a5.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.diogo.rackit",
-            "certificate_hash": "656974bb267f5f78142b093f4ee31a2255283127"
+            "package_name": "com.diogopereira.rackit.v2",
+            "certificate_hash": "7ad5fddae63a84b08f56c4250db5ae17bbb19da4"
           }
         },
         {
-          "client_id": "641462738606-925vkrovar94qks6g0psp496dq13ftjm.apps.googleusercontent.com",
+          "client_id": "812355499513-6gd2130ammsggl13lejt16a3n5m4djq8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC_YWOcnoWE-nkIeZPyUDOdWx3pk323-IA"
+          "current_key": "AIzaSyCQZASKeABXhl_G645kS1Azx_xF5ocday8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "641462738606-925vkrovar94qks6g0psp496dq13ftjm.apps.googleusercontent.com",
+              "client_id": "812355499513-6gd2130ammsggl13lejt16a3n5m4djq8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:812355499513:android:18d0ac49ae675ccfad7928",
+        "android_client_info": {
+          "package_name": "com.example.rackit.v2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "812355499513-6gd2130ammsggl13lejt16a3n5m4djq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQZASKeABXhl_G645kS1Azx_xF5ocday8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "812355499513-6gd2130ammsggl13lejt16a3n5m4djq8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

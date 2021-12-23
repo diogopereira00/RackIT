@@ -1,39 +1,26 @@
-package com.diogo.rackit
+package com.diogopereira.rackit
 
-import android.content.ContentValues.TAG
+import android.app.ProgressDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.util.Patterns
-import com.diogo.rackit.databinding.ActivityRegisterBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import android.app.Application
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Patterns
 import android.view.View
 import android.widget.*
 import androidx.core.view.isVisible
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import com.google.firebase.auth.FirebaseAuthWeakPasswordException
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.ioweyou.PasswordStrength
-import java.lang.Exception
+import com.diogopereira.rackit.v2.databinding.ActivityRegisterBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
-class VariaveisGlobais : Application() {
-    lateinit var user: User
-}
-
-class RegisterActivity : AppCompatActivity(), TextWatcher {
+class RegisterActivity : AppCompatActivity(),TextWatcher {
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var db: FirebaseFirestore
-    private lateinit var auth: FirebaseAuth
 
-    lateinit var gv: VariaveisGlobais
+    private lateinit var firebaseAuth : FirebaseAuth
+
+    private lateinit var progressDialog : ProgressDialog
+
 
     private lateinit var botaoRegister: Button
     private lateinit var editTextNome: EditText
@@ -57,14 +44,21 @@ class RegisterActivity : AppCompatActivity(), TextWatcher {
         updatePasswordStrengthView(s.toString())
     }
 
+    private var nome =""
+    private var email =""
+    private  var password = ""
+    private var confirmarPassword = ""
+    private var confirmarTermos = false
     override fun onCreate(savedInstanceState: Bundle?) {
-        gv = application as VariaveisGlobais
-
         super.onCreate(savedInstanceState)
-        this.binding = ActivityRegisterBinding.inflate(layoutInflater)
-        val view = binding.root
+        binding = ActivityRegisterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setContentView(view)
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        progressDialog = ProgressDialog(this)
+        progressDialog.setTitle("Um momento")
+        progressDialog.setCanceledOnTouchOutside(false)
 
         botaoRegister = binding.registerButton
         editTextEmail = binding.emailEditText
@@ -80,8 +74,6 @@ class RegisterActivity : AppCompatActivity(), TextWatcher {
             strengthView.text = ""
             progressBar.isVisible = false
         }
-        db = Firebase.firestore
-        auth = Firebase.auth
 
 
         botaoRegister.setOnClickListener {
@@ -123,25 +115,21 @@ class RegisterActivity : AppCompatActivity(), TextWatcher {
         editTextPassword.addTextChangedListener(this)
     }
 
-    fun onClickLoginHere() {
-        closeOpenActivity(outraActivity = LoginActivity::class.java)
-    }
-
     private fun validateData() {
-        val email = editTextEmail.text.toString().trim()
-        val password = editTextPassword.text.toString().trim()
-        val username = editTextNome.text.toString().trim()
-        val confirmarPassword = editTextConfirmPassword.text.toString()
-        val confirmarTermos = confirmTermos.isChecked
-        //validar dados
+        nome = editTextNome.text.toString().trim()
+        email = editTextEmail.text.toString().trim()
+        password = editTextConfirmPassword.text.toString().trim()
+        confirmarTermos = confirmTermos.isChecked
+        confirmarPassword = editTextConfirmPassword.text.toString().trim()
         when {
             Patterns.EMAIL_ADDRESS.matcher(email)
-                .matches() && passwordconfirmed && username.isNotEmpty() && password == confirmarPassword && confirmarTermos -> {
-                createAccount(email, password, username)
+                .matches() && passwordconfirmed && nome!="" && password == confirmarPassword && confirmarTermos -> {
+                //createAccount(email, password, nome)
+                    createContaUtilizador()
             }
 
             else -> {
-                if (username.isEmpty()) {
+                if (nome.isEmpty()) {
                     editTextNome.error = "Por favor introduza o nome"
                 }
                 if (!confirmTermos.isChecked)
@@ -151,55 +139,47 @@ class RegisterActivity : AppCompatActivity(), TextWatcher {
         }
     }
 
+    private fun createContaUtilizador() {
+        progressDialog.setMessage("Criar conta...")
+        progressDialog.show()
 
-    private fun createAccount(email: String, password: String, nome: String) {
-        // [START create_user_with_email]
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
-
-                    //crio utilizador e guardo na base de dados se !=null
-                    val userInfo = User(nome, email, user?.uid)
-                    if (user != null) {
-                        gv.user = userInfo
-                        db.collection("Users").document(email).set(userInfo)
-
-                    }
-
-                    //closeOpenActivity(outraActivity = MainActivity::class.java)
-
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user
-                    try {
-                        throw task.exception!!
-                    } catch (e: FirebaseAuthWeakPasswordException) {
-                        editTextPassword.error = "A password é demasiado fraca"
-                        editTextPassword.requestFocus()
-                    } catch (e: FirebaseAuthUserCollisionException) {
-                        editTextEmail.error = "Já existe uma conta com este email"
-                        editTextEmail.requestFocus()
-                    } catch (e: Exception) {
-                        Log.e(TAG, e.message!!)
-                    }
-
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(
-                        baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    updateUI(null)
-                }
+        firebaseAuth.createUserWithEmailAndPassword(email,password)
+            .addOnSuccessListener {
+                updateUserInfo()
             }
-    }
-
-    private fun updateUI(user: FirebaseUser?) {
-        if (user != null) {
-            closeOpenActivity(outraActivity = MainActivity::class.java)
+            .addOnFailureListener { e->
+                progressDialog.dismiss()
+                Toast.makeText(this , "Erro ao criar conta, ${e.message}", Toast.LENGTH_SHORT).show()
+            }
         }
+
+    private fun updateUserInfo() {
+        progressDialog.setMessage("Guardar dados...")
+
+        val timestamp = System.currentTimeMillis()
+
+        val uid = firebaseAuth.uid
+
+        val hashMap : HashMap<String,Any?> = HashMap()
+        hashMap["uid"]=uid
+        hashMap["email"]=email
+        hashMap["name"]=nome
+        hashMap["userType"]="user"
+        hashMap["timestamp"]=timestamp
+
+
+        val ref = FirebaseDatabase.getInstance().getReference("Users")
+        ref.child(uid!!)
+            .setValue(hashMap)
+            .addOnSuccessListener {
+                    progressDialog.dismiss()
+                Toast.makeText(this, "Conta criada...",Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+            }
+            .addOnFailureListener { e->
+                progressDialog.dismiss()
+                Toast.makeText(this, "Erro...${e.message}",Toast.LENGTH_SHORT).show()
+            }
 
     }
 
@@ -240,9 +220,8 @@ class RegisterActivity : AppCompatActivity(), TextWatcher {
         }
     }
 
-    private fun closeOpenActivity(outraActivity: Class<*>) {
-        val x = Intent(this, outraActivity)
+    fun onClickLoginHere() {
         finish()
-        startActivity(x)
+        startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
     }
 }

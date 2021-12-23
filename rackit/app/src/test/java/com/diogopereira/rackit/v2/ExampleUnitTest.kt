@@ -1,4 +1,4 @@
-package com.diogo.rackit
+package com.diogopereira.rackit.v2
 
 import org.junit.Test
 

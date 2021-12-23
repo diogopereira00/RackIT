@@ -1,11 +1,11 @@
-package com.example.rackit.v2
+package com.diogopereira.rackit.v2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class RegisterActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_main)
     }
 }

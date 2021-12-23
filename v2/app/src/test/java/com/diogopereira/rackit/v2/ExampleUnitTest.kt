@@ -1,4 +1,4 @@
-package com.example.rackit.v2
+package com.diogopereira.rackit.v2
 
 import org.junit.Test
 

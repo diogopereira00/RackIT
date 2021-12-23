@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.rackit.v2">
+    package="com.diogopereira.rackit.v2">
 
     <application
         android:allowBackup="true"
@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RackIT">
         <activity
-            android:name=".MainActivity"
+            android:name="com.diogopereira.rackit.v2.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name="com.diogopereira.rackit.v2.RegisterActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

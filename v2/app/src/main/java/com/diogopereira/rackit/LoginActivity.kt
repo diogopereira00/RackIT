@@ -1,4 +1,4 @@
-package com.diogopereira.rackit.v2
+package com.diogopereira.rackit
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -93,11 +93,11 @@ class LoginActivity : AppCompatActivity() {
                     if(userType=="user"){
                         gv.nomeUtilizador = name
                         gv.emailUtilizador = email
-                        startActivity(Intent(this@LoginActivity,MainActivity::class.java))
+                        startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                         finish()
                     }
                     else if(userType=="admin"){
-                        startActivity(Intent(this@LoginActivity,WelcomeActivity::class.java))
+                        startActivity(Intent(this@LoginActivity, WelcomeActivity::class.java))
                         finish()
                     }
                 }

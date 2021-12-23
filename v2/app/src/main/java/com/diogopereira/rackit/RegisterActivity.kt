@@ -1,4 +1,4 @@
-package com.diogopereira.rackit.v2
+package com.diogopereira.rackit
 
 import android.app.ProgressDialog
 import android.content.Intent
@@ -12,9 +12,7 @@ import android.widget.*
 import androidx.core.view.isVisible
 import com.diogopereira.rackit.v2.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
 
 class RegisterActivity : AppCompatActivity(),TextWatcher {
     private lateinit var binding: ActivityRegisterBinding
@@ -176,7 +174,7 @@ class RegisterActivity : AppCompatActivity(),TextWatcher {
             .addOnSuccessListener {
                     progressDialog.dismiss()
                 Toast.makeText(this, "Conta criada...",Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this@RegisterActivity,MainActivity::class.java))
+                startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
             }
             .addOnFailureListener { e->
                 progressDialog.dismiss()
@@ -224,6 +222,6 @@ class RegisterActivity : AppCompatActivity(),TextWatcher {
 
     fun onClickLoginHere() {
         finish()
-        startActivity(Intent(this@RegisterActivity,MainActivity::class.java))
+        startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
     }
 }

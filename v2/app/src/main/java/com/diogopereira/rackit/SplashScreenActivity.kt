@@ -1,18 +1,11 @@
-package com.diogopereira.rackit.v2
+package com.diogopereira.rackit
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import com.diogopereira.rackit.v2.R
 import com.diogopereira.rackit.v2.databinding.ActivitySplashScreenBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.ktx.Firebase
-import java.util.concurrent.CountDownLatch
 
 class SplashScreenActivity : AppCompatActivity() {
 
@@ -44,12 +37,12 @@ class SplashScreenActivity : AppCompatActivity() {
             gv.uidUtilizador = uid
 
 
-            startActivity(Intent(this@SplashScreenActivity,MainActivity::class.java))
+            startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
             finish()
 
 
         } else {
-            startActivity(Intent(this@SplashScreenActivity,WelcomeActivity::class.java))
+            startActivity(Intent(this@SplashScreenActivity, WelcomeActivity::class.java))
 
 
         }

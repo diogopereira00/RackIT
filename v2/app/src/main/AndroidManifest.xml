@@ -3,7 +3,7 @@
     package="com.diogopereira.rackit.v2">
 
     <application
-        android:name=".GlobalClass"
+        android:name="com.diogopereira.rackit.GlobalClass"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,16 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RackIT">
         <activity
-            android:name=".LoginActivity"
+            android:name="com.diogopereira.rackit.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".AuthenticationActivity"
+            android:name="com.diogopereira.rackit.AuthenticationActivity"
             android:exported="false" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name="com.diogopereira.rackit.WelcomeActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashScreenActivity"
+            android:name="com.diogopereira.rackit.SplashScreenActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -30,10 +30,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.diogopereira.rackit.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name="com.diogopereira.rackit.RegisterActivity"
             android:exported="false" />
     </application>
 

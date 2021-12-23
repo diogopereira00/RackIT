@@ -1,4 +1,4 @@
-package com.diogopereira.rackit.v2
+package com.diogopereira.rackit
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

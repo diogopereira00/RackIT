@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+    <TextView
+        android:id="@+id/regiterText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:text="@string/register"
+        android:textColor="@color/defaultText"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15" />
+
+
+    <TextView
+
+        android:id="@+id/usernameText"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:text="@string/nome_de_utilizador"
+        app:layout_constraintBottom_toTopOf="@+id/usernameEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regiterText" />
+
+    <EditText
+        android:id="@+id/usernameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/user_icon"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/colorTextBlack"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:hint="@string/enter_your_username"
+        android:inputType="textPersonName"
+        android:paddingStart="15dp"
+        android:paddingEnd="26dp"
+        android:textColor="@color/defaultText"
+        android:textColorHint="@color/colorPlaceholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.62"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regiterText"
+        app:layout_constraintVertical_bias="0.11"
+        tools:ignore="Autofill,UnusedAttribute" />
+
+    <TextView
+
+        android:id="@+id/emailText"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:text="@string/email"
+        app:layout_constraintBottom_toTopOf="@+id/emailEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameEditText"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/email_icon"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/colorTextBlack"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:hint="@string/enter_your_email"
+        android:inputType="textEmailAddress"
+        android:paddingStart="15dp"
+        android:paddingEnd="26dp"
+        android:textColor="@color/defaultText"
+        android:textColorHint="@color/colorPlaceholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameEditText"
+        app:layout_constraintVertical_bias="0.079"
+        tools:ignore="Autofill,UnusedAttribute" />
+
+
+    <TextView
+
+        android:id="@+id/passwordText"
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:text="@string/password"
+        app:layout_constraintBottom_toTopOf="@+id/passwordEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.072"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/locker_icon"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/colorTextBlack"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:hint="@string/password_insert"
+        android:inputType="textPassword"
+        android:paddingStart="15dp"
+        android:paddingEnd="26dp"
+        android:textColor="@color/defaultText"
+        android:textColorHint="@color/colorPlaceholder"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText"
+        app:layout_constraintVertical_bias="0.072"
+        tools:ignore="Autofill"
+        tools:targetApi="m" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:maxHeight="20dip"
+        android:minHeight="20dip"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:progress="0"
+        app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
+        app:layout_constraintStart_toStartOf="@+id/passwordEditText"
+        app:layout_constraintTop_toBottomOf="@+id/password_strength" />
+
+    <TextView
+        android:id="@+id/password_strength"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/weak"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/passwordEditText"
+        app:layout_constraintEnd_toEndOf="@+id/passwordEditText"
+        app:layout_constraintHorizontal_bias="0.963"
+        app:layout_constraintStart_toStartOf="@+id/passwordEditText"
+        app:layout_constraintTop_toTopOf="@+id/passwordEditText"
+        app:layout_constraintVertical_bias="0.515" />
+
+
+    <TextView
+
+        android:id="@+id/confirmPasswordText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:text="@string/confirmar_password"
+        app:layout_constraintBottom_toTopOf="@+id/confirmPasswordEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/confirmPasswordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/locker_icon"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/colorTextBlack"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:hint="@string/confirma_a_password"
+        android:inputType="textPassword"
+        android:paddingStart="15dp"
+        android:paddingEnd="26dp"
+        android:textColor="@color/defaultText"
+        android:textColorHint="@color/colorPlaceholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText"
+        tools:ignore="Autofill"
+        tools:targetApi="m" />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        style="@style/Widget.AppCompat.CompoundButton.CheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:checked="false"
+        android:buttonTint="@color/primary"
+
+        android:text="@string/aceitar_termos"
+        android:textAllCaps="false"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/defaultText"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#0F6DD2"
+        android:textCursorDrawable="?android:attr/textCursorDrawable"
+        android:textIsSelectable="true"
+
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/registerButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEditText"
+        app:layout_constraintVertical_bias="0.583"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/button_primary_background"
+
+        android:backgroundTint="@color/primary"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:text="@string/criar_conta"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordEditText"
+        app:layout_constraintVertical_bias="0.357" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:fontFamily="@font/seg_ui_semibold"
+            android:text="@string/haveAccount"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/loginHereTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/segoe_ui_bold"
+            android:onClick="onClickLoginHere"
+            android:text="@string/loginHere"
+            android:textColor="@color/primary"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

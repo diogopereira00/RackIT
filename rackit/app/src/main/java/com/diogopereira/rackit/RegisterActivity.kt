@@ -75,7 +75,10 @@ class RegisterActivity : AppCompatActivity(),TextWatcher {
             progressBar.isVisible = false
         }
 
-
+        binding.loginHereTextView.setOnClickListener{
+            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+            finish()
+        }
         botaoRegister.setOnClickListener {
             validateData()
         }
@@ -220,8 +223,5 @@ class RegisterActivity : AppCompatActivity(),TextWatcher {
         }
     }
 
-    fun onClickLoginHere() {
-        finish()
-        startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
-    }
+
 }

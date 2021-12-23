@@ -221,4 +221,9 @@ class RegisterActivity : AppCompatActivity(),TextWatcher {
             }
         }
     }
+
+    fun onClickLoginHere() {
+        finish()
+        startActivity(Intent(this@RegisterActivity,MainActivity::class.java))
+    }
 }

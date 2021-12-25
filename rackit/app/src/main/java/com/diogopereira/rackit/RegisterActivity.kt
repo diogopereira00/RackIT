@@ -14,12 +14,12 @@ import com.diogopereira.rackit.v2.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class RegisterActivity : AppCompatActivity(),TextWatcher {
+class RegisterActivity : AppCompatActivity(), TextWatcher {
     private lateinit var binding: ActivityRegisterBinding
 
-    private lateinit var firebaseAuth : FirebaseAuth
+    private lateinit var firebaseAuth: FirebaseAuth
 
-    private lateinit var progressDialog : ProgressDialog
+    private lateinit var progressDialog: ProgressDialog
 
 
     private lateinit var botaoRegister: Button
@@ -44,9 +44,9 @@ class RegisterActivity : AppCompatActivity(),TextWatcher {
         updatePasswordStrengthView(s.toString())
     }
 
-    private var nome =""
-    private var email =""
-    private  var password = ""
+    private var nome = ""
+    private var email = ""
+    private var password = ""
     private var confirmarPassword = ""
     private var confirmarTermos = false
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -123,9 +123,9 @@ class RegisterActivity : AppCompatActivity(),TextWatcher {
         confirmarPassword = editTextConfirmPassword.text.toString().trim()
         when {
             Patterns.EMAIL_ADDRESS.matcher(email)
-                .matches() && passwordconfirmed && nome!="" && password == confirmarPassword && confirmarTermos -> {
+                .matches() && passwordconfirmed && nome != "" && password == confirmarPassword && confirmarTermos -> {
                 //createAccount(email, password, nome)
-                    createContaUtilizador()
+                createContaUtilizador()
             }
 
             else -> {
@@ -143,15 +143,15 @@ class RegisterActivity : AppCompatActivity(),TextWatcher {
         progressDialog.setMessage("Criar conta...")
         progressDialog.show()
 
-        firebaseAuth.createUserWithEmailAndPassword(email,password)
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener {
                 updateUserInfo()
             }
-            .addOnFailureListener { e->
+            .addOnFailureListener { e ->
                 progressDialog.dismiss()
-                Toast.makeText(this , "Erro ao criar conta, ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Erro ao criar conta, ${e.message}", Toast.LENGTH_SHORT).show()
             }
-        }
+    }
 
     private fun updateUserInfo() {
         progressDialog.setMessage("Guardar dados...")
@@ -160,28 +160,48 @@ class RegisterActivity : AppCompatActivity(),TextWatcher {
 
         val uid = firebaseAuth.uid
 
-        val hashMap : HashMap<String,Any?> = HashMap()
-        hashMap["uid"]=uid
-        hashMap["email"]=email
-        hashMap["name"]=nome
-        hashMap["userType"]="user"
-        hashMap["timestamp"]=timestamp
+        val hashMap: HashMap<String, Any?> = HashMap()
+        hashMap["uid"] = uid
+        hashMap["email"] = email
+        hashMap["name"] = nome
+        hashMap["userType"] = "user"
+        hashMap["timestamp"] = timestamp
 
 
         val ref = FirebaseDatabase.getInstance().getReference("Users")
         ref.child(uid!!)
             .setValue(hashMap)
             .addOnSuccessListener {
-                    progressDialog.dismiss()
-                Toast.makeText(this, "Conta criada...",Toast.LENGTH_SHORT).show()
+                //progressDialog.dismiss()
+                //Toast.makeText(this, "Conta criada...", Toast.LENGTH_SHORT).show()
+                //startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+            }
+            .addOnFailureListener { e ->
+
+                //progressDialog.dismiss()
+                Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
+            }
+
+        val hashMapLista : HashMap<String,Any> = HashMap()
+        hashMapLista["nome"] = "Lista de " + nome
+        hashMapLista["uid"] = uid
+        val refLista = FirebaseDatabase.getInstance().getReference("ListaProdutos")
+        val keyLista = refLista.push().key
+        hashMap["id"]  = keyLista
+                refLista.child(keyLista!!).setValue(hashMapLista)
+            .addOnSuccessListener {
+                progressDialog.dismiss()
+                Toast.makeText(this, "Conta criada...", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
             }
-            .addOnFailureListener { e->
+            .addOnFailureListener { e ->
                 progressDialog.dismiss()
-                Toast.makeText(this, "Erro...${e.message}",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
             }
 
     }
+
+
 
 
     private fun updatePasswordStrengthView(password: String) {
@@ -221,6 +241,10 @@ class RegisterActivity : AppCompatActivity(),TextWatcher {
     }
 
     fun onClickLoginHere() {
+
+    }
+
+    fun onClickLoginHere(view: android.view.View) {
         finish()
         startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
     }

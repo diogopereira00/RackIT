@@ -90,7 +90,7 @@
 
     <TextView
 
-        android:id="@+id/emailText"
+        android:id="@+id/codBarrasText"
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
@@ -106,7 +106,7 @@
 
     <TextView
 
-        android:id="@+id/passwordText"
+        android:id="@+id/precoCompraText"
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"

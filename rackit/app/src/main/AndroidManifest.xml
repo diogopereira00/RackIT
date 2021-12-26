@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RackIT">
         <activity
-            android:name="com.diogopereira.rackit.fragments.AddProductActivity"
+            android:name="com.diogopereira.rackit.AddProductActivity"
             android:exported="false" />
         <activity
             android:name="com.diogopereira.rackit.LoginActivity"

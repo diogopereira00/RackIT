@@ -37,7 +37,7 @@ class SplashScreenActivity : AppCompatActivity() {
             gv.uidUtilizador = uid
 
 
-            startActivity(Intent(this@SplashScreenActivity, MainActivity::class.java))
+            startActivity(Intent(this@SplashScreenActivity, AddProductActivity::class.java))
             finish()
 
 

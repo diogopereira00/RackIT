@@ -1,4 +1,4 @@
-package com.diogopereira.rackit.fragments
+package com.diogopereira.rackit
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,4 +9,5 @@ class AddProductActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_product)
     }
+
 }

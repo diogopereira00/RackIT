@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.diogopereira.rackit.AddProductActivity
 import com.diogopereira.rackit.AuthenticationActivity
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.v2.databinding.FragmentHomeBinding
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -21,6 +23,8 @@ class HomeFragment : Fragment() {
     lateinit var gv: GlobalClass
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    lateinit var addButton : FloatingActionButton
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +39,7 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
         val view = binding.root
+        addButton = binding.addButton
 
 
 
@@ -44,6 +49,13 @@ class HomeFragment : Fragment() {
         return view
     }
 
+    override fun onStart() {
+        super.onStart()
+        addButton.setOnClickListener {
+            startActivity(Intent(activity, AddProductActivity::class.java))
+
+        }
+    }
     override fun onResume() {
         super.onResume()
         val currentUser = firebaseAuth.currentUser

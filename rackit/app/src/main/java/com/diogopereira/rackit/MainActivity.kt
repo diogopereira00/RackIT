@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                
+
             }
         })
     }
@@ -63,26 +63,27 @@ class MainActivity : AppCompatActivity() {
         //Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = firebaseAuth.currentUser
 
-        if (currentUser != null) {
-            val ref = FirebaseDatabase.getInstance().getReference("Users")
-            ref.child(currentUser.uid)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val userType = snapshot.child("userType").value
-                        val name = snapshot.child("name").value.toString()
-                        gv.nomeUtilizador = name
-                        //teste.text = gv.nomeUtilizador
+        if (currentUser == null) {
 
-                    }
+                startActivity(Intent(this@MainActivity, AuthenticationActivity::class.java))
+                finish()
 
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-                    }
-                })
-        } else {
-            startActivity(Intent(this@MainActivity, AuthenticationActivity::class.java))
-            finish()
         }
+//            val ref = FirebaseDatabase.getInstance().getReference("Users")
+//            ref.child(currentUser.uid)
+//                .addListenerForSingleValueEvent(object : ValueEventListener {
+//                    override fun onDataChange(snapshot: DataSnapshot) {
+//                        val userType = snapshot.child("userType").value
+//                        val name = snapshot.child("name").value.toString()
+//                        gv.nomeUtilizador = name
+//                        //teste.text = gv.nomeUtilizador
+//
+//                    }
+//
+//                    override fun onCancelled(error: DatabaseError) {
+//                    }
+//                })
+
 
 
     }

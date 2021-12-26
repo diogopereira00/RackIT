@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.diogopereira.rackit.HomeFragment">
+    tools:context="com.diogopereira.rackit.fragments.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/teste"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="HomeFragment"
+        android:text=""
         android:textSize="30sp"
         android:textAlignment="center"
         android:gravity="center"/>

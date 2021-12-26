@@ -1,4 +1,4 @@
-package com.diogopereira.rackit
+package com.diogopereira.rackit.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

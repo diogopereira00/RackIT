@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.diogopereira.rackit.v2">
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <application
         android:name="com.diogopereira.rackit.GlobalClass"
         android:allowBackup="true"
@@ -38,6 +38,18 @@
         <activity
             android:name="com.diogopereira.rackit.RegisterActivity"
             android:exported="false" />
+        
+        <provider
+            android:authorities="com.diogopereira.rackit.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/myprovider"/>
+        </provider>
+
     </application>
 
 </manifest>

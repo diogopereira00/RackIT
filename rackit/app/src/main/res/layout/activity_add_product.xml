@@ -257,9 +257,10 @@
         android:drawableTint="@color/colorTextBlack"
         android:fontFamily="@font/seg_ui_semibold"
         android:hint="@string/introduza_a_imagem"
-        android:inputType="textPassword"
+        android:inputType="textUri"
         android:paddingStart="15dp"
         android:paddingEnd="26dp"
+        android:focusable="false"
         android:textColor="@color/defaultText"
         android:textColorHint="@color/colorPlaceholder"
         app:layout_constraintEnd_toEndOf="parent"
@@ -267,6 +268,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dataValidadeEditText"
         tools:ignore="Autofill"
         tools:targetApi="m" />
+
 
     <Button
         android:id="@+id/addButton"
@@ -286,6 +288,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imagemEditText"
         app:layout_constraintVertical_bias="0.333" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addButton"
+        app:layout_constraintVertical_bias="0.0"
+        tools:srcCompat="@tools:sample/avatars" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -52,6 +52,7 @@ class HomeFragment : Fragment() {
 
                         val name = snapshot.child("name").value.toString()
                         gv.nomeUtilizador = name
+                        gv.currentList = "list_"+currentUser.uid
                         binding.teste.setText(gv.nomeUtilizador)
                     }
 

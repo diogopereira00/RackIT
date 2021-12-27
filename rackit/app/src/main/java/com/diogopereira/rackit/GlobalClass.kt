@@ -6,4 +6,5 @@ class GlobalClass : Application() {
     var emailUtilizador =""
     var nomeUtilizador = ""
     var uidUtilizador =""
+    var currentList = ""
 }

@@ -25,6 +25,8 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 class AddProductActivity : AppCompatActivity() {
+
+
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var storageReference: StorageReference
     private lateinit var imageUri : Uri
@@ -42,6 +44,7 @@ class AddProductActivity : AppCompatActivity() {
 
     lateinit var mImageView : ImageView
 
+    private var gv = GlobalClass()
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -58,6 +61,8 @@ class AddProductActivity : AppCompatActivity() {
         setContentView(view)
 
         firebaseAuth = FirebaseAuth.getInstance()
+
+        gv = application as GlobalClass
 
         addButton = binding.addButton
         mImageView = binding.imageView2
@@ -98,7 +103,6 @@ class AddProductActivity : AppCompatActivity() {
     private var precoCompra=""
     private var data =""
     private var imagemProduto=""
-    private var listaKey=""
     private fun validateData() {
         nomeProduto = editTextNomeProduto.text.toString()
         codBarras = editTextCodBarras.text.toString()
@@ -124,28 +128,28 @@ class AddProductActivity : AppCompatActivity() {
 
         val uid = firebaseAuth.uid
 
-        getListaProdutos()
-
         val hashMapProduto: HashMap<String, Any?> = HashMap()
         hashMapProduto["nomeProduto"] = nomeProduto
         hashMapProduto["codBarras"] = codBarras
         hashMapProduto["precoCompra"] = precoCompra
         hashMapProduto["adicionadoPor"] = uid
-        hashMapProduto["listaDe"] = listaKey
+        hashMapProduto["listaDe"] = gv.currentList
         //hashMapProduto["imagemProduto"] = photoFile.toUri()
         hashMapProduto["dataValidade"] = data
         hashMapProduto["adicionadoEm"] = timestamp
 
-
+        // TODO: 27/12/2021 Estruturar Produto -> Info produto
+        // produto -> id, nome, codBarras, listaProdutos, criadoEm, atualizado em
+        // infoprodutos -> dataCompra, dataValidade, precoCompra, produtoID, 
 
         val ref = FirebaseDatabase.getInstance().getReference("Produtos")
         val keyProduct = ref.push().key
         hashMapProduto["idProduto"] = keyProduct
 
-        ref.child(keyProduct!!).setValue(hashMapProduto)
+        ref.child(nomeProduto +"_"+timestamp).setValue(hashMapProduto)
             .addOnSuccessListener {
                 Toast.makeText(this, "Produto adicionado...", Toast.LENGTH_SHORT).show()
-                updateProductImage(keyProduct, listaKey)
+                updateProductImage(nomeProduto +"_"+timestamp)
             }
             .addOnFailureListener { e ->
 
@@ -153,25 +157,10 @@ class AddProductActivity : AppCompatActivity() {
                 Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
             }    }
 
-    private fun getListaProdutos() {
-        val uid = firebaseAuth.uid
 
-        val ref = FirebaseDatabase.getInstance().getReference("ListaProdutos")
-        ref.orderByChild("uid").equalTo(uid)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    listaKey = snapshot.child("listaID").value.toString()
-                }
-
-                // TODO: 27/12/2021 Erro, não ta a guardar o id da lista no produto 
-                 
-                override fun onCancelled(error: DatabaseError) {
-                }
-            })    }
-
-    private fun updateProductImage(key: String, listaKey: String) {
+    private fun updateProductImage(key: String, ) {
         // TODO: 27/12/2021 Arranjar caminho do producto formato ListaProdutos/idLista/idProduto 
-        storageReference = FirebaseStorage.getInstance().getReference("ListaProdutos/"+listaKey+"/"+key)
+        storageReference = FirebaseStorage.getInstance().getReference("ListaProdutos/"+gv.currentList+"/"+key)
         storageReference.putFile(imageUri).addOnSuccessListener {
             Toast.makeText(this, "Imagem adicionado...", Toast.LENGTH_SHORT).show()
 
@@ -206,7 +195,7 @@ class AddProductActivity : AppCompatActivity() {
     }
 
     private fun updateData(myCalendar: Calendar) {
-        val myFormat = "dd-MM-yyyy"
+        val myFormat = "dd/MM/yyyy"
         val sdf = SimpleDateFormat(myFormat,Locale.ENGLISH)
         dataValidade.setText(sdf.format(myCalendar.time))
 //        Toast.makeText(this,"Erro ao entrar, ${sdf.format(myCalendar.time)}", Toast.LENGTH_SHORT).show()

@@ -184,11 +184,9 @@ class RegisterActivity : AppCompatActivity(), TextWatcher {
 
         val hashMapLista : HashMap<String,Any> = HashMap()
         hashMapLista["nome"] = "Lista de " + nome
-        hashMapLista["uid"] = uid
+        hashMapLista["admin"] = uid
         val refLista = FirebaseDatabase.getInstance().getReference("ListaProdutos")
-        val keyLista = refLista.push().key
-        hashMapLista["listaID"]  = keyLista.toString()
-                refLista.child(keyLista!!).setValue(hashMapLista)
+                refLista.child("list_"+uid).setValue(hashMapLista)
             .addOnSuccessListener {
                 progressDialog.dismiss()
                 Toast.makeText(this, "Conta criada...", Toast.LENGTH_SHORT).show()

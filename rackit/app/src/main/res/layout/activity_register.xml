@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.diogopereira.rackit.RegisterActivity">
 
+
     <TextView
         android:id="@+id/regiterText"
         android:layout_width="wrap_content"

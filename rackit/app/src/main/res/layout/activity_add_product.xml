@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context="com.diogopereira.rackit.RegisterActivity">
 
+<!--    <DatePicker-->
+<!--        android:id="@+id/datePicker"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:layout_marginEnd="20dp"-->
+<!--        android:background="@color/white"-->
+<!--        android:datePickerMode="calendar"-->
+<!--        android:translationZ="20dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+
+<!--        app:layout_constraintHorizontal_bias="0.476"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.498" />-->
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="63dp"
@@ -199,8 +216,9 @@
         android:drawableTint="@color/colorTextBlack"
         android:drawableEnd="@drawable/ic_calendar"
         android:fontFamily="@font/seg_ui_semibold"
+        android:focusable="false"
         android:hint="Introduza a data de validade..."
-        android:inputType="textPassword"
+        android:inputType="date"
         android:paddingStart="15dp"
         android:paddingEnd="26dp"
         android:textColor="@color/defaultText"

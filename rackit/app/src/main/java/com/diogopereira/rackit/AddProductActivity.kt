@@ -3,27 +3,43 @@ package com.diogopereira.rackit
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
+import android.widget.*
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import com.diogopereira.rackit.v2.databinding.ActivityAddProductBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import kotlinx.android.synthetic.main.activity_add_product.*
 import kotlinx.android.synthetic.main.activity_welcome.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 class AddProductActivity : AppCompatActivity() {
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var storageReference: StorageReference
+    private lateinit var imageUri : Uri
     private lateinit var binding: ActivityAddProductBinding
     private lateinit var backButton : ImageButton
+    private lateinit var addButton : Button
     private lateinit var dataValidade: EditText
+    private lateinit var editTextNomeProduto: EditText
+    private lateinit var editTextCodBarras: EditText
+    private lateinit var editTextPrecoCompra: EditText
     private lateinit var imagem: EditText
     private val REQUEST_CODE = 100
     lateinit var photoFile : File
+
+
     lateinit var mImageView : ImageView
 
 
@@ -32,6 +48,7 @@ class AddProductActivity : AppCompatActivity() {
         if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
             mImageView.setImageURI(photoFile.toUri())
             imagem.setText(photoFile.toString())
+            imageUri = photoFile.toUri()
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +56,15 @@ class AddProductActivity : AppCompatActivity() {
         binding = ActivityAddProductBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        firebaseAuth = FirebaseAuth.getInstance()
+
+        addButton = binding.addButton
         mImageView = binding.imageView2
+        editTextNomeProduto = binding.nomeProdutoEditText
+        editTextCodBarras = binding.codBarrasEditText
+        editTextPrecoCompra = binding.precoCompraEditText
+
         dataValidade = binding.dataValidadeEditText
         backButton = binding.backButton
         imagem = binding.imagemEditText
@@ -50,6 +75,10 @@ class AddProductActivity : AppCompatActivity() {
             myCalendar.set(Calendar.MONTH,month)
             myCalendar.set(Calendar.DAY_OF_YEAR,dayOfMonth)
             updateData(myCalendar)
+        }
+        addButton.setOnClickListener{
+            validateData()
+
         }
         imagem.setOnClickListener {
             takePicture()
@@ -62,6 +91,95 @@ class AddProductActivity : AppCompatActivity() {
             startActivity(Intent(this@AddProductActivity, MainActivity::class.java))
             finish()
         }
+    }
+
+    private var nomeProduto =""
+    private var codBarras=""
+    private var precoCompra=""
+    private var data =""
+    private var imagemProduto=""
+    private var listaKey=""
+    private fun validateData() {
+        nomeProduto = editTextNomeProduto.text.toString()
+        codBarras = editTextCodBarras.text.toString()
+        precoCompra = editTextPrecoCompra.text.toString()
+        data = dataValidade.text.toString()
+        imagemProduto = imagem.toString()
+
+        if(nomeProduto!="" && codBarras!=""){
+            createProduct()
+        }
+        else{
+            if(nomeProduto=="") {
+                editTextNomeProduto.error ="Tem de atribuir um nome ao produto"
+            }
+            if(codBarras=="") {
+                editTextCodBarras.error ="Tem de atribuir um nome ao produto"
+            }
+        }
+    }
+
+    private fun createProduct() {
+        val timestamp = System.currentTimeMillis()
+
+        val uid = firebaseAuth.uid
+
+        getListaProdutos()
+
+        val hashMapProduto: HashMap<String, Any?> = HashMap()
+        hashMapProduto["nomeProduto"] = nomeProduto
+        hashMapProduto["codBarras"] = codBarras
+        hashMapProduto["precoCompra"] = precoCompra
+        hashMapProduto["adicionadoPor"] = uid
+        hashMapProduto["listaDe"] = listaKey
+        //hashMapProduto["imagemProduto"] = photoFile.toUri()
+        hashMapProduto["dataValidade"] = data
+        hashMapProduto["adicionadoEm"] = timestamp
+
+
+
+        val ref = FirebaseDatabase.getInstance().getReference("Produtos")
+        val keyProduct = ref.push().key
+        hashMapProduto["idProduto"] = keyProduct
+
+        ref.child(keyProduct!!).setValue(hashMapProduto)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Produto adicionado...", Toast.LENGTH_SHORT).show()
+                updateProductImage(keyProduct, listaKey)
+            }
+            .addOnFailureListener { e ->
+
+                //progressDialog.dismiss()
+                Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
+            }    }
+
+    private fun getListaProdutos() {
+        val uid = firebaseAuth.uid
+
+        val ref = FirebaseDatabase.getInstance().getReference("ListaProdutos")
+        ref.orderByChild("uid").equalTo(uid)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    listaKey = snapshot.child("listaID").value.toString()
+                }
+
+                // TODO: 27/12/2021 Erro, não ta a guardar o id da lista no produto 
+                 
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })    }
+
+    private fun updateProductImage(key: String, listaKey: String) {
+        // TODO: 27/12/2021 Arranjar caminho do producto formato ListaProdutos/idLista/idProduto 
+        storageReference = FirebaseStorage.getInstance().getReference("ListaProdutos/"+listaKey+"/"+key)
+        storageReference.putFile(imageUri).addOnSuccessListener {
+            Toast.makeText(this, "Imagem adicionado...", Toast.LENGTH_SHORT).show()
+
+        }
+            .addOnFailureListener{ e ->
+
+                Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun takePicture() {
@@ -94,7 +212,6 @@ class AddProductActivity : AppCompatActivity() {
 //        Toast.makeText(this,"Erro ao entrar, ${sdf.format(myCalendar.time)}", Toast.LENGTH_SHORT).show()
 
     }
-    // TODO: 27/12/2021 guardar imagem na base de dados https://www.youtube.com/watch?v=y4npeX35B34
-    // TODO: 26/12/2021 Adicionar Produto a base de Dados com ligação a Lista automaticamente <- Urgente 
+
 
 }

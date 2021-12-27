@@ -41,7 +41,29 @@ class HomeFragment : Fragment() {
         val view = binding.root
         addButton = binding.addButton
 
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser != null) {
+            val ref = FirebaseDatabase.getInstance().getReference("Users")
+            ref.child(currentUser.uid)
+                //.addListenerForSingleValueEvent(object : ValueEventListener {  so procura 1x
+                .addValueEventListener(object : ValueEventListener {
 
+                    override fun onDataChange(snapshot: DataSnapshot) {
+
+                        val name = snapshot.child("name").value.toString()
+                        gv.nomeUtilizador = name
+                        binding.teste.setText(gv.nomeUtilizador)
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+
+                    }
+                })
+        } else {
+            startActivity(Intent(activity, AuthenticationActivity::class.java))
+
+        }
 
 
 
@@ -58,27 +80,7 @@ class HomeFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
-        val currentUser = firebaseAuth.currentUser
-        if (currentUser != null) {
-            val ref = FirebaseDatabase.getInstance().getReference("Users")
-            ref.child(currentUser.uid)
-                .addListenerForSingleValueEvent(object : ValueEventListener {
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val userType = snapshot.child("userType").value
-                        val name = snapshot.child("name").value.toString()
-                        gv.nomeUtilizador = name
-                        binding.teste.text = gv.nomeUtilizador
-                    }
 
-                    override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
-
-                    }
-                })
-        } else {
-            startActivity(Intent(activity, AuthenticationActivity::class.java))
-
-        }
     }
 
 

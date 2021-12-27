@@ -78,7 +78,7 @@
         android:layout_marginTop="28dp"
         android:fontFamily="@font/seg_ui_semibold"
         android:text="@string/nome_do_produto"
-        app:layout_constraintBottom_toTopOf="@+id/addProductEditText"
+        app:layout_constraintBottom_toTopOf="@+id/nomeProdutoEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="parent"
@@ -86,7 +86,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/addProductEditText"
+        android:id="@+id/nomeProdutoEditText"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginLeft="25dp"
@@ -120,7 +120,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.082"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addProductEditText"
+        app:layout_constraintTop_toBottomOf="@+id/nomeProdutoEditText"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
@@ -142,7 +142,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addProductEditText"
+        app:layout_constraintTop_toBottomOf="@+id/nomeProdutoEditText"
         app:layout_constraintVertical_bias="0.079"
         tools:ignore="Autofill,UnusedAttribute" />
 
@@ -174,7 +174,7 @@
         android:drawableTint="@color/colorTextBlack"
         android:fontFamily="@font/seg_ui_semibold"
         android:hint="@string/introduza_o_pre_o_de_compra"
-        android:inputType="textPassword"
+        android:inputType="text"
         android:paddingStart="15dp"
         android:paddingEnd="26dp"
         android:textColor="@color/defaultText"

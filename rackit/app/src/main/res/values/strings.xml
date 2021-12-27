@@ -30,7 +30,7 @@
     <string name="aceitar_termos">Aceitar <u><font color='#0F6DD2'>termos e condições</font></u></string>
     <string name="nome_de_utilizador">Nome de utilizador</string>
     <string name="weak">Weak</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="nome_do_produto">Nome do Produto</string>
     <string name="introduza_o_nome_do_produto">Introduza o nome do produto...</string>

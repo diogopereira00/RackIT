@@ -187,7 +187,7 @@ class RegisterActivity : AppCompatActivity(), TextWatcher {
         hashMapLista["uid"] = uid
         val refLista = FirebaseDatabase.getInstance().getReference("ListaProdutos")
         val keyLista = refLista.push().key
-        hashMap["id"]  = keyLista
+        hashMapLista["listaID"]  = keyLista.toString()
                 refLista.child(keyLista!!).setValue(hashMapLista)
             .addOnSuccessListener {
                 progressDialog.dismiss()

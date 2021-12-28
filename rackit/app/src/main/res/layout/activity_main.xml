@@ -16,29 +16,34 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMaxWidth="0dp"
-        app:tabGravity="fill"
-        app:tabMode="fixed"
+        android:layout_alignParentBottom="true"
         android:background="@color/white"
-        app:tabIndicatorColor="?colorPrimary"
-        android:layout_alignParentBottom="true">
+        app:tabIconTint="@color/primary"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/primary"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Home"/>
+            android:icon="@drawable/ic_baseline_home_24"
+            android:text="Home" />
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Produtos"/>
+            android:text="Produtos" />
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lista Compras"/>
+            android:text="Lista Compras" />
+
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Definições"/>
+            android:text="Definições" />
 
 
     </com.google.android.material.tabs.TabLayout>

@@ -24,6 +24,8 @@ import kotlinx.android.synthetic.main.activity_welcome.*
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.HashMap
+
 class AddProductActivity : AppCompatActivity() {
 
 
@@ -93,7 +95,7 @@ class AddProductActivity : AppCompatActivity() {
             myCalendar.get(Calendar.DAY_OF_MONTH)).show()
          }
         backButton.setOnClickListener{
-            startActivity(Intent(this@AddProductActivity, MainActivity::class.java))
+            //startActivity(Intent(this@AddProductActivity, MainActivity::class.java))
             finish()
         }
     }
@@ -110,59 +112,72 @@ class AddProductActivity : AppCompatActivity() {
         data = dataValidade.text.toString()
         imagemProduto = imagem.toString()
 
-        if(nomeProduto!="" && codBarras!=""){
+        if(nomeProduto!=""){
             createProduct()
         }
         else{
             if(nomeProduto=="") {
                 editTextNomeProduto.error ="Tem de atribuir um nome ao produto"
             }
-            if(codBarras=="") {
-                editTextCodBarras.error ="Tem de atribuir um nome ao produto"
-            }
         }
     }
 
     private fun createProduct() {
-        val timestamp = System.currentTimeMillis()
+        var timestamp = System.currentTimeMillis()
 
         val uid = firebaseAuth.uid
+        val keyProduct = nomeProduto.replace(" ", "_") +"_"+timestamp
+
+        val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+        val currentDate = sdf.format(Date())
 
         val hashMapProduto: HashMap<String, Any?> = HashMap()
         hashMapProduto["nomeProduto"] = nomeProduto
         hashMapProduto["codBarras"] = codBarras
-        hashMapProduto["precoCompra"] = precoCompra
-        hashMapProduto["adicionadoPor"] = uid
+        hashMapProduto["timestamp"] = uid
         hashMapProduto["listaDe"] = gv.currentList
         //hashMapProduto["imagemProduto"] = photoFile.toUri()
-        hashMapProduto["dataValidade"] = data
         hashMapProduto["adicionadoEm"] = timestamp
-
-        // TODO: 27/12/2021 Estruturar Produto -> Info produto
-        // produto -> id, nome, codBarras, listaProdutos, criadoEm, atualizado em
-        // infoprodutos -> dataCompra, dataValidade, precoCompra, produtoID, 
+        hashMapProduto["produtoID"] = keyProduct
 
         val ref = FirebaseDatabase.getInstance().getReference("Produtos")
-        val keyProduct = ref.push().key
-        hashMapProduto["idProduto"] = keyProduct
-
         ref.child(nomeProduto +"_"+timestamp).setValue(hashMapProduto)
             .addOnSuccessListener {
-                Toast.makeText(this, "Produto adicionado...", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(this, "Produto adicionado...", Toast.LENGTH_SHORT).show()
                 updateProductImage(nomeProduto +"_"+timestamp)
             }
             .addOnFailureListener { e ->
-
-                //progressDialog.dismiss()
                 Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
-            }    }
+            }
+
+        val hasMapInfoProduto : HashMap<String,Any?> = HashMap()
+        hasMapInfoProduto["dataCompra"] = currentDate
+        hasMapInfoProduto["dataValidade"] = data
+        hasMapInfoProduto["precoCompra"] = precoCompra
+        hasMapInfoProduto["produtoID"] = keyProduct
+        hashMapProduto["adicionadoPor"] = uid
+        timestamp = System.currentTimeMillis()
+        hashMapProduto["adicionadoEm"] = timestamp
+
+        val keyInfo = "Info_"+nomeProduto.replace(" ","_")+"_"+timestamp
+        val refInfoProdutos = FirebaseDatabase.getInstance().getReference("InfoProdutos")
+        refInfoProdutos.child(keyInfo).setValue(hasMapInfoProduto)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Produto adicionado com sucesso.", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
+            }
+
+
+    }
 
 
     private fun updateProductImage(key: String, ) {
-        // TODO: 27/12/2021 Arranjar caminho do producto formato ListaProdutos/idLista/idProduto 
         storageReference = FirebaseStorage.getInstance().getReference("ListaProdutos/"+gv.currentList+"/"+key)
         storageReference.putFile(imageUri).addOnSuccessListener {
-            Toast.makeText(this, "Imagem adicionado...", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(this, "Imagem adicionado...", Toast.LENGTH_SHORT).show()
 
         }
             .addOnFailureListener{ e ->

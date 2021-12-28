@@ -174,7 +174,7 @@
         android:drawableTint="@color/colorTextBlack"
         android:fontFamily="@font/seg_ui_semibold"
         android:hint="@string/introduza_o_pre_o_de_compra"
-        android:inputType="text"
+        android:inputType="numberDecimal"
         android:paddingStart="15dp"
         android:paddingEnd="26dp"
         android:textColor="@color/defaultText"

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
+import com.diogopereira.rackit.v2.R
 import com.diogopereira.rackit.v2.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
@@ -46,8 +47,8 @@ class MainActivity : AppCompatActivity() {
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab) {
                 viewPager.currentItem = tab.position
-            }
 
+            }
             override fun onTabUnselected(tab: TabLayout.Tab?) {
 
             }

@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var addButton : FloatingActionButton
 
-
+    // TODO: 01/01/2022 Por floatbutton no topo da navbar e limitar viewpage no topo da navabar 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -17,7 +17,7 @@
             android:src="@drawable/ic_camera" />
 
         <TextView
-            android:id="@+id/textoLinha1"
+            android:id="@+id/nomeProduto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/iconeNaLista"
@@ -31,7 +31,7 @@
             android:id="@+id/textoLinha2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textoLinha1"
+            android:layout_below="@id/nomeProduto"
             android:layout_toEndOf="@id/iconeNaLista"
             android:layout_toRightOf="@id/iconeNaLista"
             android:text="devel placeholder line 2"

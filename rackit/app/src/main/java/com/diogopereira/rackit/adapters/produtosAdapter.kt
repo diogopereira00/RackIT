@@ -7,16 +7,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.diogopereira.rackit.classes.Produto
 import com.diogopereira.rackit.v2.R
+import com.diogopereira.rackit.v2.databinding.ItemListaProdutosBinding
 
 class produtosAdapter(private val productsList : ArrayList<Produto>) : RecyclerView.Adapter<produtosAdapter.ProductsViewHolder>() {
 
-
+    private lateinit var binding : ItemListaProdutosBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsViewHolder {
+        binding = ItemListaProdutosBinding.inflate(LayoutInflater.from(parent.context),parent,false)
 
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_lista_produtos,
-        parent,false)
-        return ProductsViewHolder(itemView)
+        //val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_lista_produtos, parent,false)
+        return ProductsViewHolder(binding.root)
     }
 
     override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
@@ -30,8 +31,9 @@ class produtosAdapter(private val productsList : ArrayList<Produto>) : RecyclerV
 
     }
 
-    class ProductsViewHolder(productView : View) : RecyclerView.ViewHolder(productView){
+    inner class ProductsViewHolder(productView : View) : RecyclerView.ViewHolder(productView){
 
-        val nomeProduto :TextView = productView.findViewById(R.id.nomeProduto)
+        val nomeProduto :TextView = binding.nomeProduto
+        
     }
 }

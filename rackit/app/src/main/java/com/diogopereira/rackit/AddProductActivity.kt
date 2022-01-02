@@ -31,31 +31,32 @@ class AddProductActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var storageReference: StorageReference
-    private lateinit var imageUri : Uri
+    private lateinit var imageUri: Uri
     private lateinit var binding: ActivityAddProductBinding
-    private lateinit var backButton : ImageButton
-    private lateinit var addButton : Button
+    private lateinit var backButton: ImageButton
+    private lateinit var addButton: Button
     private lateinit var dataValidade: EditText
     private lateinit var editTextNomeProduto: EditText
     private lateinit var editTextCodBarras: EditText
     private lateinit var editTextPrecoCompra: EditText
     private lateinit var imagem: EditText
     private val REQUEST_CODE = 100
-    lateinit var photoFile : File
+    lateinit var photoFile: File
 
 
-    lateinit var mImageView : ImageView
+    lateinit var mImageView: ImageView
 
     private var gv = GlobalClass()
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             mImageView.setImageURI(photoFile.toUri())
             imagem.setText(photoFile.toString())
             imageUri = photoFile.toUri()
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddProductBinding.inflate(layoutInflater)
@@ -63,7 +64,6 @@ class AddProductActivity : AppCompatActivity() {
         setContentView(view)
 
         firebaseAuth = FirebaseAuth.getInstance()
-
         gv = application as GlobalClass
 
         addButton = binding.addButton
@@ -76,48 +76,49 @@ class AddProductActivity : AppCompatActivity() {
         backButton = binding.backButton
         imagem = binding.imagemEditText
         photoFile = getPhotoFile("photo.jpg")
-        val myCalendar =  Calendar.getInstance()
-        val datePicker = DatePickerDialog.OnDateSetListener{ view, year, month, dayOfMonth ->
-            myCalendar.set(Calendar.YEAR,year)
-            myCalendar.set(Calendar.MONTH,month)
-            myCalendar.set(Calendar.DAY_OF_YEAR,dayOfMonth)
+        val myCalendar = Calendar.getInstance()
+        val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            myCalendar.set(Calendar.YEAR, year)
+            myCalendar.set(Calendar.MONTH, month)
+            myCalendar.set(Calendar.DAY_OF_YEAR, dayOfMonth)
             updateData(myCalendar)
         }
-        addButton.setOnClickListener{
+        addButton.setOnClickListener {
             validateData()
 
         }
         imagem.setOnClickListener {
             takePicture()
         }
-        dataValidade.setOnClickListener{
-            DatePickerDialog(this,datePicker,myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-            myCalendar.get(Calendar.DAY_OF_MONTH)).show()
-         }
-        backButton.setOnClickListener{
+        dataValidade.setOnClickListener {
+            DatePickerDialog(
+                this, datePicker, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
+        backButton.setOnClickListener {
             //startActivity(Intent(this@AddProductActivity, MainActivity::class.java))
             finish()
         }
     }
 
-    private var nomeProduto =""
-    private var codBarras=""
-    private var precoCompra=""
-    private var data =""
-    private var imagemProduto=""
+    private var nomeProduto = ""
+    private var codBarras = ""
+    private var precoCompra = ""
+    private var data = ""
+    private var imagemProduto = ""
     private fun validateData() {
         nomeProduto = editTextNomeProduto.text.toString()
         codBarras = editTextCodBarras.text.toString()
         precoCompra = editTextPrecoCompra.text.toString()
         data = dataValidade.text.toString()
-        imagemProduto = imagem.toString()
+        imagemProduto = imagem.text.toString()
 
-        if(nomeProduto!=""){
+        if (nomeProduto != "") {
             createProduct()
-        }
-        else{
-            if(nomeProduto=="") {
-                editTextNomeProduto.error ="Tem de atribuir um nome ao produto"
+        } else {
+            if (nomeProduto == "") {
+                editTextNomeProduto.error = "Tem de atribuir um nome ao produto"
             }
         }
     }
@@ -126,7 +127,7 @@ class AddProductActivity : AppCompatActivity() {
         var timestamp = System.currentTimeMillis()
 
         val uid = firebaseAuth.uid
-        val keyProduct = nomeProduto.replace(" ", "_") +"_"+timestamp
+        val keyProduct = nomeProduto.replace(" ", "_") + "_" + timestamp
 
         val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
         val currentDate = sdf.format(Date())
@@ -141,16 +142,23 @@ class AddProductActivity : AppCompatActivity() {
         hashMapProduto["produtoID"] = keyProduct
 
         val ref = FirebaseDatabase.getInstance().getReference("Produtos")
-        ref.child(nomeProduto +"_"+timestamp).setValue(hashMapProduto)
+        ref.child(nomeProduto + "_" + timestamp).setValue(hashMapProduto)
             .addOnSuccessListener {
-                //Toast.makeText(this, "Produto adicionado...", Toast.LENGTH_SHORT).show()
-                updateProductImage(nomeProduto +"_"+timestamp)
+
+                if (imagemProduto!="") {
+                    updateProductImage(nomeProduto + "_" + timestamp)
+                }
+                else{
+                    Toast.makeText(this, "Produto adicionado...", Toast.LENGTH_SHORT).show()
+                    //finish()
+
+                }
             }
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
             }
 
-        val hasMapInfoProduto : HashMap<String,Any?> = HashMap()
+        val hasMapInfoProduto: HashMap<String, Any?> = HashMap()
         hasMapInfoProduto["dataCompra"] = currentDate
         hasMapInfoProduto["dataValidade"] = data
         hasMapInfoProduto["precoCompra"] = precoCompra
@@ -159,7 +167,7 @@ class AddProductActivity : AppCompatActivity() {
         timestamp = System.currentTimeMillis()
         hashMapProduto["adicionadoEm"] = timestamp
 
-        val keyInfo = "Info_"+nomeProduto.replace(" ","_")+"_"+timestamp
+        val keyInfo = "Info_" + nomeProduto.replace(" ", "_") + "_" + timestamp
         val refInfoProdutos = FirebaseDatabase.getInstance().getReference("InfoProdutos")
         refInfoProdutos.child(keyInfo).setValue(hasMapInfoProduto)
             .addOnSuccessListener {
@@ -174,44 +182,49 @@ class AddProductActivity : AppCompatActivity() {
     }
 
 
-    private fun updateProductImage(key: String, ) {
-        storageReference = FirebaseStorage.getInstance().getReference("ListaProdutos/"+gv.currentList+"/"+key)
+    private fun updateProductImage(key: String) {
+        storageReference = FirebaseStorage.getInstance()
+            .getReference("ListaProdutos/" + gv.currentList + "/" + key)
         storageReference.putFile(imageUri).addOnSuccessListener {
-            //Toast.makeText(this, "Imagem adicionado...", Toast.LENGTH_SHORT).show()
+            // TODO: 02/01/2022 Adicionar URL quando adiciono putfile 
+            Toast.makeText(this, "Imagem adicionado...", Toast.LENGTH_SHORT).show()
 
         }
-            .addOnFailureListener{ e ->
+            .addOnFailureListener { e ->
 
                 Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
     private fun takePicture() {
-         val picInt = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        val picInt = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         photoFile = createPhotoFile()
-        val uris = FileProvider.getUriForFile(this,"com.diogopereira.rackit.fileprovider", photoFile)
-        picInt.putExtra(MediaStore.EXTRA_OUTPUT,uris)
+        val uris =
+            FileProvider.getUriForFile(this, "com.diogopereira.rackit.fileprovider", photoFile)
+        picInt.putExtra(MediaStore.EXTRA_OUTPUT, uris)
         startActivityForResult(picInt, REQUEST_CODE)
     }
 
     private fun createPhotoFile(): File {
-        val timestamp:String = SimpleDateFormat("ddMMyyyy_HHmmss").format(Date())
-        val storageDir : File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile("JPEG_${timestamp}_",
+        val timestamp: String = SimpleDateFormat("ddMMyyyy_HHmmss").format(Date())
+        val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(
+            "JPEG_${timestamp}_",
             ".jpg",
-            storageDir).apply {
+            storageDir
+        ).apply {
 
         }
     }
 
-    private fun getPhotoFile(fileName:String): File {
+    private fun getPhotoFile(fileName: String): File {
         val diStorage = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile(fileName,"jpg",diStorage)
+        return File.createTempFile(fileName, "jpg", diStorage)
     }
 
     private fun updateData(myCalendar: Calendar) {
         val myFormat = "dd/MM/yyyy"
-        val sdf = SimpleDateFormat(myFormat,Locale.ENGLISH)
+        val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
         dataValidade.setText(sdf.format(myCalendar.time))
 //        Toast.makeText(this,"Erro ao entrar, ${sdf.format(myCalendar.time)}", Toast.LENGTH_SHORT).show()
 

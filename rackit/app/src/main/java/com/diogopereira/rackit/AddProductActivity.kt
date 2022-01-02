@@ -12,6 +12,7 @@ import android.widget.*
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import com.diogopereira.rackit.v2.databinding.ActivityAddProductBinding
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -140,15 +141,16 @@ class AddProductActivity : AppCompatActivity() {
         //hashMapProduto["imagemProduto"] = photoFile.toUri()
         hashMapProduto["adicionadoEm"] = timestamp
         hashMapProduto["produtoID"] = keyProduct
+        hashMapProduto["imagemProduto"] = ""
 
+        val keyProduto = nomeProduto + "_" + timestamp
         val ref = FirebaseDatabase.getInstance().getReference("Produtos")
-        ref.child(nomeProduto + "_" + timestamp).setValue(hashMapProduto)
+        ref.child(keyProduct).setValue(hashMapProduto)
             .addOnSuccessListener {
 
-                if (imagemProduto!="") {
-                    updateProductImage(nomeProduto + "_" + timestamp)
-                }
-                else{
+                if (imagemProduto != "") {
+                    updateProductImage(keyProduct)
+                } else {
                     Toast.makeText(this, "Produto adicionado...", Toast.LENGTH_SHORT).show()
                     //finish()
 
@@ -185,14 +187,35 @@ class AddProductActivity : AppCompatActivity() {
     private fun updateProductImage(key: String) {
         storageReference = FirebaseStorage.getInstance()
             .getReference("ListaProdutos/" + gv.currentList + "/" + key)
-        storageReference.putFile(imageUri).addOnSuccessListener {
-            // TODO: 02/01/2022 Adicionar URL quando adiciono putfile 
-            Toast.makeText(this, "Imagem adicionado...", Toast.LENGTH_SHORT).show()
+        storageReference.putFile(imageUri).addOnSuccessListener { taskSnapshot ->
+            val uriTask: Task<Uri> = taskSnapshot.storage.downloadUrl
+            while (!uriTask.isSuccessful);
+            val uploadImageUrl = "${uriTask.result}"
+            updateImageURL(uploadImageUrl, key)
+            //Toast.makeText(this, "Imagem adicionado... ${uriTask.result}\"", Toast.LENGTH_SHORT).show()
 
         }
             .addOnFailureListener { e ->
 
                 Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun updateImageURL(uploadImageUrl: String, key: String) {
+        val hashMap: HashMap<String, Any> = HashMap()
+        hashMap["imagemProduto"] = uploadImageUrl
+        val ref = FirebaseDatabase.getInstance().getReference("Produtos")
+        ref.child(key).updateChildren(hashMap)
+            .addOnSuccessListener {
+                //Toast.makeText(this, "Imagem atualizado ", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(
+                    this,
+                    "Erro de atualização de imagem devido  ${e.message} ",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
     }
 

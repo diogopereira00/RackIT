@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.adapters.produtosAdapter
+import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.classes.Produto
 import com.diogopereira.rackit.v2.R
 import com.diogopereira.rackit.v2.databinding.ActivityAddProductBinding
@@ -70,7 +71,25 @@ class ProductsFragment : Fragment() {
                     else{
                         binding.semProduto.visibility = View.GONE
 
+<<<<<<< Updated upstream
                         produtoRecyclerView.adapter = produtosAdapter(produtosArrayList)
+=======
+                        // TODO: 03/01/2022 Obter dados do info produtos
+                        getInfoProdutos()
+                        //var teste = InfoProduto(produtoID = produto!!.produtoID)
+                        //produto!!.adicionarInfoProduto(InfoProduto(dataCompra = "", dataValidade = "teste", precoCompra = "2,3", produtoID = produto!!.produtoID))
+                            produtosArrayList.add(produto!!)
+                            produtoRecyclerView.adapter?.notifyDataSetChanged()
+
+
+                        if (produtosArrayList.isEmpty()) {
+                            binding.semProduto.visibility = View.VISIBLE
+                            binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
+                        } else {
+                            binding.semProduto.visibility = View.GONE
+                            produtoRecyclerView.adapter = produtosAdapter(produtosArrayList)
+                            produtoRecyclerView.adapter?.notifyDataSetChanged()
+>>>>>>> Stashed changes
 
                     }
                 }
@@ -83,4 +102,8 @@ class ProductsFragment : Fragment() {
         })
 
 
-}}
+}
+
+    private fun getInfoProdutos() {
+    }
+}

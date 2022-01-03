@@ -1,8 +1,6 @@
 package com.diogopereira.rackit.classes
 
-<<<<<<< Updated upstream
-data class Produto (var nomeProduto : String ?=null,  var codBarras : String?= null, var listaDe : String? = null, val adicionadoEm : Long? = null, val produtoID : String? = null)
-=======
+
 data class Produto (var nomeProduto : String ?=null,
                     var codBarras : String?= null,
                     var listaDe : String? = null,
@@ -16,4 +14,4 @@ data class Produto (var nomeProduto : String ?=null,
         listaInfoProduto.add(infoProduto)
     }
 }
->>>>>>> Stashed changes
+

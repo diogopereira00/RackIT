@@ -30,6 +30,18 @@ class ProductsFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        //getProdutoData()
+        //produtosArrayList.clear()
+        produtoRecyclerView.adapter?.notifyDataSetChanged()
+
+    }
+    override fun onStart()  {
+        super.onStart()
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,28 +64,22 @@ class ProductsFragment : Fragment() {
     }
 
     private fun getProdutoData() {
+        val size: Int = produtosArrayList.size
+        //produtosArrayList.clear()
+
         val listid = "list_" + gv.uidUtilizador
         dbref  = FirebaseDatabase.getInstance().getReference("Produtos")
         dbref.orderByChild("listaDe").equalTo(listid)
             .addValueEventListener(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                    for(productSnapshot in snapshot.children){
-                        val produto = productSnapshot.getValue(Produto::class.java)
-                        produtosArrayList.add(produto!!)
-                    }
-                    if(produtosArrayList.isEmpty()){
-                        binding.semProduto.visibility = View.VISIBLE
-                        binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
-                        // TODO: 01/01/2022 quando adiciono items nao ta a dar refresh 
-                        // TODO: 01/01/2022 adicionar imagem 
-                    }
-                    else{
-                        binding.semProduto.visibility = View.GONE
+                if (snapshot.exists()) {
+                    //produtoRecyclerView.adapter?.notifyDataSetChanged()
+                    produtoRecyclerView.adapter?.notifyDataSetChanged()
+                    produtosArrayList.clear()
+                    for (productSnapshot in snapshot.children) {
 
-<<<<<<< Updated upstream
-                        produtoRecyclerView.adapter = produtosAdapter(produtosArrayList)
-=======
+                        val produto = productSnapshot.getValue(Produto::class.java)
+
                         // TODO: 03/01/2022 Obter dados do info produtos
                         getInfoProdutos()
                         //var teste = InfoProduto(produtoID = produto!!.produtoID)
@@ -89,15 +95,14 @@ class ProductsFragment : Fragment() {
                             binding.semProduto.visibility = View.GONE
                             produtoRecyclerView.adapter = produtosAdapter(produtosArrayList)
                             produtoRecyclerView.adapter?.notifyDataSetChanged()
->>>>>>> Stashed changes
 
+                        }
                     }
-                }
 
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
         })
 

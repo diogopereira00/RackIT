@@ -29,6 +29,7 @@ class produtosAdapter(private val productsList: ArrayList<Produto>) :
         holder.nomeProduto.text = currentItem.listaInfoProduto.size.toString()+"x " + currentItem.nomeProduto
         if (!currentItem.listaInfoProduto.isEmpty())
             holder.dataValidade.text = "Expira em: " +currentItem.listaInfoProduto[0].dataValidade.toString()
+        // TODO: 04/01/2022 Percorrer lista e comparar datas, convertendo string em data 
         else
             holder.dataValidade.text =""
         if (currentItem.imagemProduto != "") {

@@ -58,7 +58,6 @@ class ProductsFragment : Fragment() {
 
         InfoprodutosArrayList = arrayListOf<Produto>()
         ProdutoArrayList = arrayListOf<Produto>()
-        // TODO: 28/12/2021 Recyler view com os produtos na lista de produtos
 
 
         return view
@@ -85,7 +84,6 @@ class ProductsFragment : Fragment() {
                                 binding.semProduto.visibility = View.VISIBLE
                                 binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
                             }
-                            // TODO: 03/01/2022 Obter dados do info produtos
                             produtoRecyclerView.adapter?.notifyDataSetChanged()
 
                         }

@@ -28,7 +28,7 @@
             android:layout_toRightOf="@id/iconeNaLista" />
 
         <TextView
-            android:id="@+id/textoLinha2"
+            android:id="@+id/dataValidade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/nomeProduto"

@@ -5,16 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.adapters.produtosAdapter
 import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.classes.Produto
-import com.diogopereira.rackit.v2.R
-import com.diogopereira.rackit.v2.databinding.ActivityAddProductBinding
-import com.diogopereira.rackit.v2.databinding.FragmentHomeBinding
 import com.diogopereira.rackit.v2.databinding.FragmentProductsBinding
 import com.google.firebase.database.*
 
@@ -23,9 +19,12 @@ class ProductsFragment : Fragment() {
     private val binding get() = _binding!!
     lateinit var gv: GlobalClass
 
-    private lateinit var dbref :DatabaseReference
-    private lateinit var produtosArrayList: ArrayList<Produto>
-    private lateinit var  produtoRecyclerView: RecyclerView
+    private lateinit var dbref: DatabaseReference
+    private lateinit var dbrefInfo : DatabaseReference
+    private lateinit var InfoprodutosArrayList: ArrayList<Produto>
+    private lateinit var ProdutoArrayList: ArrayList<Produto>
+
+    private lateinit var produtoRecyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,17 +35,20 @@ class ProductsFragment : Fragment() {
         //getProdutoData()
         //produtosArrayList.clear()
         produtoRecyclerView.adapter?.notifyDataSetChanged()
+        getProdutoData()
 
     }
-    override fun onStart()  {
+
+    override fun onStart() {
         super.onStart()
 
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentProductsBinding.inflate(inflater,container,false)
+        _binding = FragmentProductsBinding.inflate(inflater, container, false)
         val view = binding.root
         gv = activity?.application as GlobalClass
 
@@ -54,8 +56,8 @@ class ProductsFragment : Fragment() {
         produtoRecyclerView.layoutManager = LinearLayoutManager(activity)
         produtoRecyclerView.setHasFixedSize(true)
 
-        produtosArrayList = arrayListOf<Produto>()
-        getProdutoData()
+        InfoprodutosArrayList = arrayListOf<Produto>()
+        ProdutoArrayList = arrayListOf<Produto>()
         // TODO: 28/12/2021 Recyler view com os produtos na lista de produtos
 
 
@@ -64,51 +66,102 @@ class ProductsFragment : Fragment() {
     }
 
     private fun getProdutoData() {
-        val size: Int = produtosArrayList.size
+        val size: Int = InfoprodutosArrayList.size
         //produtosArrayList.clear()
 
         val listid = "list_" + gv.uidUtilizador
-        dbref  = FirebaseDatabase.getInstance().getReference("Produtos")
+        dbref = FirebaseDatabase.getInstance().getReference("Produtos")
         dbref.orderByChild("listaDe").equalTo(listid)
-            .addValueEventListener(object : ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    //produtoRecyclerView.adapter?.notifyDataSetChanged()
-                    produtoRecyclerView.adapter?.notifyDataSetChanged()
-                    produtosArrayList.clear()
-                    for (productSnapshot in snapshot.children) {
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        //produtoRecyclerView.adapter?.notifyDataSetChanged()
+                        produtoRecyclerView.adapter?.notifyDataSetChanged()
+                        ProdutoArrayList.clear()
+                        for (productSnapshot in snapshot.children) {
 
-                        val produto = productSnapshot.getValue(Produto::class.java)
-
-                        // TODO: 03/01/2022 Obter dados do info produtos
-                        getInfoProdutos()
-                        //var teste = InfoProduto(produtoID = produto!!.produtoID)
-                        //produto!!.adicionarInfoProduto(InfoProduto(dataCompra = "", dataValidade = "teste", precoCompra = "2,3", produtoID = produto!!.produtoID))
-                            produtosArrayList.add(produto!!)
+                            val produto = productSnapshot.getValue(Produto::class.java)
+                            ProdutoArrayList.add(produto!!)
+                            if(produto == null){
+                                binding.semProduto.visibility = View.VISIBLE
+                                binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
+                            }
+                            // TODO: 03/01/2022 Obter dados do info produtos
+                            var teste = getInfoProdutos(produto!!)
+                            //var teste = InfoProduto(produtoID = produto!!.produtoID)
+                            //produto!!.adicionarInfoProduto(InfoProduto(dataCompra = "", dataValidade = "teste", precoCompra = "2,3", produtoID = produto!!.produtoID))
+                            var testess = produto
+                           // produtosArrayList.add(produto!!)
                             produtoRecyclerView.adapter?.notifyDataSetChanged()
 
+                        }
+//                        if (produtosArrayList.isEmpty()) {
+//                            binding.semProduto.visibility = View.VISIBLE
+//                            binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
+//                        } else {
+//                            binding.semProduto.visibility = View.GONE
+//                            produtoRecyclerView.adapter = produtosAdapter(produtosArrayList)
+//                            produtoRecyclerView.adapter?.notifyDataSetChanged()
+//
+//                        }
+                    }
 
-                        if (produtosArrayList.isEmpty()) {
+                }
+
+
+                override fun onCancelled(error: DatabaseError) {
+                    binding.semProduto.visibility = View.VISIBLE
+                    binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
+                }
+            })
+
+
+    }
+
+    private fun getInfoProdutos(produto: Produto) {
+        InfoprodutosArrayList.clear()
+        dbrefInfo = FirebaseDatabase.getInstance().getReference("InfoProdutos")
+        dbrefInfo.orderByChild("produtoID").equalTo(produto.produtoID)
+            .addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        //InfoprodutosArrayList.clear()
+                        produtoRecyclerView.adapter?.notifyDataSetChanged()
+                        for (productSnapshot in snapshot.children) {
+
+                            val Infoproduto = productSnapshot.getValue(InfoProduto::class.java)
+
+                            if(InfoprodutosArrayList.contains(produto)){
+
+                            }
+                            produto.adicionarInfoProduto(Infoproduto!!)
+
+
+
+                        }
+                        InfoprodutosArrayList.add(produto!!)
+                        produtoRecyclerView.adapter?.notifyDataSetChanged()
+                        if (InfoprodutosArrayList.isEmpty()) {
                             binding.semProduto.visibility = View.VISIBLE
                             binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
                         } else {
                             binding.semProduto.visibility = View.GONE
-                            produtoRecyclerView.adapter = produtosAdapter(produtosArrayList)
+                            produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
                             produtoRecyclerView.adapter?.notifyDataSetChanged()
 
                         }
                     }
 
                 }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
 
 
-}
+                override fun onCancelled(error: DatabaseError) {
 
-    private fun getInfoProdutos() {
+                }
+
+
+            })
+
+
     }
 }

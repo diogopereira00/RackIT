@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.adapters.produtosAdapter
+import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.classes.Produto
 import com.diogopereira.rackit.v2.R
 import com.diogopereira.rackit.v2.databinding.ActivityAddProductBinding
@@ -79,6 +80,10 @@ class ProductsFragment : Fragment() {
 
                         val produto = productSnapshot.getValue(Produto::class.java)
 
+                        // TODO: 03/01/2022 Obter dados do info produtos
+                        getInfoProdutos()
+                        //var teste = InfoProduto(produtoID = produto!!.produtoID)
+                        //produto!!.adicionarInfoProduto(InfoProduto(dataCompra = "", dataValidade = "teste", precoCompra = "2,3", produtoID = produto!!.produtoID))
                             produtosArrayList.add(produto!!)
                             produtoRecyclerView.adapter?.notifyDataSetChanged()
 
@@ -102,4 +107,8 @@ class ProductsFragment : Fragment() {
         })
 
 
-}}
+}
+
+    private fun getInfoProdutos() {
+    }
+}

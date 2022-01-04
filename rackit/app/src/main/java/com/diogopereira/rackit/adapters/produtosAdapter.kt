@@ -29,6 +29,7 @@ class produtosAdapter(private val productsList: ArrayList<Produto>) :
         return ProductsViewHolder(binding.root)
     }
 
+    // TODO: 04/01/2022 onclick open activity 
     override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
         //codigo para retirar a data do produto com menor data de validade
         val myFormat = "dd/MM/yyyy"
@@ -45,7 +46,7 @@ class produtosAdapter(private val productsList: ArrayList<Produto>) :
             //percorro a lista e verifico se ha data de validade
             for (p in currentItem.listaInfoProduto) {
                 //se houver retiro a data e comparo, se for menor passa a ser novaData
-                if (p.dataValidade != null) {
+                if (p.dataValidade != null && p.dataValidade!="") {
                     dataV = SimpleDateFormat("dd/MM/yyyy").parse(p.dataValidade)
                     if (dataV > hojeDate) {
                         if (novaData != Date())

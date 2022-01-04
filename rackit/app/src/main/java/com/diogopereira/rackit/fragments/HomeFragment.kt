@@ -23,9 +23,8 @@ class HomeFragment : Fragment() {
     lateinit var gv: GlobalClass
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    lateinit var addButton : FloatingActionButton
 
-    // TODO: 01/01/2022 Por floatbutton no topo da navbar e limitar viewpage no topo da navabar 
+    // TODO: 04/01/2022 criaçao do home fragment
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,7 +38,6 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
         val view = binding.root
-        addButton = binding.addButton
 
         val currentUser = firebaseAuth.currentUser
         if (currentUser != null) {
@@ -73,10 +71,7 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        addButton.setOnClickListener {
-            startActivity(Intent(activity, AddProductActivity::class.java))
 
-        }
     }
     override fun onResume() {
         super.onResume()

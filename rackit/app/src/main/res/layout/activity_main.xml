@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android = "http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,15 +7,27 @@
     android:layout_height="match_parent"
     tools:context="com.diogopereira.rackit.MainActivity">
 
+
+    <View
+        android:id="@+id/navigation_view"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/primary"
+        android:backgroundTint="@color/primary"
+        app:layout_constraintBottom_toTopOf="@id/viewPager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0" />
+
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/tabLayout"
+        app:layout_constraintTop_toBottomOf="@id/navigation_view"/>
 
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
 
         <com.google.android.material.tabs.TabLayout
@@ -27,7 +39,10 @@
             app:tabIconTint="@color/color_selected"
             app:tabIndicatorColor="@color/primary"
             app:tabMaxWidth="0dp"
-            app:tabMode="fixed">
+            app:tabMode="fixed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
@@ -52,7 +67,36 @@
 
         </com.google.android.material.tabs.TabLayout>
 
-        <!--    <TextView-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_margin="30dp"
+        app:fabSize="normal"
+        android:src="@drawable/ic_add"
+        android:tint="@color/white"
+        android:backgroundTint="@color/primary"
+        />
+
+    <TextView
+        android:id="@+id/fragmentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:text="@string/home"
+        android:translationZ="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/navigation_view"
+        app:layout_constraintEnd_toEndOf="@+id/navigation_view"
+        app:layout_constraintStart_toStartOf="@+id/navigation_view"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--    <TextView-->
         <!--        android:id="@+id/teste"-->
         <!--        android:layout_width="wrap_content"-->
         <!--        android:layout_height="wrap_content"-->
@@ -62,5 +106,4 @@
         <!--        app:layout_constraintRight_toRightOf="parent"-->
         <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    </RelativeLayout>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

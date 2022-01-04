@@ -17,6 +17,6 @@ class ShoppingListFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_shopping_list, container, false)
     }
-
+// TODO: 04/01/2022 RECYCLYER VIEW LISTA DE COMPRAS <--------------
 
 }

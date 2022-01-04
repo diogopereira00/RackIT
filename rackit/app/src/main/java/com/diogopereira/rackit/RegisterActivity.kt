@@ -188,8 +188,8 @@ class RegisterActivity : AppCompatActivity(), TextWatcher {
         val refLista = FirebaseDatabase.getInstance().getReference("ListaProdutos")
                 refLista.child("list_"+uid).setValue(hashMapLista)
             .addOnSuccessListener {
-                progressDialog.dismiss()
-                Toast.makeText(this, "Conta criada...", Toast.LENGTH_SHORT).show()
+                //progressDialog.dismiss()
+                //Toast.makeText(this, "Conta criada...", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
             }
             .addOnFailureListener { e ->
@@ -197,6 +197,22 @@ class RegisterActivity : AppCompatActivity(), TextWatcher {
                 Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
             }
 
+
+
+        val hashMapListaCompras : HashMap<String,Any> = HashMap()
+        hashMapListaCompras["nome"] ="Lista de Compras" + nome
+        hashMapListaCompras["admin"] = uid
+        val refListaCompras = FirebaseDatabase.getInstance().getReference("ListaCompras")
+            refListaCompras.child("listC_"+uid).setValue(hashMapListaCompras)
+                .addOnSuccessListener {
+                    progressDialog.dismiss()
+                    Toast.makeText(this, "Conta criada...", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+                }
+                .addOnFailureListener { e ->
+                    progressDialog.dismiss()
+                    Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
+                }
     }
 
 

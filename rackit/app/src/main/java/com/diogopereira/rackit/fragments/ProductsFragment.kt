@@ -66,8 +66,7 @@ class ProductsFragment : Fragment() {
     }
 
     private fun getProdutoData() {
-        val size: Int = InfoprodutosArrayList.size
-        //produtosArrayList.clear()
+        ProdutoArrayList.clear()
 
         val listid = "list_" + gv.uidUtilizador
         dbref = FirebaseDatabase.getInstance().getReference("Produtos")
@@ -87,23 +86,11 @@ class ProductsFragment : Fragment() {
                                 binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
                             }
                             // TODO: 03/01/2022 Obter dados do info produtos
-                            var teste = getInfoProdutos(produto!!)
-                            //var teste = InfoProduto(produtoID = produto!!.produtoID)
-                            //produto!!.adicionarInfoProduto(InfoProduto(dataCompra = "", dataValidade = "teste", precoCompra = "2,3", produtoID = produto!!.produtoID))
-                            var testess = produto
-                           // produtosArrayList.add(produto!!)
                             produtoRecyclerView.adapter?.notifyDataSetChanged()
 
                         }
-//                        if (produtosArrayList.isEmpty()) {
-//                            binding.semProduto.visibility = View.VISIBLE
-//                            binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
-//                        } else {
-//                            binding.semProduto.visibility = View.GONE
-//                            produtoRecyclerView.adapter = produtosAdapter(produtosArrayList)
-//                            produtoRecyclerView.adapter?.notifyDataSetChanged()
-//
-//                        }
+                        getProdutosArrayList(ProdutoArrayList)
+
                     }
 
                 }
@@ -118,50 +105,53 @@ class ProductsFragment : Fragment() {
 
     }
 
-    private fun getInfoProdutos(produto: Produto) {
-        InfoprodutosArrayList.clear()
-        dbrefInfo = FirebaseDatabase.getInstance().getReference("InfoProdutos")
-        dbrefInfo.orderByChild("produtoID").equalTo(produto.produtoID)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.exists()) {
-                        //InfoprodutosArrayList.clear()
-                        produtoRecyclerView.adapter?.notifyDataSetChanged()
-                        for (productSnapshot in snapshot.children) {
+    private fun getProdutosArrayList(produtoArrayList: ArrayList<Produto>) {
+        //InfoprodutosArrayList.clear()
+        for(produto in produtoArrayList){
+            InfoprodutosArrayList.clear()
+            dbrefInfo = FirebaseDatabase.getInstance().getReference("InfoProdutos")
+            dbrefInfo.orderByChild("produtoID").equalTo(produto.produtoID)
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (snapshot.exists()) {
+                            //InfoprodutosArrayList.clear()
+                            produtoRecyclerView.adapter?.notifyDataSetChanged()
+                            for (productSnapshot in snapshot.children) {
 
-                            val Infoproduto = productSnapshot.getValue(InfoProduto::class.java)
+                                val Infoproduto = productSnapshot.getValue(InfoProduto::class.java)
 
-                            if(InfoprodutosArrayList.contains(produto)){
+                                if(InfoprodutosArrayList.contains(produto)){
+
+                                }
+                                produto.adicionarInfoProduto(Infoproduto!!)
+
+
 
                             }
-                            produto.adicionarInfoProduto(Infoproduto!!)
-
-
-
-                        }
-                        InfoprodutosArrayList.add(produto!!)
-                        produtoRecyclerView.adapter?.notifyDataSetChanged()
-                        if (InfoprodutosArrayList.isEmpty()) {
-                            binding.semProduto.visibility = View.VISIBLE
-                            binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
-                        } else {
-                            binding.semProduto.visibility = View.GONE
-                            produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
+                            InfoprodutosArrayList.add(produto!!)
                             produtoRecyclerView.adapter?.notifyDataSetChanged()
+                            if (InfoprodutosArrayList.isEmpty()) {
+                                binding.semProduto.visibility = View.VISIBLE
+                                binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
+                            } else {
+                                binding.semProduto.visibility = View.GONE
+                                produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
+                                produtoRecyclerView.adapter?.notifyDataSetChanged()
 
+                            }
                         }
+
                     }
 
-                }
+
+                    override fun onCancelled(error: DatabaseError) {
+
+                    }
 
 
-                override fun onCancelled(error: DatabaseError) {
-
-                }
-
-
-            })
-
-
+                })
+        }
     }
+
+
 }

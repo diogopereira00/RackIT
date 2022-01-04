@@ -162,7 +162,7 @@ class AddProductActivity : AppCompatActivity() {
 
         val hasMapInfoProduto: HashMap<String, Any?> = HashMap()
         hasMapInfoProduto["dataCompra"] = currentDate
-        hasMapInfoProduto["dataValidade"] = data
+        hasMapInfoProduto["dataValidade"] = dataValidade
         hasMapInfoProduto["precoCompra"] = precoCompra
         hasMapInfoProduto["produtoID"] = keyProduct
         hashMapProduto["adicionadoPor"] = uid

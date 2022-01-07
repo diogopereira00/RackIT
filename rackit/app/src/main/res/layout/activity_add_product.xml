@@ -23,37 +23,30 @@
 <!--        app:layout_constraintTop_toTopOf="parent"-->
 <!--        app:layout_constraintVertical_bias="0.498" />-->
 
-    <androidx.appcompat.widget.Toolbar
+    <View
+        android:id="@+id/navigation_view"
         android:layout_width="match_parent"
-        android:layout_height="63dp"
-        android:background="@color/primaryDark"
+        android:layout_height="60dp"
+        android:background="@color/primary"
         android:backgroundTint="@color/primary"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" >
-    </androidx.appcompat.widget.Toolbar>
-
+        app:layout_constraintVertical_bias="0" />
     <TextView
-        android:id="@+id/addProductText"
+        android:id="@+id/fragmentName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:fontFamily="@font/seg_ui_semibold"
-
-        android:text="Adicionar Produtos"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:textStyle="bold"
+        android:text="@string/adicionar_produto"
         android:translationZ="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.015" />
+        app:layout_constraintBottom_toBottomOf="@+id/navigation_view"
+        app:layout_constraintEnd_toEndOf="@+id/navigation_view"
+        app:layout_constraintStart_toStartOf="@+id/navigation_view"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:id="@+id/backButton"
@@ -63,11 +56,15 @@
         android:backgroundTint="@color/white"
 
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addProductText"
-        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintEnd_toStartOf="@+id/fragmentName"
+        app:layout_constraintHorizontal_bias="0.266"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.032" />
+        app:layout_constraintVertical_bias="0.026" />
+
+
+
+
 
     <TextView
 
@@ -82,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.084"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addProductText"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentName"
         app:layout_constraintVertical_bias="1.0" />
 
     <EditText
@@ -104,7 +101,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addProductText"
+        app:layout_constraintTop_toBottomOf="@+id/fragmentName"
         app:layout_constraintVertical_bias="0.091"
         tools:ignore="Autofill,UnusedAttribute" />
 

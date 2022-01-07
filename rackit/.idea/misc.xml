@@ -9,8 +9,9 @@
         <entry key="..\:/RackIT/rackit/app/src/main/res/drawable/tab_color_selector.xml" value="0.21510416666666668" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_add_product.xml" value="0.33" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_authentication.xml" value="0.1875" />
+        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_info_produto.xml" value="0.22" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_login.xml" value="0.1875" />
-        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_register.xml" value="0.19114583333333332" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_splash_screen.xml" value="0.1875" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/fragment_home.xml" value="0.315625" />

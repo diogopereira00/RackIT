@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isEmpty
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.diogopereira.rackit.GlobalClass
@@ -23,7 +24,7 @@ class ProductsFragment : Fragment() {
     private lateinit var dbrefInfo : DatabaseReference
     private lateinit var InfoprodutosArrayList: ArrayList<Produto>
     private lateinit var ProdutoArrayList: ArrayList<Produto>
-
+    private  var haProdutos : Boolean = false
     private lateinit var produtoRecyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,13 @@ class ProductsFragment : Fragment() {
         super.onResume()
         //getProdutoData()
         //produtosArrayList.clear()
+        if(haProdutos){
+            produtoRecyclerView.adapter?.notifyDataSetChanged()
+            binding.semProduto.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
+            produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
+        }
+
         getProdutoData()
 
     }
@@ -50,14 +58,12 @@ class ProductsFragment : Fragment() {
         _binding = FragmentProductsBinding.inflate(inflater, container, false)
         val view = binding.root
         gv = activity?.application as GlobalClass
-        InfoprodutosArrayList = arrayListOf<Produto>()
 
         produtoRecyclerView = binding.recyclerView
         produtoRecyclerView.layoutManager = LinearLayoutManager(activity)
-        produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
-
         produtoRecyclerView.setHasFixedSize(true)
 
+        InfoprodutosArrayList = arrayListOf<Produto>()
         ProdutoArrayList = arrayListOf<Produto>()
 
 
@@ -73,16 +79,23 @@ class ProductsFragment : Fragment() {
         dbref.orderByChild("listaDe").equalTo(listid)
             .addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    haProdutos = true
                     if (snapshot.exists()) {
                         //produtoRecyclerView.adapter?.notifyDataSetChanged()
+                        produtoRecyclerView.adapter?.notifyDataSetChanged()
                         ProdutoArrayList.clear()
                         for (productSnapshot in snapshot.children) {
 
                             val produto = productSnapshot.getValue(Produto::class.java)
                             ProdutoArrayList.add(produto!!)
+                            if(produto == null){
+                                binding.semProduto.visibility = View.VISIBLE
+                                binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
+                            }
+                            produtoRecyclerView.adapter?.notifyDataSetChanged()
+
                         }
                         getProdutosArrayList(ProdutoArrayList)
-                        produtoRecyclerView.adapter?.notifyDataSetChanged()
 
                     }
 

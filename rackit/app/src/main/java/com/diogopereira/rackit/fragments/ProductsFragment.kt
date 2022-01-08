@@ -34,7 +34,6 @@ class ProductsFragment : Fragment() {
         super.onResume()
         //getProdutoData()
         //produtosArrayList.clear()
-        produtoRecyclerView.adapter?.notifyDataSetChanged()
         getProdutoData()
 
     }
@@ -51,12 +50,14 @@ class ProductsFragment : Fragment() {
         _binding = FragmentProductsBinding.inflate(inflater, container, false)
         val view = binding.root
         gv = activity?.application as GlobalClass
+        InfoprodutosArrayList = arrayListOf<Produto>()
 
         produtoRecyclerView = binding.recyclerView
         produtoRecyclerView.layoutManager = LinearLayoutManager(activity)
+        produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
+
         produtoRecyclerView.setHasFixedSize(true)
 
-        InfoprodutosArrayList = arrayListOf<Produto>()
         ProdutoArrayList = arrayListOf<Produto>()
 
 
@@ -74,20 +75,14 @@ class ProductsFragment : Fragment() {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.exists()) {
                         //produtoRecyclerView.adapter?.notifyDataSetChanged()
-                        produtoRecyclerView.adapter?.notifyDataSetChanged()
                         ProdutoArrayList.clear()
                         for (productSnapshot in snapshot.children) {
 
                             val produto = productSnapshot.getValue(Produto::class.java)
                             ProdutoArrayList.add(produto!!)
-                            if(produto == null){
-                                binding.semProduto.visibility = View.VISIBLE
-                                binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
-                            }
-                            produtoRecyclerView.adapter?.notifyDataSetChanged()
-
                         }
                         getProdutosArrayList(ProdutoArrayList)
+                        produtoRecyclerView.adapter?.notifyDataSetChanged()
 
                     }
 

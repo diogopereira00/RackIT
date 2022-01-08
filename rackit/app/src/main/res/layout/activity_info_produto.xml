@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.diogopereira.rackit.InfoProduto">
+    tools:context="com.diogopereira.rackit.InfoProdutoActivity">
 
     <View
         android:id="@+id/navigation_view"
@@ -91,11 +91,11 @@
         android:paddingEnd="26dp"
         android:textColor="@color/defaultText"
         android:textColorHint="@color/colorPlaceholder"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerInfos"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.095"
+        app:layout_constraintVertical_bias="0.223"
         tools:ignore="Autofill,UnusedAttribute" />
 
     <EditText
@@ -118,7 +118,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nomeProdutoEditText"
-        app:layout_constraintVertical_bias="0.076"
+        app:layout_constraintVertical_bias="0.135"
         tools:ignore="Autofill,UnusedAttribute" />
 
     <TextView
@@ -148,13 +148,13 @@
         android:text="Atualizar"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerInfos"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.126"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/codBarrasEditText"
-        app:layout_constraintVertical_bias="0.519" />
+        app:layout_constraintVertical_bias="0.084" />
 
     <Button
         android:id="@+id/APAGAR"
@@ -166,18 +166,18 @@
         android:text="Apagar"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerInfos"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintHorizontal_bias="0.259"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toEndOf="@+id/addButton"
         app:layout_constraintTop_toBottomOf="@+id/codBarrasEditText"
-        app:layout_constraintVertical_bias="0.519" />
+        app:layout_constraintVertical_bias="0.084" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerInfos"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="170dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

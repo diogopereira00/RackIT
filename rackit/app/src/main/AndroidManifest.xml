@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RackIT">
         <activity
-            android:name="com.diogopereira.rackit.InfoProduto"
+            android:name="com.diogopereira.rackit.InfoProdutoActivity"
             android:exported="false" />
         <activity
             android:name="com.diogopereira.rackit.AddProductActivity"

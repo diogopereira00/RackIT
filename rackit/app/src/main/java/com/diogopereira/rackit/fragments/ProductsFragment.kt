@@ -36,16 +36,19 @@ class ProductsFragment : Fragment() {
         //getProdutoData()
         //produtosArrayList.clear()
         if(haProdutos){
-            produtoRecyclerView.adapter?.notifyDataSetChanged()
             binding.semProduto.visibility = View.GONE
             binding.recyclerView.visibility = View.VISIBLE
-            produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
         }
 
+        produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
         getProdutoData()
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
     override fun onStart() {
         super.onStart()
 
@@ -61,18 +64,25 @@ class ProductsFragment : Fragment() {
 
         produtoRecyclerView = binding.recyclerView
         produtoRecyclerView.layoutManager = LinearLayoutManager(activity)
+        InfoprodutosArrayList = arrayListOf<Produto>()
+
+        produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
+
         produtoRecyclerView.setHasFixedSize(true)
 
-        InfoprodutosArrayList = arrayListOf<Produto>()
         ProdutoArrayList = arrayListOf<Produto>()
 
+        binding.swipeLayout.setOnRefreshListener {
+            produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
+            getProdutoData()
+            binding.swipeLayout.isRefreshing = false
+        }
 
         return view
 
     }
 
     private fun getProdutoData() {
-        ProdutoArrayList.clear()
 
         val listid = "list_" + gv.uidUtilizador
         dbref = FirebaseDatabase.getInstance().getReference("Produtos")
@@ -82,7 +92,6 @@ class ProductsFragment : Fragment() {
                     haProdutos = true
                     if (snapshot.exists()) {
                         //produtoRecyclerView.adapter?.notifyDataSetChanged()
-                        produtoRecyclerView.adapter?.notifyDataSetChanged()
                         ProdutoArrayList.clear()
                         for (productSnapshot in snapshot.children) {
 
@@ -119,6 +128,8 @@ class ProductsFragment : Fragment() {
             dbrefInfo.orderByChild("produtoID").equalTo(produto.produtoID)
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
+                        produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
+
                         if (snapshot.exists()) {
                             //InfoprodutosArrayList.clear()
                             produtoRecyclerView.adapter?.notifyDataSetChanged()
@@ -126,26 +137,23 @@ class ProductsFragment : Fragment() {
 
                                 val Infoproduto = productSnapshot.getValue(InfoProduto::class.java)
 
-                                if(InfoprodutosArrayList.contains(produto)){
-
-                                }
                                 produto.adicionarInfoProduto(Infoproduto!!)
 
 
 
                             }
                             InfoprodutosArrayList.add(produto!!)
-                            produtoRecyclerView.adapter?.notifyDataSetChanged()
                             if (InfoprodutosArrayList.isEmpty()) {
                                 binding.semProduto.visibility = View.VISIBLE
                                 binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
                             } else {
                                 binding.semProduto.visibility = View.GONE
+                                produtoRecyclerView.layoutManager = LinearLayoutManager(activity)
                                 produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
-                                produtoRecyclerView.adapter?.notifyDataSetChanged()
 
                             }
                         }
+                        produtoRecyclerView.adapter?.notifyDataSetChanged()
 
                     }
 

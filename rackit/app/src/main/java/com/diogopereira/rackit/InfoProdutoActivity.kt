@@ -2,6 +2,7 @@ package com.diogopereira.rackit
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -10,6 +11,7 @@ import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.v2.R
 import com.diogopereira.rackit.v2.databinding.ActivityAddProductBinding
 import com.diogopereira.rackit.v2.databinding.ActivityInfoProdutoBinding
+import com.google.firebase.database.FirebaseDatabase
 
 class InfoProdutoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInfoProdutoBinding
@@ -26,6 +28,7 @@ class InfoProdutoActivity : AppCompatActivity() {
         setContentView(view)
         gv = application as GlobalClass
         var nomeProduto = gv.currentProduto.nomeProduto
+        var codBarras = gv.currentProduto.codBarras
 
         if (gv.currentProduto.imagemProduto != "") {
             Glide.with(this).load(gv.currentProduto.imagemProduto)
@@ -48,5 +51,37 @@ class InfoProdutoActivity : AppCompatActivity() {
         infoRecyclerView.layoutManager = LinearLayoutManager(this)
         infoRecyclerView.adapter = infoAdapter
 
+        binding.update.setOnClickListener {
+            val hashMapProduto: HashMap<String, Any?> = HashMap()
+            // TODO: 10/01/2022 fix isto, nao ta a atualizar
+            // TODO: 10/01/2022 opçao remover produto
+            // TODO: 10/01/2022 modais aqui e no infoprodutoadapter delete
+             
+            hashMapProduto["nomeProduto"] = nomeProduto.toString()
+            hashMapProduto["imagemProduto"] = gv.currentProduto.imagemProduto
+            hashMapProduto["codBarras"] = codBarras.toString()
+            hashMapProduto["listaDe"] = gv.currentList
+            //hashMapProduto["imagemProduto"] = photoFile.toUri()
+            hashMapProduto["adicionadoEm"] = gv.currentProduto.adicionadoEm
+            hashMapProduto["produtoID"] = gv.currentProduto.produtoID
+            hashMapProduto["imagemProduto"] = gv.currentProduto.imagemProduto
+            val keyProduto = gv.currentProduto.produtoID
+            val ref = FirebaseDatabase.getInstance().getReference("Produtos")
+            ref.child(keyProduto!!).setValue(hashMapProduto)
+                .addOnSuccessListener {
+                       Toast.makeText(this, "Produto adicionado...", Toast.LENGTH_SHORT).show()
+
+//                    if (imagemProduto != "") {
+//                        updateProductImage(keyProduct)
+//                    } else {
+//                        Toast.makeText(this, "Produto adicionado...", Toast.LENGTH_SHORT).show()
+//                        //finish()
+//
+//                    }
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 }

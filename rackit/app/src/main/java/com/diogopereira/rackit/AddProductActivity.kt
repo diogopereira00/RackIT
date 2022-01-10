@@ -161,15 +161,17 @@ class AddProductActivity : AppCompatActivity() {
             }
 
         val hasMapInfoProduto: HashMap<String, Any?> = HashMap()
+        val keyInfo = "Info_" + nomeProduto.replace(" ", "_") + "_" + timestamp
         hasMapInfoProduto["dataCompra"] = currentDate
         hasMapInfoProduto["dataValidade"] = data
         hasMapInfoProduto["precoCompra"] = precoCompra
         hasMapInfoProduto["produtoID"] = keyProduct
+        hasMapInfoProduto["infoProdutoID"] = keyInfo
+
         hashMapProduto["adicionadoPor"] = uid
         timestamp = System.currentTimeMillis()
         hashMapProduto["adicionadoEm"] = timestamp
 
-        val keyInfo = "Info_" + nomeProduto.replace(" ", "_") + "_" + timestamp
         val refInfoProdutos = FirebaseDatabase.getInstance().getReference("InfoProdutos")
         refInfoProdutos.child(keyInfo).setValue(hasMapInfoProduto)
             .addOnSuccessListener {

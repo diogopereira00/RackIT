@@ -137,7 +137,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/addButton"
+        android:id="@+id/update"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginLeft="20dp"
@@ -160,28 +160,44 @@
         android:id="@+id/APAGAR"
         android:layout_width="150dp"
         android:layout_height="50dp"
+        android:layout_marginEnd="48dp"
         android:background="@drawable/button_primary_background"
         android:backgroundTint="@color/red"
         android:fontFamily="@font/seg_ui_semibold"
         android:text="Apagar"
         android:textColor="@color/white"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
 
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.444"
         app:layout_constraintStart_toEndOf="@+id/addButton"
         app:layout_constraintTop_toBottomOf="@+id/codBarrasEditText"
-        app:layout_constraintVertical_bias="0.084" />
+        app:layout_constraintVertical_bias="0.085" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerInfos"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="180dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/info_produtos_lista"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/info_produtos_lista" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="Lista de Produtos"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerInfos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

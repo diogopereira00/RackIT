@@ -53,6 +53,7 @@ class InfoProdutoActivity : AppCompatActivity() {
 
         binding.update.setOnClickListener {
             val hashMapProduto: HashMap<String, Any?> = HashMap()
+            // TODO: 10/01/2022 Alterar imagem, similar ao addProductsActivity 
             // TODO: 10/01/2022 opçao remover produto
             // TODO: 10/01/2022 modais aqui e no infoprodutoadapter delete
 

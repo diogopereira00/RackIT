@@ -1,5 +1,7 @@
 package com.diogopereira.rackit.adapters
 
+import android.app.Activity
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,13 +27,13 @@ class InfoProdutosAdapter(
     RecyclerView.Adapter<InfoProdutosAdapter.InfoProductsViewHolder>() {
     private lateinit var binding: InfoProdutosListaBinding
     private var gv = GlobalClass()
-
+    private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InfoProductsViewHolder {
         binding =
             InfoProdutosListaBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         gv = parent.context.applicationContext as GlobalClass
-
+        context = parent.context
         return InfoProductsViewHolder(binding.root)
     }
 
@@ -47,7 +49,7 @@ class InfoProdutosAdapter(
 
         }
         holder.nome.text = gv.currentProduto.nomeProduto
-        if (currentItem.dataValidade =="") {
+        if (currentItem.dataValidade == "") {
             holder.dataValidade.text = "Sem data de validade"
 
         } else
@@ -61,8 +63,12 @@ class InfoProdutosAdapter(
                 Toast.LENGTH_SHORT
             ).show()
             productsList.remove(currentItem)
+            if (productsList.size == 0) {
+                (context as Activity).finish()
+            }
             notifyItemRemoved(position)
-            FirebaseDatabase.getInstance().getReference("InfoProdutos").child(currentItem.infoProdutoID!!).removeValue()
+            FirebaseDatabase.getInstance().getReference("InfoProdutos")
+                .child(currentItem.infoProdutoID!!).removeValue()
 
 
         }

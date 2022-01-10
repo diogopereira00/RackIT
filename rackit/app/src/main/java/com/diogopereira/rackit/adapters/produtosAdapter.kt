@@ -40,7 +40,6 @@ class produtosAdapter(private val productsList: ArrayList<Produto>) :
         return ProductsViewHolder(binding.root)
     }
 
-    // TODO: 04/01/2022 onclick open activity 
     override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
         //codigo para retirar a data do produto com menor data de validade
         verificarData(holder,position)

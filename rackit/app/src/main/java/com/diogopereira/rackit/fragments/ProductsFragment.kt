@@ -21,10 +21,10 @@ class ProductsFragment : Fragment() {
     lateinit var gv: GlobalClass
 
     private lateinit var dbref: DatabaseReference
-    private lateinit var dbrefInfo : DatabaseReference
+    private lateinit var dbrefInfo: DatabaseReference
     private lateinit var InfoprodutosArrayList: ArrayList<Produto>
     private lateinit var ProdutoArrayList: ArrayList<Produto>
-    private  var haProdutos : Boolean = false
+    private var haProdutos: Boolean = false
     private lateinit var produtoRecyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,7 @@ class ProductsFragment : Fragment() {
         super.onResume()
         //getProdutoData()
         //produtosArrayList.clear()
-        if(haProdutos){
+        if (haProdutos) {
             binding.semProduto.visibility = View.GONE
             binding.recyclerView.visibility = View.VISIBLE
         }
@@ -49,6 +49,7 @@ class ProductsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
     }
+
     override fun onStart() {
         super.onStart()
 
@@ -97,14 +98,15 @@ class ProductsFragment : Fragment() {
 
                             val produto = productSnapshot.getValue(Produto::class.java)
                             ProdutoArrayList.add(produto!!)
-                            if(produto == null){
+                            if (produto == null) {
                                 binding.semProduto.visibility = View.VISIBLE
                                 binding.semProduto.setText("Ups, parece que ainda não tem nenhum produto na lista. Comece por adicionar um")
                             }
-                            produtoRecyclerView.adapter?.notifyDataSetChanged()
+//                            produtoRecyclerView.adapter?.notifyDataSetChanged()
 
                         }
                         getProdutosArrayList(ProdutoArrayList)
+                        produtoRecyclerView.adapter?.notifyDataSetChanged()
 
                     }
 
@@ -122,23 +124,21 @@ class ProductsFragment : Fragment() {
 
     private fun getProdutosArrayList(produtoArrayList: ArrayList<Produto>) {
         //InfoprodutosArrayList.clear()
-        for(produto in produtoArrayList){
+        for (produto in produtoArrayList) {
             InfoprodutosArrayList.clear()
             dbrefInfo = FirebaseDatabase.getInstance().getReference("InfoProdutos")
             dbrefInfo.orderByChild("produtoID").equalTo(produto.produtoID)
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
-                        produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
 
+                        produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
                         if (snapshot.exists()) {
                             //InfoprodutosArrayList.clear()
-                            produtoRecyclerView.adapter?.notifyDataSetChanged()
                             for (productSnapshot in snapshot.children) {
 
                                 val Infoproduto = productSnapshot.getValue(InfoProduto::class.java)
 
                                 produto.adicionarInfoProduto(Infoproduto!!)
-
 
 
                             }
@@ -153,7 +153,7 @@ class ProductsFragment : Fragment() {
 
                             }
                         }
-                        produtoRecyclerView.adapter?.notifyDataSetChanged()
+//                        produtoRecyclerView.adapter?.notifyDataSetChanged()
 
                     }
 

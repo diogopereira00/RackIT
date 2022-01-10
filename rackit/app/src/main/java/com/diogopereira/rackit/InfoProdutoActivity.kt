@@ -51,11 +51,24 @@ class InfoProdutoActivity : AppCompatActivity() {
         infoRecyclerView.layoutManager = LinearLayoutManager(this)
         infoRecyclerView.adapter = infoAdapter
 
+
+        binding.APAGAR.setOnClickListener {
+            FirebaseDatabase.getInstance().getReference("Produtos")
+                .child(gv.currentProduto.produtoID!!).removeValue()
+//            FirebaseDatabase.getInstance().getReference("InfoProdutos")
+//                .orderByChild("produtoID").equalTo(gv.currentProduto.produtoID)
+//
+//            dbref.orderByChild("listaDe").equalTo(listid)
+            // TODO: 10/01/2022 chamar modal
+            finish()
+        }
+
+
+
         binding.update.setOnClickListener {
             val hashMapProduto: HashMap<String, Any?> = HashMap()
             // TODO: 10/01/2022 Alterar imagem, similar ao addProductsActivity 
-            // TODO: 10/01/2022 opçao remover produto
-            // TODO: 10/01/2022 modais aqui e no infoprodutoadapter delete
+            // TODO: 10/01/2022 chamar modal confirmar
 
             hashMapProduto["nomeProduto"] = binding.nomeProdutoEditText.text.toString()
             gv.currentProduto.nomeProduto = binding.nomeProdutoEditText.text.toString()

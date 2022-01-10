@@ -40,12 +40,12 @@ class InfoProdutoActivity : AppCompatActivity() {
         }
         binding.nomeProdutoEditText.setText(nomeProduto)
         if (gv.currentProduto.codBarras.isNullOrEmpty()) {
-            binding.codBarrasEditText.setText("Introduza agora")
+            binding.codBarrasEditText.setHint("Introduza agora")
         } else
             binding.codBarrasEditText.setText(gv.currentProduto.codBarras)
 
         infoList = gv.currentProduto.listaInfoProduto
-        infoAdapter = InfoProdutosAdapter(gv.currentProduto.listaInfoProduto,gv.currentProduto)
+        infoAdapter = InfoProdutosAdapter(gv.currentProduto.listaInfoProduto, gv.currentProduto)
 
         infoRecyclerView = binding.recyclerInfos
         infoRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -53,13 +53,15 @@ class InfoProdutoActivity : AppCompatActivity() {
 
         binding.update.setOnClickListener {
             val hashMapProduto: HashMap<String, Any?> = HashMap()
-            // TODO: 10/01/2022 fix isto, nao ta a atualizar
             // TODO: 10/01/2022 opçao remover produto
             // TODO: 10/01/2022 modais aqui e no infoprodutoadapter delete
-             
-            hashMapProduto["nomeProduto"] = nomeProduto.toString()
+
+            hashMapProduto["nomeProduto"] = binding.nomeProdutoEditText.text.toString()
+            gv.currentProduto.nomeProduto = binding.nomeProdutoEditText.text.toString()
             hashMapProduto["imagemProduto"] = gv.currentProduto.imagemProduto
-            hashMapProduto["codBarras"] = codBarras.toString()
+            hashMapProduto["codBarras"] = binding.codBarrasEditText.text.toString()
+            gv.currentProduto.codBarras = binding.codBarrasEditText.text.toString()
+
             hashMapProduto["listaDe"] = gv.currentList
             //hashMapProduto["imagemProduto"] = photoFile.toUri()
             hashMapProduto["adicionadoEm"] = gv.currentProduto.adicionadoEm
@@ -67,17 +69,15 @@ class InfoProdutoActivity : AppCompatActivity() {
             hashMapProduto["imagemProduto"] = gv.currentProduto.imagemProduto
             val keyProduto = gv.currentProduto.produtoID
             val ref = FirebaseDatabase.getInstance().getReference("Produtos")
-            ref.child(keyProduto!!).setValue(hashMapProduto)
+            ref.child(keyProduto!!).updateChildren(hashMapProduto)
                 .addOnSuccessListener {
-                       Toast.makeText(this, "Produto adicionado...", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(
+//                        this,
+//                        "Produto atualizado $hashMapProduto...",
+//                        Toast.LENGTH_SHORT
+//                    ).show()
+                    infoAdapter.notifyDataSetChanged()
 
-//                    if (imagemProduto != "") {
-//                        updateProductImage(keyProduct)
-//                    } else {
-//                        Toast.makeText(this, "Produto adicionado...", Toast.LENGTH_SHORT).show()
-//                        //finish()
-//
-//                    }
                 }
                 .addOnFailureListener { e ->
                     Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()

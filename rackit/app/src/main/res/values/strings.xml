@@ -42,4 +42,6 @@
     <string name="introduza_a_imagem">Introduza a imagem...</string>
     <string name="adicionar_produto">Adicionar Produto</string>
     <string name="home">Home</string>
+    <string name="apagar_produto">Apagar Produto</string>
+    <string name="atualizar_dados">Atualizar Dados</string>
 </resources>

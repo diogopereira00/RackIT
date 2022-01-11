@@ -74,7 +74,7 @@ class InfoProdutosAdapter(
 
 
         holder.deleteButton.setOnClickListener {
-
+// TODO: 11/01/2022 criar dialog parecido apagarproduto
             val unwrappedDrawable = AppCompatResources.getDrawable(context, android.R.drawable.ic_dialog_alert)
             val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
             DrawableCompat.setTint(wrappedDrawable, Color.RED)

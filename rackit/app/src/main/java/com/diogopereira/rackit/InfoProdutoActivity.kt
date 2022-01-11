@@ -1,8 +1,14 @@
 package com.diogopereira.rackit
 
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -62,38 +68,63 @@ class InfoProdutoActivity : AppCompatActivity() {
 
         }
 
-
-
         binding.update.setOnClickListener {
-            val hashMapProduto: HashMap<String, Any?> = HashMap()
-            // TODO: 10/01/2022 Alterar imagem, similar ao addProductsActivity 
+            val unwrappedDrawable =
+                AppCompatResources.getDrawable(this, android.R.drawable.ic_dialog_info)
+            val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
+            DrawableCompat.setTint(wrappedDrawable, Color.BLUE)
+            //codigo
 
-            hashMapProduto["nomeProduto"] = binding.nomeProdutoEditText.text.toString()
-            gv.currentProduto.nomeProduto = binding.nomeProdutoEditText.text.toString()
-            hashMapProduto["imagemProduto"] = gv.currentProduto.imagemProduto
-            hashMapProduto["codBarras"] = binding.codBarrasEditText.text.toString()
-            gv.currentProduto.codBarras = binding.codBarrasEditText.text.toString()
+            AlertDialog.Builder(this)
+                .setTitle("Atualizar produto")
+                .setMessage("Tem a certeza que pretende atualizar este produto para ${binding.nomeProdutoEditText.text} com o codigo de barras '${binding.codBarrasEditText.text}'")
 
-            hashMapProduto["listaDe"] = gv.currentList
-            //hashMapProduto["imagemProduto"] = photoFile.toUri()
-            hashMapProduto["adicionadoEm"] = gv.currentProduto.adicionadoEm
-            hashMapProduto["produtoID"] = gv.currentProduto.produtoID
-            hashMapProduto["imagemProduto"] = gv.currentProduto.imagemProduto
-            val keyProduto = gv.currentProduto.produtoID
-            val ref = FirebaseDatabase.getInstance().getReference("Produtos")
-            ref.child(keyProduto!!).updateChildren(hashMapProduto)
-                .addOnSuccessListener {
+                .setPositiveButton("Sim",
+                    DialogInterface.OnClickListener { dialog, which ->
+                        val hashMapProduto: HashMap<String, Any?> = HashMap()
+                        // TODO: 10/01/2022 Alterar imagem, similar ao addProductsActivity
+
+                        hashMapProduto["nomeProduto"] = binding.nomeProdutoEditText.text.toString()
+                        gv.currentProduto.nomeProduto = binding.nomeProdutoEditText.text.toString()
+                        hashMapProduto["imagemProduto"] = gv.currentProduto.imagemProduto
+                        hashMapProduto["codBarras"] = binding.codBarrasEditText.text.toString()
+                        gv.currentProduto.codBarras = binding.codBarrasEditText.text.toString()
+
+                        hashMapProduto["listaDe"] = gv.currentList
+                        //hashMapProduto["imagemProduto"] = photoFile.toUri()
+                        hashMapProduto["adicionadoEm"] = gv.currentProduto.adicionadoEm
+                        hashMapProduto["produtoID"] = gv.currentProduto.produtoID
+                        hashMapProduto["imagemProduto"] = gv.currentProduto.imagemProduto
+                        val keyProduto = gv.currentProduto.produtoID
+                        val ref = FirebaseDatabase.getInstance().getReference("Produtos")
+                        ref.child(keyProduto!!).updateChildren(hashMapProduto)
+                            .addOnSuccessListener {
 //                    Toast.makeText(
 //                        this,
 //                        "Produto atualizado $hashMapProduto...",
 //                        Toast.LENGTH_SHORT
 //                    ).show()
-                    infoAdapter.notifyDataSetChanged()
+                                infoAdapter.notifyDataSetChanged()
 
-                }
-                .addOnFailureListener { e ->
-                    Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
-                }
+                            }
+                            .addOnFailureListener { e ->
+                                Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT)
+                                    .show()
+
+                            }
+
+
+                    })
+                .setNegativeButton("Não", null)
+
+
+                .setIcon(wrappedDrawable)
+                .show()
         }
+        binding.backButton.setOnClickListener {
+            finish()
+        }
+
+
     }
 }

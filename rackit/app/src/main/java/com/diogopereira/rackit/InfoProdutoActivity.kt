@@ -1,24 +1,17 @@
 package com.diogopereira.rackit
 
-import android.app.Activity
-import android.app.AlertDialog
-import android.content.DialogInterface
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.diogopereira.rackit.adapters.InfoProdutosAdapter
 import com.diogopereira.rackit.classes.InfoProduto
+import com.diogopereira.rackit.dialogs.AtualizarProduto
 import com.diogopereira.rackit.dialogs.DeleteInfoProdutos
 import com.diogopereira.rackit.v2.R
 import com.diogopereira.rackit.v2.databinding.ActivityInfoProdutoBinding
-import com.google.firebase.database.FirebaseDatabase
 
 class InfoProdutoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInfoProdutoBinding
@@ -69,57 +62,9 @@ class InfoProdutoActivity : AppCompatActivity() {
         }
 
         binding.update.setOnClickListener {
-            val unwrappedDrawable =
-                AppCompatResources.getDrawable(this, android.R.drawable.ic_dialog_info)
-            val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
-            DrawableCompat.setTint(wrappedDrawable, Color.BLUE)
-            //codigo
-
-            AlertDialog.Builder(this)
-                .setTitle("Atualizar produto")
-                .setMessage("Tem a certeza que pretende atualizar este produto para ${binding.nomeProdutoEditText.text} com o codigo de barras '${binding.codBarrasEditText.text}'")
-
-                .setPositiveButton("Sim",
-                    DialogInterface.OnClickListener { dialog, which ->
-                        val hashMapProduto: HashMap<String, Any?> = HashMap()
-                        // TODO: 10/01/2022 Alterar imagem, similar ao addProductsActivity
-
-                        hashMapProduto["nomeProduto"] = binding.nomeProdutoEditText.text.toString()
-                        gv.currentProduto.nomeProduto = binding.nomeProdutoEditText.text.toString()
-                        hashMapProduto["imagemProduto"] = gv.currentProduto.imagemProduto
-                        hashMapProduto["codBarras"] = binding.codBarrasEditText.text.toString()
-                        gv.currentProduto.codBarras = binding.codBarrasEditText.text.toString()
-
-                        hashMapProduto["listaDe"] = gv.currentList
-                        //hashMapProduto["imagemProduto"] = photoFile.toUri()
-                        hashMapProduto["adicionadoEm"] = gv.currentProduto.adicionadoEm
-                        hashMapProduto["produtoID"] = gv.currentProduto.produtoID
-                        hashMapProduto["imagemProduto"] = gv.currentProduto.imagemProduto
-                        val keyProduto = gv.currentProduto.produtoID
-                        val ref = FirebaseDatabase.getInstance().getReference("Produtos")
-                        ref.child(keyProduto!!).updateChildren(hashMapProduto)
-                            .addOnSuccessListener {
-//                    Toast.makeText(
-//                        this,
-//                        "Produto atualizado $hashMapProduto...",
-//                        Toast.LENGTH_SHORT
-//                    ).show()
-                                infoAdapter.notifyDataSetChanged()
-
-                            }
-                            .addOnFailureListener { e ->
-                                Toast.makeText(this, "Erro...${e.message}", Toast.LENGTH_SHORT)
-                                    .show()
-
-                            }
-
-
-                    })
-                .setNegativeButton("Não", null)
-
-
-                .setIcon(wrappedDrawable)
-                .show()
+            var dialog = AtualizarProduto(gv.currentProduto,binding.nomeProdutoEditText.text.toString(), binding.codBarrasEditText.text.toString(),infoAdapter)
+            val fm: FragmentManager = this.supportFragmentManager
+            dialog.show(fm, "")
         }
         binding.backButton.setOnClickListener {
             finish()

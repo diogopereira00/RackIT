@@ -6,19 +6,16 @@
         <entry key="..\:/RackIT/rackit/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.215625" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/drawable/ic_hello_re_3evm.xml" value="0.21875" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/drawable/ic_home.xml" value="0.21875" />
-        <entry key="..\:/RackIT/rackit/app/src/main/res/drawable/shape_rect.xml" value="0.2046875" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/drawable/tab_color_selector.xml" value="0.21510416666666668" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_add_product.xml" value="0.33" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_authentication.xml" value="0.1875" />
-        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_info_produto.xml" value="0.33" />
+        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_info_produto.xml" value="0.25" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_login.xml" value="0.1875" />
-        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_register.xml" value="0.19114583333333332" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/activity_splash_screen.xml" value="0.1875" />
-        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/dialog_add_infoproduto.xml" value="0.20260416666666667" />
-        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/dialog_delete_infoproduto.xml" value="0.25" />
-        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/dialog_delete_produto.xml" value="0.20260416666666667" />
-        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/dialog_update_produto.xml" value="0.18489583333333334" />
+        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/dialog_add_infoproduto.xml" value="0.20572916666666666" />
+        <entry key="..\:/RackIT/rackit/app/src/main/res/layout/dialog_adicionar_listacompras.xml" value="0.36666666666666664" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/fragment_home.xml" value="0.315625" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/fragment_products.xml" value="0.315625" />
         <entry key="..\:/RackIT/rackit/app/src/main/res/layout/fragment_shopping_list.xml" value="0.315625" />

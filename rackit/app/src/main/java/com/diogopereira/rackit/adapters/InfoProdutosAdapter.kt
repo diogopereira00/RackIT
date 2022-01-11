@@ -23,9 +23,6 @@ import android.graphics.Color
 import androidx.appcompat.content.res.AppCompatResources
 
 
-
-
-
 class InfoProdutosAdapter(
     private val productsList: ArrayList<InfoProduto>,
     private val produto: Produto
@@ -49,7 +46,8 @@ class InfoProdutosAdapter(
             Glide.with(holder.itemView.context).load(produto.imagemProduto)
                 .into(holder.imagemProduto)
         } else {
-            Glide.with(holder.itemView.context).load(com.diogopereira.rackit.v2.R.drawable.ic_camera)
+            Glide.with(holder.itemView.context)
+                .load(com.diogopereira.rackit.v2.R.drawable.ic_camera)
                 .into(holder.imagemProduto)
 
 
@@ -63,8 +61,10 @@ class InfoProdutosAdapter(
 
 
         holder.deleteButton.setOnClickListener {
-// TODO: 11/01/2022 criar dialog parecido apagarproduto
-            val unwrappedDrawable = AppCompatResources.getDrawable(context, android.R.drawable.ic_dialog_alert)
+            //bug ao eliminar mais que 1
+
+            val unwrappedDrawable =
+                AppCompatResources.getDrawable(context, android.R.drawable.ic_dialog_alert)
             val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
             DrawableCompat.setTint(wrappedDrawable, Color.RED)
             //codigo
@@ -73,28 +73,26 @@ class InfoProdutosAdapter(
                 .setTitle("Apagar entrada")
                 .setMessage("Tem a certeza que pretende apagar este produto?")
 
-                .setPositiveButton("Sim",
-                    DialogInterface.OnClickListener { dialog, which ->
-                        FirebaseDatabase.getInstance().getReference("InfoProdutos")
-                            .child(currentItem.infoProdutoID!!).removeValue()
-                        productsList.remove(currentItem)
-                        if (productsList.size == 0) {
-                            (context as Activity).finish()
-                        }
-                        notifyItemRemoved(position)
+                .setPositiveButton("Sim") { dialog, which ->
+                    FirebaseDatabase.getInstance().getReference("InfoProdutos")
+                        .child(currentItem.infoProdutoID!!).removeValue()
+                    productsList.remove(currentItem)
+                    if (productsList.size == 0) {
+                        (context as Activity).finish()
+                    }
+                    //notifyItemRemoved(position)
+                    notifyDataSetChanged()
 
 
-                    })
+                }
                 .setNegativeButton("Não", null)
-
-
                 .setIcon(wrappedDrawable)
+                .create()
                 .show()
 
 
         }
     }
-
 
 
     override fun getItemCount(): Int {

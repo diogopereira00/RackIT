@@ -7,21 +7,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.diogopereira.rackit.GlobalClass
+import com.diogopereira.rackit.adapters.InfoProdutosAdapter
+import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.classes.Produto
 import com.diogopereira.rackit.v2.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.dialog_add_infoproduto.*
-import kotlinx.android.synthetic.main.dialog_delete_produto.*
 import kotlinx.android.synthetic.main.dialog_delete_produto.cancelar
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AdicionarInfoProduto(currentProduto: Produto) : BottomSheetDialogFragment() {
+class AdicionarInfoProduto(currentProduto: Produto, infoAdapter: InfoProdutosAdapter) : BottomSheetDialogFragment() {
     var mContext: Context? = null
     var produto = currentProduto
     var dataValidade: String = ""
-    public var foiEliminado = false
+    var adapter = infoAdapter
+    private var gv = GlobalClass()
 
     val myCalendar = Calendar.getInstance()
     val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
@@ -38,16 +42,43 @@ class AdicionarInfoProduto(currentProduto: Produto) : BottomSheetDialogFragment(
     ): View? {
         val view = inflater.inflate(R.layout.dialog_add_infoproduto, container, false)
 
-
+        mContext = context
+        gv = mContext!!.applicationContext as GlobalClass
 
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mContext = context
 
+        adicionar.setOnClickListener {
+            if(dataValidadeEditText.text.toString()!=""){
+                val hasMapInfoProduto: HashMap<String, Any?> = HashMap()
+                var timestamp = System.currentTimeMillis()
+                val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+                val currentDate = sdf.format(Date())
+                val keyInfo = "Info_" + produto.nomeProduto!!.replace(" ", "_") + "_" + timestamp
+                hasMapInfoProduto["dataValidade"] = dataValidadeEditText.text.toString()
+                hasMapInfoProduto["precoCompra"] = ""
+                hasMapInfoProduto["produtoID"] = produto.produtoID
+                hasMapInfoProduto["infoProdutoID"] = keyInfo
 
+                val refInfoProdutos = FirebaseDatabase.getInstance().getReference("InfoProdutos")
+                refInfoProdutos.child(keyInfo).setValue(hasMapInfoProduto)
+                    .addOnSuccessListener {
+                        Toast.makeText(mContext, "Produto adicionado com sucesso.", Toast.LENGTH_SHORT).show()
+                        //adapter.notifyDataSetChanged()
+                        adapter.notifyDataSetChanged()
+                        dismiss()
+                        (mContext as Activity).finish()
+
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(mContext, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
+                        dismiss()
+                    }
+            }
+        }
 
         dataValidadeEditText.setOnClickListener {
             DatePickerDialog(

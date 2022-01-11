@@ -45,4 +45,5 @@
     <string name="apagar_produto">Apagar Produto</string>
     <string name="atualizar_dados">Atualizar Dados</string>
     <string name="cancelar">Cancelar</string>
+    <string name="introduza_a_quantidade">Introduza a quantidade...</string>
 </resources>

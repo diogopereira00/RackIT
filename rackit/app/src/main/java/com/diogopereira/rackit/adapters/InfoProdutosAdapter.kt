@@ -1,24 +1,41 @@
 package com.diogopereira.rackit.adapters
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.classes.Produto
-import com.diogopereira.rackit.v2.R
-import com.diogopereira.rackit.v2.databinding.ActivityInfoProdutoBinding
+import com.diogopereira.rackit.dialogs.DeleteInfoProdutos
 import com.diogopereira.rackit.v2.databinding.InfoProdutosListaBinding
-import com.diogopereira.rackit.v2.databinding.ItemListaProdutosBinding
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import android.widget.Button
+import android.widget.Toast
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.ktx.Firebase
+import kotlinx.android.synthetic.main.activity_info_produto.*
+import kotlinx.android.synthetic.main.dialog_delete_infoproduto.*
+import kotlinx.android.synthetic.main.dialog_delete_infoproduto.APAGAR
+import android.content.DialogInterface
+import androidx.core.graphics.drawable.DrawableCompat
+
+import android.graphics.drawable.Drawable
+
+import android.R
+import android.graphics.Color
+
+import androidx.appcompat.content.res.AppCompatResources
+
+
+
+
 
 class InfoProdutosAdapter(
     private val productsList: ArrayList<InfoProduto>,
@@ -43,7 +60,7 @@ class InfoProdutosAdapter(
             Glide.with(holder.itemView.context).load(produto.imagemProduto)
                 .into(holder.imagemProduto)
         } else {
-            Glide.with(holder.itemView.context).load(R.drawable.ic_camera)
+            Glide.with(holder.itemView.context).load(com.diogopereira.rackit.v2.R.drawable.ic_camera)
                 .into(holder.imagemProduto)
 
 
@@ -57,22 +74,39 @@ class InfoProdutosAdapter(
 
 
         holder.deleteButton.setOnClickListener {
-            Toast.makeText(
-                holder.deleteButton.context,
-                "${currentItem.infoProdutoID}",
-                Toast.LENGTH_SHORT
-            ).show()
-            productsList.remove(currentItem)
-            if (productsList.size == 0) {
-                (context as Activity).finish()
-            }
-            notifyItemRemoved(position)
-            FirebaseDatabase.getInstance().getReference("InfoProdutos")
-                .child(currentItem.infoProdutoID!!).removeValue()
+
+            val unwrappedDrawable = AppCompatResources.getDrawable(context, android.R.drawable.ic_dialog_alert)
+            val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
+            DrawableCompat.setTint(wrappedDrawable, Color.RED)
+            //codigo
+
+            AlertDialog.Builder(context)
+                .setTitle("Apagar entrada")
+                .setMessage("Tem a certeza que pretende apagar este produto?")
+
+                .setPositiveButton("Sim",
+                    DialogInterface.OnClickListener { dialog, which ->
+                        FirebaseDatabase.getInstance().getReference("InfoProdutos")
+                            .child(currentItem.infoProdutoID!!).removeValue()
+                        productsList.remove(currentItem)
+                        if (productsList.size == 0) {
+                            (context as Activity).finish()
+                        }
+                        notifyItemRemoved(position)
+
+
+                    })
+                .setNegativeButton("Não", null)
+
+
+                .setIcon(wrappedDrawable)
+                .show()
 
 
         }
     }
+
+
 
     override fun getItemCount(): Int {
         return productsList.size

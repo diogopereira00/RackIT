@@ -44,4 +44,5 @@
     <string name="home">Home</string>
     <string name="apagar_produto">Apagar Produto</string>
     <string name="atualizar_dados">Atualizar Dados</string>
+    <string name="cancelar">Cancelar</string>
 </resources>

@@ -3,13 +3,14 @@ package com.diogopereira.rackit
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.diogopereira.rackit.adapters.InfoProdutosAdapter
 import com.diogopereira.rackit.classes.InfoProduto
+import com.diogopereira.rackit.dialogs.DeleteInfoProdutos
 import com.diogopereira.rackit.v2.R
-import com.diogopereira.rackit.v2.databinding.ActivityAddProductBinding
 import com.diogopereira.rackit.v2.databinding.ActivityInfoProdutoBinding
 import com.google.firebase.database.FirebaseDatabase
 
@@ -53,14 +54,12 @@ class InfoProdutoActivity : AppCompatActivity() {
 
 
         binding.APAGAR.setOnClickListener {
-            FirebaseDatabase.getInstance().getReference("Produtos")
-                .child(gv.currentProduto.produtoID!!).removeValue()
-//            FirebaseDatabase.getInstance().getReference("InfoProdutos")
-//                .orderByChild("produtoID").equalTo(gv.currentProduto.produtoID)
-//
-//            dbref.orderByChild("listaDe").equalTo(listid)
-            // TODO: 10/01/2022 chamar modal
-            finish()
+
+            var dialog = DeleteInfoProdutos(gv.currentProduto)
+            val fm: FragmentManager = this.supportFragmentManager
+            dialog.show(fm, "")
+
+
         }
 
 
@@ -68,7 +67,6 @@ class InfoProdutoActivity : AppCompatActivity() {
         binding.update.setOnClickListener {
             val hashMapProduto: HashMap<String, Any?> = HashMap()
             // TODO: 10/01/2022 Alterar imagem, similar ao addProductsActivity 
-            // TODO: 10/01/2022 chamar modal confirmar
 
             hashMapProduto["nomeProduto"] = binding.nomeProdutoEditText.text.toString()
             gv.currentProduto.nomeProduto = binding.nomeProdutoEditText.text.toString()

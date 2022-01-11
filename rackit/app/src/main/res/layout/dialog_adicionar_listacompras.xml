@@ -29,7 +29,7 @@
         android:textSize="16dp" />
 
     <EditText
-        android:id="@+id/dataValidadeEditText"
+        android:id="@+id/quantidadeEditText"
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_below="@id/quantidade"
@@ -38,7 +38,6 @@
         android:background="@drawable/edit_text_background"
         android:drawablePadding="10dp"
         android:drawableTint="@color/colorTextBlack"
-        android:focusable="false"
         android:fontFamily="@font/seg_ui_semibold"
         android:hint="@string/introduza_a_quantidade"
         android:inputType="number"
@@ -53,7 +52,7 @@
         android:id="@+id/adicionarListaCompras"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/dataValidadeEditText"
+        android:layout_below="@id/quantidadeEditText"
         android:layout_marginStart="10dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"

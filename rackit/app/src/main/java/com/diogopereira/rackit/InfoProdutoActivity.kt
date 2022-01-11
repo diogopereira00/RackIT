@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.diogopereira.rackit.adapters.InfoProdutosAdapter
 import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.dialogs.AdicionarInfoProduto
+import com.diogopereira.rackit.dialogs.AdicionarListaCompras
 import com.diogopereira.rackit.dialogs.AtualizarProduto
 import com.diogopereira.rackit.dialogs.DeleteProduto
 import com.diogopereira.rackit.v2.R
@@ -86,7 +87,10 @@ class InfoProdutoActivity : AppCompatActivity() {
         }
         
         binding.shopButton.setOnClickListener{
-            // TODO: 11/01/2022 botao adicionar listacompras, criar dialog\ 
+            // TODO: 11/01/2022 botao adicionar listacompras, criar dialog\
+            var dialog = AdicionarListaCompras(gv.currentProduto)
+            val fm: FragmentManager = this.supportFragmentManager
+            dialog.show(fm, "")
         }
 
 

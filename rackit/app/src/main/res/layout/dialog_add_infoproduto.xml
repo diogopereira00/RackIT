@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/shape_rect"
+    android:layout_height="wrap_content"
+
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/sure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Introdua os dados do produto que pretende adicionar"
+        android:textSize="16dp" />
+    <TextView
+        android:id="@+id/dataValidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="25dp"
+        android:layout_below="@id/sure"
+        android:text="Data de validade"
+        android:textSize="16dp" />
+
+    <EditText
+        android:id="@+id/dataValidadeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_below="@id/dataValidade"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableEnd="@drawable/ic_calendar"
+        android:drawablePadding="10dp"
+        android:drawableTint="@color/colorTextBlack"
+        android:focusable="false"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:hint="Introduza a data de validade..."
+        android:inputType="date"
+        android:paddingStart="15dp"
+        android:paddingEnd="26dp"
+        android:textColor="@color/defaultText"
+        android:textColorHint="@color/colorPlaceholder"
+        tools:ignore="Autofill"
+        tools:targetApi="m" />
+
+    <Button
+        android:id="@+id/adicionar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/dataValidadeEditText"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/button_primary_background"
+        android:backgroundTint="@color/primary"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:scaleType="center"
+        android:text="@string/adicionar_produto"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+    <Button
+        android:id="@+id/cancelar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:scaleType="center"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/adicionar"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:text="@string/cancelar"
+        android:textColor="@color/colorPlaceholder"
+        android:textSize="16sp"/>
+
+
+
+
+
+</RelativeLayout>

@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.diogopereira.rackit.adapters.InfoProdutosAdapter
 import com.diogopereira.rackit.classes.InfoProduto
+import com.diogopereira.rackit.dialogs.AdicionarInfoProduto
 import com.diogopereira.rackit.dialogs.AtualizarProduto
-import com.diogopereira.rackit.dialogs.DeleteInfoProdutos
+import com.diogopereira.rackit.dialogs.DeleteProduto
 import com.diogopereira.rackit.v2.R
 import com.diogopereira.rackit.v2.databinding.ActivityInfoProdutoBinding
 
@@ -51,23 +52,42 @@ class InfoProdutoActivity : AppCompatActivity() {
         infoRecyclerView.layoutManager = LinearLayoutManager(this)
         infoRecyclerView.adapter = infoAdapter
 
-
+        // botao apagar produto
         binding.APAGAR.setOnClickListener {
 
-            var dialog = DeleteInfoProdutos(gv.currentProduto)
+            var dialog = DeleteProduto(gv.currentProduto)
             val fm: FragmentManager = this.supportFragmentManager
             dialog.show(fm, "")
 
 
         }
-
+        //botao atualizar produto
         binding.update.setOnClickListener {
-            var dialog = AtualizarProduto(gv.currentProduto,binding.nomeProdutoEditText.text.toString(), binding.codBarrasEditText.text.toString(),infoAdapter)
+            var dialog = AtualizarProduto(
+                gv.currentProduto,
+                binding.nomeProdutoEditText.text.toString(),
+                binding.codBarrasEditText.text.toString(),
+                infoAdapter
+            )
             val fm: FragmentManager = this.supportFragmentManager
             dialog.show(fm, "")
         }
+        //botao voltar atras
         binding.backButton.setOnClickListener {
             finish()
+        }
+        
+        //botao adicionar infoproduto 
+        binding.addButton.setOnClickListener{
+            // TODO: 11/01/2022 botao adicionar infoproduto, criar dialog
+
+            var dialog = AdicionarInfoProduto(gv.currentProduto)
+            val fm: FragmentManager = this.supportFragmentManager
+            dialog.show(fm, "")
+        }
+        
+        binding.shopButton.setOnClickListener{
+            // TODO: 11/01/2022 botao adicionar listacompras, criar dialog\ 
         }
 
 

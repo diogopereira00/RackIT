@@ -12,7 +12,7 @@ import com.diogopereira.rackit.classes.Produto
 import com.diogopereira.rackit.v2.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.dialog_delete_infoproduto.cancelar
+import kotlinx.android.synthetic.main.dialog_delete_produto.cancelar
 import kotlinx.android.synthetic.main.dialog_update_produto.*
 
 class AtualizarProduto(

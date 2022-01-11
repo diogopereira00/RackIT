@@ -13,22 +13,11 @@ import com.bumptech.glide.Glide
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.classes.Produto
-import com.diogopereira.rackit.dialogs.DeleteInfoProdutos
 import com.diogopereira.rackit.v2.databinding.InfoProdutosListaBinding
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import android.widget.Button
-import android.widget.Toast
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_info_produto.*
-import kotlinx.android.synthetic.main.dialog_delete_infoproduto.*
-import kotlinx.android.synthetic.main.dialog_delete_infoproduto.APAGAR
 import android.content.DialogInterface
 import androidx.core.graphics.drawable.DrawableCompat
 
-import android.graphics.drawable.Drawable
-
-import android.R
 import android.graphics.Color
 
 import androidx.appcompat.content.res.AppCompatResources

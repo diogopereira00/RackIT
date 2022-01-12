@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.diogopereira.rackit.fragments.HomeFragment
 import com.diogopereira.rackit.fragments.ProductsFragment
+import com.diogopereira.rackit.fragments.SettingsFragment
 import com.diogopereira.rackit.fragments.ShoppingListFragment
 
 class TabPageAdapter(activity:FragmentActivity, private val tabCount:Int): FragmentStateAdapter(activity){
@@ -15,6 +16,7 @@ class TabPageAdapter(activity:FragmentActivity, private val tabCount:Int): Fragm
             0-> HomeFragment()
             1-> ProductsFragment()
             2-> ShoppingListFragment()
+            3-> SettingsFragment()
             else -> HomeFragment()
         }
     }

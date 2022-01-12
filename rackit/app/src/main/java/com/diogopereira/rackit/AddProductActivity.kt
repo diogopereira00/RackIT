@@ -52,7 +52,7 @@ class AddProductActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            mImageView.setImageURI(photoFile.toUri())
+            //mImageView.setImageURI(photoFile.toUri())
             imagem.setText(photoFile.toString())
             imageUri = photoFile.toUri()
         }

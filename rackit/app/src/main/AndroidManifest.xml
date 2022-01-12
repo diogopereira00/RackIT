@@ -13,9 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RackIT">
         <activity
-            android:name="com.diogopereira.rackit.InfoProdutoActivity"
-            android:windowSoftInputMode="adjustPan"
+            android:name="com.diogopereira.rackit.AddProductListaComprasActivity"
             android:exported="false" />
+        <activity
+            android:name="com.diogopereira.rackit.InfoProdutoActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name="com.diogopereira.rackit.AddProductActivity"
             android:exported="false" />

@@ -41,7 +41,7 @@ class ShopAdapter  : RecyclerView.Adapter<ShopAdapter.HolderListaCompras>  {
 
     override fun onBindViewHolder(holder: HolderListaCompras, position: Int) {
         val currentItem = shopListArray[position]
-        if (currentItem.imagem != "") {
+        if (!currentItem.imagem.isNullOrEmpty()) {
             Glide.with(holder.itemView.context).load(currentItem.imagem)
                 .into(holder.imagemProduto)
         } else {

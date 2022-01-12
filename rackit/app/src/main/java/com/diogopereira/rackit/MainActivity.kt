@@ -1,5 +1,7 @@
 package com.diogopereira.rackit
 
+import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,12 +18,14 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_main.*
+import android.content.DialogInterface
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var teste: TextView
     private lateinit var firebaseAuth: FirebaseAuth
-    lateinit var addButton : FloatingActionButton
+    lateinit var addButton: FloatingActionButton
 
     lateinit var gv: GlobalClass
 
@@ -39,48 +43,54 @@ class MainActivity : AppCompatActivity() {
         setUpBar()
 
         addButton.setOnClickListener {
-            startActivity(Intent(this, AddProductActivity::class.java))
+         //fragmnet produto
+            if (viewPager.currentItem == 1)
+                startActivity(Intent(this, AddProductActivity::class.java))
+            if(viewPager.currentItem == 2){
+                startActivity(Intent(this, AddProductListaComprasActivity::class.java))
 
+            }
         }
+        //fragment listacompras
+        // TODO: 12/01/2022
+
 
     }
 
     // TODO: 04/01/2022 floatButton abrir muitas paginas 
     private fun setUpBar() {
-        val adapter  =TabPageAdapter(activity = this, tabLayout.tabCount)
+        val adapter = TabPageAdapter(activity = this, tabLayout.tabCount)
         binding.viewPager.adapter = adapter
 
-        viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 tabLayout.selectTab(tabLayout.getTabAt(position))
             }
         })
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 viewPager.currentItem = tab.position
 
-                if(viewPager.currentItem  == 0){
-                    binding.fragmentName.text ="Home"
+                if (viewPager.currentItem == 0) {
+                    binding.fragmentName.text = "Home"
                     binding.addButton.visibility = View.VISIBLE
 
-                }
-                else if(viewPager.currentItem ==1){
-                    binding.fragmentName.text ="Lista de Produtos"
+                } else if (viewPager.currentItem == 1) {
+                    binding.fragmentName.text = "Lista de Produtos"
                     binding.addButton.visibility = View.VISIBLE
 
-                }
-                else if(viewPager.currentItem ==2){
-                    binding.fragmentName.text ="Lista de Compras"
+                } else if (viewPager.currentItem == 2) {
+                    binding.fragmentName.text = "Lista de Compras"
                     binding.addButton.visibility = View.VISIBLE
 
-                }
-                else if(viewPager.currentItem ==3){
-                    binding.fragmentName.text ="Definições"
+                } else if (viewPager.currentItem == 3) {
+                    binding.fragmentName.text = "Definições"
                     binding.addButton.visibility = View.GONE
 
                 }
 
             }
+
             override fun onTabUnselected(tab: TabLayout.Tab?) {
 
             }
@@ -98,8 +108,8 @@ class MainActivity : AppCompatActivity() {
 
         if (currentUser == null) {
 
-                startActivity(Intent(this@MainActivity, AuthenticationActivity::class.java))
-                finish()
+            startActivity(Intent(this@MainActivity, AuthenticationActivity::class.java))
+            finish()
 
         }
 //            val ref = FirebaseDatabase.getInstance().getReference("Users")
@@ -116,7 +126,6 @@ class MainActivity : AppCompatActivity() {
 //                    override fun onCancelled(error: DatabaseError) {
 //                    }
 //                })
-
 
 
     }

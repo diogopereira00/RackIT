@@ -45,6 +45,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AuthenticationActivity::class.java))
 
         }
+        else{
+            gv.uidUtilizador = firebaseAuth.currentUser!!.uid
+            gv.emailUtilizador = firebaseAuth.currentUser!!.email.toString()
+        }
         setUpBar()
 
         addButton.setOnClickListener {

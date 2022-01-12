@@ -78,6 +78,8 @@ class InfoProdutosAdapter(
                         .child(currentItem.infoProdutoID!!).removeValue()
                     productsList.remove(currentItem)
                     if (productsList.size == 0) {
+                        FirebaseDatabase.getInstance().getReference("Produtos")
+                            .child(currentItem.produtoID!!).removeValue()
                         (context as Activity).finish()
                     }
                     //notifyItemRemoved(position)

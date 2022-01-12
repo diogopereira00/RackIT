@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.adapters.ShopAdapter
-import com.diogopereira.rackit.adapters.produtosAdapter
 import com.diogopereira.rackit.classes.ProdutoComprar
 import com.diogopereira.rackit.v2.R
 import com.diogopereira.rackit.v2.databinding.FragmentProductsBinding

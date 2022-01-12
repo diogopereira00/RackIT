@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.adapters.ProductsAdapter
 import com.diogopereira.rackit.adapters.ProductsAdapterVertical
-import com.diogopereira.rackit.adapters.produtosAdapter
 import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.classes.Produto
 import com.diogopereira.rackit.v2.databinding.FragmentProductsBinding

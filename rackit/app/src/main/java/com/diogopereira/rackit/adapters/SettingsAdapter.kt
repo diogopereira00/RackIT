@@ -52,7 +52,7 @@ class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.HolderDefinicoes> {
         holder.nomeSettings.text = currentItem.nomeSetting
 
         binding.layout.setOnClickListener {
-            if(currentItem.id=="Conta") {
+            if(currentItem.id=="Logout") {
                 FirebaseAuth.getInstance().signOut()
                 var intent = Intent(context, AuthenticationActivity::class.java)
                 context.startActivity(intent)

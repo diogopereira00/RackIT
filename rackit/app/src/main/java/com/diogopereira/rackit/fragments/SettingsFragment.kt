@@ -81,7 +81,7 @@ class SettingsFragment : Fragment() {
         settingsList.add(Settings(id = "Notificacoes",nomeSetting = "Notificações", descricao = "Selecione os tipos de informações que recebe sobre atividades, interesses e recomendações", imagemSetting = R.drawable.ic_baseline_notifications_24))
         settingsList.add(Settings(id = "Acessibilidade",nomeSetting ="Acessibilidade, exibição e idiomas", descricao = "Selecione a forma como o conteudo é exibido", imagemSetting = R.drawable.ic_baseline_remove_red_eye_24))
         settingsList.add(Settings(id = "Recursos adicionais",nomeSetting = "Recursos adicionais", descricao = "Verifique informações uteis do RackIT", imagemSetting = R.drawable.ic_baseline_more_horiz_24))
-        settingsList.add(Settings(id = "Conta",nomeSetting = "Terminar sessão", descricao = "Termine sessão em segurança", imagemSetting = R.drawable.ic_baseline_power_settings_new_24))
+        settingsList.add(Settings(id = "Logout",nomeSetting = "Terminar sessão", descricao = "Termine sessão em segurança", imagemSetting = R.drawable.ic_baseline_power_settings_new_24))
 
 
 

@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.diogopereira.rackit.AddProductActivity
 import com.diogopereira.rackit.AuthenticationActivity
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.adapters.HorizontalAdapter
+import com.diogopereira.rackit.adapters.ShopAdapter
+import com.diogopereira.rackit.classes.ProdutoComprar
 import com.diogopereira.rackit.v2.databinding.FragmentHomeBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
@@ -26,7 +29,11 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    // TODO: 04/01/2022 criaçao do home fragment
+
+
+    private lateinit var comprasRecyclerView: RecyclerView
+    private lateinit var shopList: ArrayList<ProdutoComprar>
+    private lateinit var shopAdapter: ShopAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -58,6 +65,17 @@ class HomeFragment : Fragment() {
 
         recycler.adapter = HorizontalAdapter(data)
 
+        shopList = ArrayList()
+        shopAdapter = ShopAdapter(requireContext(), shopList)
+        comprasRecyclerView = binding.recyclerViewCompras
+        comprasRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        comprasRecyclerView.adapter = shopAdapter
+
+        loadAllListaCompras()
+
+
+
+
         val currentUser = firebaseAuth.currentUser
             val ref = FirebaseDatabase.getInstance().getReference("Users")
             ref.child(currentUser!!.uid)
@@ -79,6 +97,34 @@ class HomeFragment : Fragment() {
 
 
         return view
+    }
+
+    private fun loadAllListaCompras() {
+        val caminho = "ListaCompras/listC_" + gv.uidUtilizador
+        val ref = FirebaseDatabase.getInstance().getReference(caminho)
+            .child("Produtos").addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    shopList.clear()
+                    for (ds in snapshot.children) {
+                        val model = ds.getValue(ProdutoComprar::class.java)
+                        shopList.add(model!!)
+
+                    }
+                    if (shopList.size > 0) {
+                        binding.semProdutosListaCompras.visibility = View.GONE
+                        binding.recyclerViewCompras.visibility = View.VISIBLE
+
+                    } else {
+                        binding.semProdutosListaCompras.visibility = View.VISIBLE
+                        binding.recyclerViewCompras.visibility = View.GONE
+                    }
+                    shopList.sortByDescending { it.urgente }
+                    comprasRecyclerView.adapter = shopAdapter
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                }
+            })
     }
 
     override fun onStart() {

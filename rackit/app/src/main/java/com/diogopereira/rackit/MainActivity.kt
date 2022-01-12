@@ -40,24 +40,26 @@ class MainActivity : AppCompatActivity() {
 
         //teste = binding.teste
         firebaseAuth = FirebaseAuth.getInstance()
+
+        if (firebaseAuth == null) {
+            startActivity(Intent(this, AuthenticationActivity::class.java))
+
+        }
         setUpBar()
 
         addButton.setOnClickListener {
-         //fragmnet produto
+            //fragmnet produto
             if (viewPager.currentItem == 1)
                 startActivity(Intent(this, AddProductActivity::class.java))
+            //fragment listacompras
             if(viewPager.currentItem == 2){
                 startActivity(Intent(this, AddProductListaComprasActivity::class.java))
 
             }
         }
-        //fragment listacompras
-        // TODO: 12/01/2022
-
 
     }
 
-    // TODO: 04/01/2022 floatButton abrir muitas paginas 
     private fun setUpBar() {
         val adapter = TabPageAdapter(activity = this, tabLayout.tabCount)
         binding.viewPager.adapter = adapter

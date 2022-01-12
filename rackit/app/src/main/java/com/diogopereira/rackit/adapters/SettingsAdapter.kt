@@ -1,22 +1,25 @@
 package com.diogopereira.rackit.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.diogopereira.rackit.AuthenticationActivity
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.classes.Settings
 import com.diogopereira.rackit.v2.R
 import com.diogopereira.rackit.v2.databinding.ItemDefinicoesBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.HolderDefinicoes> {
 
     // context, get using construtor
     private var context: Context
     private var gv = GlobalClass()
-
     private var settingsList: ArrayList<Settings>
 
     //viewbinding RowReviewsBinding.xml
@@ -31,7 +34,6 @@ class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.HolderDefinicoes> {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderDefinicoes {
         binding = ItemDefinicoesBinding.inflate(LayoutInflater.from(context), parent, false)
         gv = parent.context.applicationContext as GlobalClass
-
         return HolderDefinicoes(binding.root)
     }
 
@@ -48,6 +50,15 @@ class SettingsAdapter : RecyclerView.Adapter<SettingsAdapter.HolderDefinicoes> {
         }
         holder.descricao.text = currentItem.descricao
         holder.nomeSettings.text = currentItem.nomeSetting
+
+        binding.layout.setOnClickListener {
+            if(currentItem.id=="Conta") {
+                FirebaseAuth.getInstance().signOut()
+                var intent = Intent(context, AuthenticationActivity::class.java)
+                context.startActivity(intent)
+
+            }
+        }
     }
 
     override fun getItemCount(): Int {

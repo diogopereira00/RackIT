@@ -16,7 +16,6 @@ import com.diogopereira.rackit.adapters.ShopAdapter
 import com.diogopereira.rackit.classes.ProdutoComprar
 import com.diogopereira.rackit.classes.Settings
 import com.diogopereira.rackit.v2.R
-import com.diogopereira.rackit.v2.databinding.FragmentHomeBinding
 import com.diogopereira.rackit.v2.databinding.FragmentSettingsBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
@@ -76,13 +75,13 @@ class SettingsFragment : Fragment() {
 
     private fun gerarLista() {
         settingsList.clear()
-        settingsList.add(Settings("Sua conta", descricao = "Veja a segurança da sua conta, baixe um arquivo com seus dados ou saiba mais sobre as opções de desativação da conta", imagemSetting = R.drawable.ic_baseline_account_circle_24))
-        settingsList.add(Settings("Segurança e acesso à conta", descricao = "Gira a segurança da sua conta e monitorize o uso dela, inclusive os aplicativos conectados.", imagemSetting = R.drawable.ic_baseline_lock_24))
-        settingsList.add(Settings("Privacidade e segurança", descricao = "Consulte as informações que vê e partilha no RackIT", imagemSetting = R.drawable.ic_baseline_security_24))
-        settingsList.add(Settings("Notificações", descricao = "Selecione os tipos de informações que recebe sobre atividades, interesses e recomendações", imagemSetting = R.drawable.ic_baseline_notifications_24))
-        settingsList.add(Settings("Acessibilidade, exibição e idiomas", descricao = "Selecione a forma como o conteudo é exibido", imagemSetting = R.drawable.ic_baseline_remove_red_eye_24))
-        settingsList.add(Settings("Recursos adicionais", descricao = "Verifique informações uteis do RackIT", imagemSetting = R.drawable.ic_baseline_more_horiz_24))
-        settingsList.add(Settings("Terminar sessão", descricao = "Termine sessão em segurança", imagemSetting = R.drawable.ic_baseline_power_settings_new_24))
+        settingsList.add(Settings(id = "Conta", nomeSetting = "Sua conta", descricao = "Veja a segurança da sua conta, baixe um arquivo com seus dados ou saiba mais sobre as opções de desativação da conta", imagemSetting = R.drawable.ic_baseline_account_circle_24))
+        settingsList.add(Settings(id = "Segurança",nomeSetting = "Segurança e acesso à conta", descricao = "Gira a segurança da sua conta e monitorize o uso dela, inclusive os aplicativos conectados.", imagemSetting = R.drawable.ic_baseline_lock_24))
+        settingsList.add(Settings(id = "Privacidade",nomeSetting = "Privacidade e segurança", descricao = "Consulte as informações que vê e partilha no RackIT", imagemSetting = R.drawable.ic_baseline_security_24))
+        settingsList.add(Settings(id = "Notificacoes",nomeSetting = "Notificações", descricao = "Selecione os tipos de informações que recebe sobre atividades, interesses e recomendações", imagemSetting = R.drawable.ic_baseline_notifications_24))
+        settingsList.add(Settings(id = "Acessibilidade",nomeSetting ="Acessibilidade, exibição e idiomas", descricao = "Selecione a forma como o conteudo é exibido", imagemSetting = R.drawable.ic_baseline_remove_red_eye_24))
+        settingsList.add(Settings(id = "Recursos adicionais",nomeSetting = "Recursos adicionais", descricao = "Verifique informações uteis do RackIT", imagemSetting = R.drawable.ic_baseline_more_horiz_24))
+        settingsList.add(Settings(id = "Conta",nomeSetting = "Terminar sessão", descricao = "Termine sessão em segurança", imagemSetting = R.drawable.ic_baseline_power_settings_new_24))
 
 
 

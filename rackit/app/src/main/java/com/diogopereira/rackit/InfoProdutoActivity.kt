@@ -87,7 +87,6 @@ class InfoProdutoActivity : AppCompatActivity() {
         }
         
         binding.shopButton.setOnClickListener{
-            // TODO: 11/01/2022 botao adicionar listacompras, criar dialog\
             var dialog = AdicionarListaCompras(gv.currentProduto)
             val fm: FragmentManager = this.supportFragmentManager
             dialog.show(fm, "")

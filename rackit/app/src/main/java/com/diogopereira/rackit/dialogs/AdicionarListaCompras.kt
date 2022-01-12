@@ -60,7 +60,7 @@ class AdicionarListaCompras(currentProduto: Produto) : BottomSheetDialogFragment
                 hashMapListaCompras["nome"] = produto.nomeProduto
                 hashMapListaCompras["imagem"] = produto.imagemProduto
                 hashMapListaCompras["quantidade"] = quantidadeEditText.text.toString()
-
+                hashMapListaCompras["produtoComprarID"] = keyProduto
 
 
                 val refListaCompras = FirebaseDatabase.getInstance().getReference("ListaCompras")

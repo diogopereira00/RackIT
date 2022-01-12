@@ -157,23 +157,24 @@
         android:autoSizeMaxTextSize="25sp"
         android:buttonTint="@color/primary"
         android:checked="false"
+        android:minHeight="48dp"
         android:text="Urgente"
         android:textAllCaps="false"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="@color/defaultText"
         android:textColorHint="#FFFFFF"
+
         android:textColorLink="#0F6DD2"
 
         android:textCursorDrawable="?android:attr/textCursorDrawable"
-
         android:textIsSelectable="true"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/addButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quantidadeEditText"
-        app:layout_constraintVertical_bias="0.03" />
+        app:layout_constraintVertical_bias="0.363" />
 
     <Button
         android:id="@+id/addButton"
@@ -192,7 +193,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/quantidadeEditText"
-        app:layout_constraintVertical_bias="0.659" />
+        app:layout_constraintVertical_bias="0.651" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

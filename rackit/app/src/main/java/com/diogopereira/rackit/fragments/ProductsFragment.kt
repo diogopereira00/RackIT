@@ -45,6 +45,7 @@ class ProductsFragment : Fragment() {
         //produtosArrayList.clear()
 //        produtoList.clear()
 //        loadProdutosExpirar()
+        loadProdutosExpirar()
 
 
 
@@ -78,7 +79,6 @@ class ProductsFragment : Fragment() {
         produtosRecyclerView.adapter = productsAdapter
         produtoList.clear()
 
-        loadProdutosExpirar()
 
 //        produtoRecyclerView = binding.recyclerView
 //        produtoRecyclerView.layoutManager = LinearLayoutManager(activity)
@@ -115,7 +115,7 @@ class ProductsFragment : Fragment() {
         val listid = "list_" + gv.uidUtilizador
         val dbref = FirebaseDatabase.getInstance().getReference("Produtos")
         dbref.orderByChild("listaDe").equalTo(listid)
-            .addValueEventListener(object : ValueEventListener {
+            .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     produtoList.clear()
 
@@ -142,7 +142,7 @@ class ProductsFragment : Fragment() {
     private fun verificarInfoProdutos(currentItem: Produto) {
         var dbrefInfo = FirebaseDatabase.getInstance().getReference("InfoProdutos")
         dbrefInfo.orderByChild("produtoID").equalTo(currentItem.produtoID)
-            .addValueEventListener(object : ValueEventListener {
+            .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     if (snapshot.exists()) {

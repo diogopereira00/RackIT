@@ -25,13 +25,7 @@ class AdicionarListaCompras(currentProduto: Produto) : BottomSheetDialogFragment
     var produto = currentProduto
     private var gv = GlobalClass()
 
-    val myCalendar = Calendar.getInstance()
-    val datePicker = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-        myCalendar.set(Calendar.YEAR, year)
-        myCalendar.set(Calendar.MONTH, month)
-        myCalendar.set(Calendar.DAY_OF_YEAR, dayOfMonth)
-        updateData(myCalendar)
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,15 +47,13 @@ class AdicionarListaCompras(currentProduto: Produto) : BottomSheetDialogFragment
             if(quantidadeEditText.text.toString()!=""){
                 val hashMapListaCompras : HashMap<String, Any?> = HashMap()
                 var timestamp = System.currentTimeMillis()
-                val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
-                val currentDate = sdf.format(Date())
                 val keyInfo = "listC_" + gv.uidUtilizador
                 var keyProduto = produto.nomeProduto+"_"+timestamp
                 hashMapListaCompras["nome"] = produto.nomeProduto
                 hashMapListaCompras["imagem"] = produto.imagemProduto
                 hashMapListaCompras["quantidade"] = quantidadeEditText.text.toString()
                 hashMapListaCompras["produtoComprarID"] = keyProduto
-
+                hashMapListaCompras["urgente"] = urgente.isChecked
 
                 val refListaCompras = FirebaseDatabase.getInstance().getReference("ListaCompras")
                 refListaCompras.child(keyInfo+"/Produtos/"+keyProduto).setValue(hashMapListaCompras)
@@ -82,13 +74,6 @@ class AdicionarListaCompras(currentProduto: Produto) : BottomSheetDialogFragment
     }
 
 
-    private fun updateData(myCalendar: Calendar) {
-        val myFormat = "dd/MM/yyyy"
-        val sdf = SimpleDateFormat(myFormat, Locale.ENGLISH)
-        dataValidade = sdf.format(myCalendar.time)
-        dataValidadeEditText.setText(sdf.format(myCalendar.time))
-//        Toast.makeText(this,"Erro ao entrar, ${sdf.format(myCalendar.time)}", Toast.LENGTH_SHORT).show()
 
-    }
 
 }

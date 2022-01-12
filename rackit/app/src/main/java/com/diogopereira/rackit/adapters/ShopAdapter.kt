@@ -1,9 +1,12 @@
 package com.diogopereira.rackit.adapters
 
 import android.content.Context
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.text.color
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.diogopereira.rackit.GlobalClass
@@ -47,8 +50,18 @@ class ShopAdapter  : RecyclerView.Adapter<ShopAdapter.HolderListaCompras>  {
 
 
         }
-        holder.nomeProduto.text = currentItem.nome
         holder.quantidadeProduto.text = "Quantidade: " + currentItem.quantidade
+        if(currentItem.urgente == true){
+            val red = ContextCompat.getColor(context, R.color.red)
+            val text = SpannableStringBuilder()
+                .color(red) { append("⚠ ") }
+                .append(currentItem.nome)
+
+            holder.nomeProduto.text = text
+        }
+
+        else
+            holder.nomeProduto.text = currentItem.nome
 
         binding.check.setOnClickListener {
             val caminho = "ListaCompras/listC_" + gv.uidUtilizador+"/Produtos"

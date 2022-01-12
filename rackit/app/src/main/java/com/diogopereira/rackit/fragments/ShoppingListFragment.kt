@@ -46,7 +46,6 @@ class ShoppingListFragment : Fragment() {
 
         loadAllListaCompras()
 
-        return view
 
 
         binding.swipeLayoutCompras.setOnRefreshListener {
@@ -60,27 +59,29 @@ class ShoppingListFragment : Fragment() {
     private fun loadAllListaCompras() {
         val caminho = "ListaCompras/listC_" + gv.uidUtilizador
         val ref = FirebaseDatabase.getInstance().getReference(caminho)
-        .child("Produtos").addValueEventListener(object: ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                shopList.clear()
-                for (ds in snapshot.children){
-                    val model = ds.getValue(ProdutoComprar::class.java)
-                    shopList.add(model!!)
-                }
-                if(shopList.size>0){
-                    binding.semProdutos.visibility = View.GONE
-                    binding.recyclerViewCompras.visibility = View.VISIBLE
+            .child("Produtos").addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    shopList.clear()
+                    for (ds in snapshot.children) {
+                        val model = ds.getValue(ProdutoComprar::class.java)
+                        shopList.add(model!!)
 
+                    }
+                    if (shopList.size > 0) {
+                        binding.semProdutos.visibility = View.GONE
+                        binding.recyclerViewCompras.visibility = View.VISIBLE
+
+                    } else {
+                        binding.semProdutos.visibility = View.VISIBLE
+                        binding.recyclerViewCompras.visibility = View.GONE
+                    }
+                    shopList.sortByDescending { it.urgente }
+                    comprasRecyclerView.adapter = shopAdapter
                 }
-                else{
-                    binding.semProdutos.visibility = View.VISIBLE
-                    binding.recyclerViewCompras.visibility = View.GONE
+
+                override fun onCancelled(error: DatabaseError) {
                 }
-                comprasRecyclerView.adapter = shopAdapter
-            }
-            override fun onCancelled(error: DatabaseError) {
-            }
-        })
+            })
     }
 
 }

@@ -6,6 +6,7 @@ O RackIT é um sistema de gestão de inventario doméstico feito para facilitar 
 
 ## Organização do repositorio
 * Pode encontrar o **codigo fonte** em [rackit](https://github.com/diogopereira00/RackIT/tree/main/rackit).
+* Pode encontrar as **mockups** em [docs/mockups.pdf](https://github.com/diogopereira00/RackIT/blob/main/docs/mokcups.pdf).
 * Pode encontrar a **preview das mockups** [aqui](https://previewer.adalo.com/2c0a7795-ff19-4203-890f-a534f801457d).
 * Pode encontrar um   **video de demonstração** [aqui](https://www.youtube.com/watch?v=iz7Q-Qj05Jg).
 

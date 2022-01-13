@@ -11,12 +11,11 @@ O RackIT é um sistema de gestão de inventario doméstico feito para facilitar 
 * Pode encontrar um   **video de demonstração** [aqui](https://www.youtube.com/watch?v=iz7Q-Qj05Jg).
 
 
-
 ## Galeria
-| VIDEO DEMO | MAIN MENU| GAME | 
+| VIDEO DEMO | -- | -- | 
 :---: | :---: | :---: |
-
-GAME PREVIEW | Main Menu | Game
+[![Video_Preview](https://github.com/diogopereira00/RackIT/blob/main/docs/images/previewvideo.png)](https://www.youtube.com/watch?v=iz7Q-Qj05Jg)| ![--]() | ![--]() 
+GAME PREVIEW | -- | --
 
 ## Tecnologias
 * [Android Studio](https://unity.com/)

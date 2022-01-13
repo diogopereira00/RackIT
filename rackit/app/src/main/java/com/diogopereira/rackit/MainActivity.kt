@@ -63,7 +63,9 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
+    public fun modificarPosicao(posicao : Int){
+        viewPager.currentItem = posicao
+    }
     private fun setUpBar() {
         val adapter = TabPageAdapter(activity = this, tabLayout.tabCount)
         binding.viewPager.adapter = adapter
@@ -79,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (viewPager.currentItem == 0) {
                     binding.fragmentName.text = "Home"
-                    binding.addButton.visibility = View.VISIBLE
+                    binding.addButton.visibility = View.GONE
 
                 } else if (viewPager.currentItem == 1) {
                     binding.fragmentName.text = "Lista de Produtos"

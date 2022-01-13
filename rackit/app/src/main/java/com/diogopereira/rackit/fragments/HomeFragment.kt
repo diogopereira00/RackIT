@@ -1,5 +1,6 @@
 package com.diogopereira.rackit.fragments
 
+import android.app.Activity
 import android.content.Intent
 import android.icu.text.IDNA
 import android.os.Bundle
@@ -11,18 +12,22 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.diogopereira.rackit.AuthenticationActivity
 import com.diogopereira.rackit.GlobalClass
+import com.diogopereira.rackit.MainActivity
+import com.diogopereira.rackit.TabPageAdapter
 import com.diogopereira.rackit.adapters.ProductsAdapter
 import com.diogopereira.rackit.adapters.ShopAdapter
 import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.classes.Produto
 import com.diogopereira.rackit.classes.ProdutoComprar
 import com.diogopereira.rackit.classes.ProdutoExpirar
+import com.diogopereira.rackit.v2.R
 import com.diogopereira.rackit.v2.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -83,18 +88,6 @@ class HomeFragment : Fragment() {
         //creating recycler val
         produtosRecyclerView = binding.recycler
 
-        //setting recycler to horizontal scroll
-//        val data: ArrayList<String> = ArrayList()
-//        data.add("https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80")
-//        data.add("https://images.ctfassets.net/hrltx12pl8hq/4plHDVeTkWuFMihxQnzBSb/aea2f06d675c3d710d095306e377382f/shutterstock_554314555_copy.jpg")
-//        data.add("https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHw%3D&w=1000&q=80")
-//        data.add("https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80")
-//        data.add("https://images.ctfassets.net/hrltx12pl8hq/4plHDVeTkWuFMihxQnzBSb/aea2f06d675c3d710d095306e377382f/shutterstock_554314555_copy.jpg")
-//        data.add("https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHw%3D&w=1000&q=80")
-//        data.add("https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8aHVtYW58ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80")
-//        data.add("https://images.ctfassets.net/hrltx12pl8hq/4plHDVeTkWuFMihxQnzBSb/aea2f06d675c3d710d095306e377382f/shutterstock_554314555_copy.jpg")
-//        data.add("https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHw%3D&w=1000&q=80")
-
 
         produtoList = ArrayList()
         productsAdapter = ProductsAdapter(requireContext(), produtoList)
@@ -127,11 +120,21 @@ class HomeFragment : Fragment() {
 
             binding.swipeLayout.isRefreshing = false
         }
+        binding.vermaisProdutos.setOnClickListener {
 
+            var heroActivity : MainActivity= activity as MainActivity
+            heroActivity.modificarPosicao(1)
+        }
+        binding.vermaisListaCompras.setOnClickListener {
+            var heroActivity : MainActivity= activity as MainActivity
+            heroActivity.modificarPosicao(2)
+        }
 
 
         return view
     }
+
+
 
 
     private fun loadUserData() {

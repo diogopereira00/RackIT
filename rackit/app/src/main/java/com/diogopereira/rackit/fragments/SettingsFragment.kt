@@ -35,7 +35,6 @@ class SettingsFragment : Fragment() {
     private lateinit var definicoesRecyclerView: RecyclerView
 
 
-    // TODO: 12/01/2022 setting menu 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -16,7 +16,9 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:text="Quantos produtos pretende comprar?"
-        android:textSize="16dp" />
+        android:textColor="@color/primary"
+        android:textSize="16dp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/quantidade"

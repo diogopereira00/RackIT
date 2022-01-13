@@ -1,5 +1,6 @@
 package com.diogopereira.rackit.dialogs
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
@@ -12,8 +13,11 @@ import com.diogopereira.rackit.classes.Produto
 import com.diogopereira.rackit.v2.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_add_product_lista_compras.*
 import kotlinx.android.synthetic.main.dialog_add_infoproduto.dataValidadeEditText
 import kotlinx.android.synthetic.main.dialog_adicionar_listacompras.*
+import kotlinx.android.synthetic.main.dialog_adicionar_listacompras.quantidadeEditText
+import kotlinx.android.synthetic.main.dialog_adicionar_listacompras.urgente
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,6 +47,10 @@ class AdicionarListaCompras(currentProduto: Produto) : BottomSheetDialogFragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sure.setText("Tem a certeza que pretende adicionar ${produto.nomeProduto} à sua lista de compras?")
+        cancelar.setOnClickListener {
+            dismiss()
+        }
         adicionarListaCompras.setOnClickListener {
             if(quantidadeEditText.text.toString()!=""){
                 val hashMapListaCompras : HashMap<String, Any?> = HashMap()
@@ -61,13 +69,17 @@ class AdicionarListaCompras(currentProduto: Produto) : BottomSheetDialogFragment
                         Toast.makeText(mContext, "Produto adicionado a lista de compras com sucesso.", Toast.LENGTH_SHORT).show()
                         //adapter.notifyDataSetChanged()
                         dismiss()
-//                        (mContext as Activity).finish()
+                        (mContext as Activity).finish()
+
 
                     }
                     .addOnFailureListener { e ->
                         Toast.makeText(mContext, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
                         dismiss()
                     }
+            }
+            else{
+                quantidadeEditText.error = "Introduza a quantidade de produtos que pretende comprar"
             }
         }
 

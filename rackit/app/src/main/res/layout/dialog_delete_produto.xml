@@ -16,7 +16,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:text="Tem a certeza que pretende eliminar definitivamente este produto e todos relacionados?"
-        android:textSize="16dp" />
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
 
     <Button
         android:id="@+id/APAGAR"

@@ -41,7 +41,6 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.HolderProduto> {
 
     override fun onBindViewHolder(holder: HolderProduto, position: Int) {
         val currentItem = shopListArray[position]
-        // TODO: 12/01/2022 verificar se chega a lista de produtos
 
         for (teste in currentItem.listaInfoProduto) {
             holder.nomeProduto.text = currentItem.nomeProduto

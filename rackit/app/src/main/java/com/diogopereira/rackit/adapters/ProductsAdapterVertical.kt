@@ -47,7 +47,6 @@ class ProductsAdapterVertical :
 
     override fun onBindViewHolder(holder: HolderProdutoVertical, position: Int) {
         val currentItem = shopListArray[position]
-        // TODO: 12/01/2022 verificar se chega a lista de produtos
 //        currentItem.listaInfoProduto.sortByDescending { it.dataValidadeAux }
         currentItem.listaInfoProduto.sortWith(compareBy<InfoProduto,Date?>(nullsLast(), { it.dataValidadeAux }))
 

@@ -20,7 +20,8 @@ import kotlinx.android.synthetic.main.dialog_delete_produto.cancelar
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AdicionarInfoProduto(currentProduto: Produto, infoAdapter: InfoProdutosAdapter) : BottomSheetDialogFragment() {
+class AdicionarInfoProduto(currentProduto: Produto, infoAdapter: InfoProdutosAdapter) :
+    BottomSheetDialogFragment() {
     var mContext: Context? = null
     var produto = currentProduto
     var dataValidade: String = ""
@@ -50,34 +51,35 @@ class AdicionarInfoProduto(currentProduto: Produto, infoAdapter: InfoProdutosAda
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        sure.setText("Tem a certeza que pretende adicionar uma unidade de ${produto.nomeProduto} à sua lista de produtos?")
         adicionar.setOnClickListener {
-            if(dataValidadeEditText.text.toString()!=""){
-                val hasMapInfoProduto: HashMap<String, Any?> = HashMap()
-                var timestamp = System.currentTimeMillis()
-                val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
-                val currentDate = sdf.format(Date())
-                val keyInfo = "Info_" + produto.nomeProduto!!.replace(" ", "_") + "_" + timestamp
-                hasMapInfoProduto["dataValidade"] = dataValidadeEditText.text.toString()
-                hasMapInfoProduto["precoCompra"] = ""
-                hasMapInfoProduto["produtoID"] = produto.produtoID
-                hasMapInfoProduto["infoProdutoID"] = keyInfo
 
-                val refInfoProdutos = FirebaseDatabase.getInstance().getReference("InfoProdutos")
-                refInfoProdutos.child(keyInfo).setValue(hasMapInfoProduto)
-                    .addOnSuccessListener {
-                        Toast.makeText(mContext, "Produto adicionado com sucesso.", Toast.LENGTH_SHORT).show()
-                        //adapter.notifyDataSetChanged()
-                        adapter.notifyDataSetChanged()
-                        dismiss()
-                        (mContext as Activity).finish()
+            val hasMapInfoProduto: HashMap<String, Any?> = HashMap()
+            var timestamp = System.currentTimeMillis()
+            val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
+            val currentDate = sdf.format(Date())
+            val keyInfo = "Info_" + produto.nomeProduto!!.replace(" ", "_") + "_" + timestamp
+            hasMapInfoProduto["dataValidade"] = dataValidadeEditText.text.toString()
+            hasMapInfoProduto["precoCompra"] = ""
+            hasMapInfoProduto["produtoID"] = produto.produtoID
+            hasMapInfoProduto["infoProdutoID"] = keyInfo
 
-                    }
-                    .addOnFailureListener { e ->
-                        Toast.makeText(mContext, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
-                        dismiss()
-                    }
-            }
+            val refInfoProdutos = FirebaseDatabase.getInstance().getReference("InfoProdutos")
+            refInfoProdutos.child(keyInfo).setValue(hasMapInfoProduto)
+                .addOnSuccessListener {
+                    Toast.makeText(mContext, "Produto adicionado com sucesso.", Toast.LENGTH_SHORT)
+                        .show()
+                    //adapter.notifyDataSetChanged()
+                    adapter.notifyDataSetChanged()
+                    dismiss()
+                    (mContext as Activity).finish()
+
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(mContext, "Erro...${e.message}", Toast.LENGTH_SHORT).show()
+                    dismiss()
+                }
+
         }
 
         dataValidadeEditText.setOnClickListener {

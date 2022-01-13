@@ -23,6 +23,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import kotlinx.android.synthetic.main.fragment_home.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -115,7 +116,17 @@ class HomeFragment : Fragment() {
 
 
 
+        binding.swipeLayout.setOnRefreshListener {
+//            produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
+//            getProdutoData()
+            if (produtoList.size <= 0) {
+                binding.semProdutosListaProdutos.visibility = View.VISIBLE
+                binding.recycler.visibility = View.GONE
+            }
+            loadProdutosExpirar()
 
+            binding.swipeLayout.isRefreshing = false
+        }
 
 
 
@@ -149,10 +160,11 @@ class HomeFragment : Fragment() {
         val listid = "list_" + gv.uidUtilizador
         val dbref = FirebaseDatabase.getInstance().getReference("Produtos")
         dbref.orderByChild("listaDe").equalTo(listid)
-            .addValueEventListener(object : ValueEventListener {
+            .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
+                    produtoList.clear()
+
                     if (snapshot.exists()) {
-                        produtoList.clear()
                         //produtoRecyclerView.adapter?.notifyDataSetChanged()
                         for (productSnapshot in snapshot.children) {
 
@@ -160,11 +172,7 @@ class HomeFragment : Fragment() {
                             verificarInfoProdutos(produto!!)
 
                         }
-                        if (produtoList.size > 0) {
-                            // TODO: 12/01/2022 esconder array mostrar textview
-                        } else {
 
-                        }
 
 
                     }
@@ -224,7 +232,11 @@ class HomeFragment : Fragment() {
                             }
 //                            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
 
+                            if (produtoList.size > 0) {
+                                binding.semProdutosListaProdutos.visibility = View.GONE
+                                binding.recycler.visibility = View.VISIBLE
 
+                            }
 
                             currentItem.adicionarInfoProduto(Infoproduto!!)
 

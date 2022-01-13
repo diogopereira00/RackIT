@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/iconeNaLista"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_camera"
+            app:tint="@color/defaultText" />
+
+        <TextView
+            android:id="@+id/nomeSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/iconeNaLista"
+            android:layout_toRightOf="@id/iconeNaLista"
+            android:text="devel placeholder line 1"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/descricao"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/nomeSetting"
+            android:layout_toEndOf="@id/iconeNaLista"
+            android:layout_toRightOf="@id/iconeNaLista"
+            android:text=""
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

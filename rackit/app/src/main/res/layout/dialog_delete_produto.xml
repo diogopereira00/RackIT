@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@drawable/shape_rect"
+    android:layout_height="wrap_content"
+
+    android:padding="20dp">
+
+
+    <TextView
+        android:id="@+id/sure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Tem a certeza que pretende eliminar definitivamente este produto e todos relacionados?"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        />
+
+    <Button
+        android:id="@+id/APAGAR"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/sure"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/button_primary_background"
+        android:backgroundTint="@color/red"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:scaleType="center"
+        android:text="@string/apagar_produto"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+    <Button
+        android:id="@+id/cancelar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:scaleType="center"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/APAGAR"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/seg_ui_semibold"
+        android:text="@string/cancelar"
+        android:textColor="@color/colorPlaceholder"
+        android:textSize="16sp"/>
+
+
+
+
+
+</RelativeLayout>

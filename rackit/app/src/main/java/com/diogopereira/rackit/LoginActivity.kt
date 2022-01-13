@@ -44,6 +44,11 @@ class LoginActivity : AppCompatActivity() {
             validadarDados()
             //openActivity(outraActivity = MainActivity::class.java)
         }
+
+        binding.registHereTextView.setOnClickListener{
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+            finish()
+        }
     }
 
 
@@ -103,7 +108,6 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
                 }
             })
     }

@@ -10,10 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.InfoProdutoActivity
+import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.classes.Produto
 import com.diogopereira.rackit.classes.ProdutoExpirar
 import com.diogopereira.rackit.v2.R
 import com.diogopereira.rackit.v2.databinding.RecyclerItemBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.HolderProduto> {
 
@@ -41,6 +44,7 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.HolderProduto> {
 
     override fun onBindViewHolder(holder: HolderProduto, position: Int) {
         val currentItem = shopListArray[position]
+        currentItem.listaInfoProduto.sortWith(compareBy<InfoProduto,Date?>(nullsLast(), { it.dataValidadeAux }))
 
         for (teste in currentItem.listaInfoProduto) {
             holder.nomeProduto.text = currentItem.nomeProduto
@@ -79,7 +83,6 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.HolderProduto> {
             context.startActivity(intent)
         }
 //        holder.nomeProduto.text = currentItem.nomeProduto
-
 
     }
 

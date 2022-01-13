@@ -2,27 +2,18 @@ package com.diogopereira.rackit.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
-import androidx.core.text.color
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.InfoProdutoActivity
-import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.classes.Produto
-import com.diogopereira.rackit.classes.ProdutoComprar
+import com.diogopereira.rackit.classes.ProdutoExpirar
 import com.diogopereira.rackit.v2.R
-import com.diogopereira.rackit.v2.databinding.ItemListaComprasBinding
 import com.diogopereira.rackit.v2.databinding.RecyclerItemBinding
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 
 class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.HolderProduto> {
 
@@ -30,13 +21,13 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.HolderProduto> {
     private var context: Context
     private var gv = GlobalClass()
 
-    private var shopListArray: ArrayList<Produto>
+    private var shopListArray: ArrayList<ProdutoExpirar>
 
     //viewbinding RowReviewsBinding.xml
     private lateinit var binding: RecyclerItemBinding
 
     // construtor
-    constructor(context: Context, list: ArrayList<Produto>) {
+    constructor(context: Context, list: ArrayList<ProdutoExpirar>) {
         this.context = context
         this.shopListArray = list
     }
@@ -53,8 +44,15 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.HolderProduto> {
         // TODO: 12/01/2022 verificar se chega a lista de produtos
 
         for (teste in currentItem.listaInfoProduto) {
-            holder.nomeProduto.text =
-                currentItem.listaInfoProduto.size.toString() + "x " + currentItem.nomeProduto
+            holder.nomeProduto.text = currentItem.nomeProduto
+            if(currentItem.dataValidade == null){
+                holder.dataValidade.text = "Sem data de validade"
+
+            }
+            else{
+                holder.dataValidade.text = "Expira em: " + currentItem.dataValidade.toString()
+
+            }
         }
 
         if (!currentItem.imagemProduto.isNullOrEmpty()) {
@@ -68,7 +66,15 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.HolderProduto> {
         }
 
         holder.itemView.setOnClickListener {
-            gv.currentProduto = currentItem
+            gv.currentProduto = Produto(
+                nomeProduto = currentItem.nomeProduto,
+                produtoID = currentItem.produtoID,
+                listaInfoProduto = currentItem.listaInfoProduto,
+                listaDe = currentItem.listaDe,
+                adicionadoEm = currentItem.adicionadoEm,
+                codBarras = currentItem.codBarras,
+                imagemProduto = currentItem.imagemProduto
+            )
             Toast.makeText(context, "${gv.currentProduto.nomeProduto}", Toast.LENGTH_SHORT).show()
             val intent = Intent(context, InfoProdutoActivity::class.java)
             context.startActivity(intent)

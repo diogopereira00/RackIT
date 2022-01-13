@@ -1,5 +1,7 @@
 package com.diogopereira.rackit.fragments
 
+import android.content.Intent
+import android.icu.text.IDNA
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,18 +9,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.diogopereira.rackit.AuthenticationActivity
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.adapters.ProductsAdapter
 import com.diogopereira.rackit.adapters.ShopAdapter
 import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.classes.Produto
 import com.diogopereira.rackit.classes.ProdutoComprar
+import com.diogopereira.rackit.classes.ProdutoExpirar
 import com.diogopereira.rackit.v2.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
     var firedatabase: FirebaseDatabase? = null
@@ -33,9 +40,23 @@ class HomeFragment : Fragment() {
     private lateinit var shopAdapter: ShopAdapter
 
 
-    private lateinit var produtoList: ArrayList<Produto>
+    private lateinit var produtoList: ArrayList<ProdutoExpirar>
     private lateinit var produtosRecyclerView: RecyclerView
-    private lateinit var productsAdapter : ProductsAdapter
+    private lateinit var productsAdapter: ProductsAdapter
+
+    override fun onResume() {
+        super.onResume()
+        //getProdutoData()
+        //produtosArrayList.clear()
+//        produtoList.clear()
+//        loadProdutosExpirar()
+        loadProdutosExpirar()
+
+
+//        produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
+//        getProdutoData()
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +69,14 @@ class HomeFragment : Fragment() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
+        if (firebaseAuth == null) {
+            startActivity(Intent(activity, AuthenticationActivity::class.java))
+
+        }
+        else{
+            gv.uidUtilizador = firebaseAuth.currentUser!!.uid
+            gv.emailUtilizador = firebaseAuth.currentUser!!.email.toString()
+        }
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
         //creating recycler val
@@ -66,11 +95,11 @@ class HomeFragment : Fragment() {
 //        data.add("https://images.unsplash.com/photo-1541963463532-d68292c34b19?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHw%3D&w=1000&q=80")
 
 
-
         produtoList = ArrayList()
-        productsAdapter = ProductsAdapter(requireContext(),produtoList)
+        productsAdapter = ProductsAdapter(requireContext(), produtoList)
         produtosRecyclerView = binding.recycler
-        produtosRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        produtosRecyclerView.layoutManager =
+            LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
         produtosRecyclerView.adapter = productsAdapter
 
 
@@ -81,13 +110,10 @@ class HomeFragment : Fragment() {
         comprasRecyclerView.adapter = shopAdapter
 
 
-
-
         loadUserData()
-
-        loadProdutosExpirar()
-
         loadAllListaCompras()
+
+
 
 
 
@@ -95,7 +121,6 @@ class HomeFragment : Fragment() {
 
         return view
     }
-
 
 
     private fun loadUserData() {
@@ -135,19 +160,17 @@ class HomeFragment : Fragment() {
                             verificarInfoProdutos(produto!!)
 
                         }
-                        if(produtoList.size>0){
+                        if (produtoList.size > 0) {
                             // TODO: 12/01/2022 esconder array mostrar textview
-                        }
-                        else{
+                        } else {
 
                         }
-
-
 
 
                     }
 
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
@@ -156,7 +179,7 @@ class HomeFragment : Fragment() {
     private fun verificarInfoProdutos(currentItem: Produto) {
         var dbrefInfo = FirebaseDatabase.getInstance().getReference("InfoProdutos")
         dbrefInfo.orderByChild("produtoID").equalTo(currentItem.produtoID)
-            .addValueEventListener(object : ValueEventListener {
+            .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
 
                     if (snapshot.exists()) {
@@ -166,15 +189,56 @@ class HomeFragment : Fragment() {
                         for (productSnapshot in snapshot.children) {
 
                             val Infoproduto = productSnapshot.getValue(InfoProduto::class.java)
+                            if (!Infoproduto!!.dataValidade.isNullOrEmpty()) {
+                                var produtoAdicionar = ProdutoExpirar(
+                                    produtoID = currentItem.produtoID,
+                                    imagemProduto = currentItem.imagemProduto,
+                                    codBarras = currentItem.codBarras,
+                                    adicionadoEm = currentItem.adicionadoEm,
+                                    infoProdutoID = Infoproduto!!.infoProdutoID,
+                                    listaDe = currentItem.listaDe,
+                                    listaInfoProduto = currentItem.listaInfoProduto,
+                                    nomeProduto = currentItem.nomeProduto,
+                                    precoCompra = Infoproduto!!.precoCompra,
+                                    dataCompra = Infoproduto!!.dataCompra,
+                                    dataValidadeAux = SimpleDateFormat("dd/MM/yyyy").parse(Infoproduto!!.dataValidade),
+                                    dataValidade = Infoproduto.dataValidade
+                                )
+                                produtoList.add(produtoAdicionar)
+
+                            } else {
+                                var produtoAdicionar = ProdutoExpirar(
+                                    produtoID = currentItem.produtoID,
+                                    imagemProduto = currentItem.imagemProduto,
+                                    codBarras = currentItem.codBarras,
+                                    adicionadoEm = currentItem.adicionadoEm,
+                                    infoProdutoID = Infoproduto!!.infoProdutoID,
+                                    listaDe = currentItem.listaDe,
+                                    listaInfoProduto = currentItem.listaInfoProduto,
+                                    nomeProduto = currentItem.nomeProduto,
+                                    precoCompra = Infoproduto!!.precoCompra,
+                                    dataCompra = Infoproduto!!.dataCompra
+                                )
+                                produtoList.add(produtoAdicionar)
+
+                            }
+//                            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH)
+
+
 
                             currentItem.adicionarInfoProduto(Infoproduto!!)
 
                         }
-                        produtoList.add(currentItem)
+
+                        produtoList.sortWith(compareBy<ProdutoExpirar,Date?>(nullsLast(), { it.dataValidadeAux }))
+
+//                        produtoList.sort
+//                        produtoList.sortByDescending { it.dataValidade }
                         produtosRecyclerView.adapter = productsAdapter
 
                     }
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
@@ -210,11 +274,6 @@ class HomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-
-    }
-
-    override fun onResume() {
-        super.onResume()
 
     }
 

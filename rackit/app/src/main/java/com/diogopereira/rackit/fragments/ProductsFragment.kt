@@ -17,13 +17,14 @@ import com.diogopereira.rackit.classes.Produto
 import com.diogopereira.rackit.v2.databinding.FragmentProductsBinding
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_products.*
+import java.text.SimpleDateFormat
 
 class ProductsFragment : Fragment() {
     private var _binding: FragmentProductsBinding? = null
     private val binding get() = _binding!!
     lateinit var gv: GlobalClass
 
-//    private lateinit var dbref: DatabaseReference
+    //    private lateinit var dbref: DatabaseReference
 //    private lateinit var dbrefInfo: DatabaseReference
 //    private lateinit var InfoprodutosArrayList: ArrayList<Produto>
 //    private lateinit var ProdutoArrayList: ArrayList<Produto>
@@ -33,7 +34,7 @@ class ProductsFragment : Fragment() {
 
     private lateinit var produtoList: ArrayList<Produto>
     private lateinit var produtosRecyclerView: RecyclerView
-    private lateinit var productsAdapter : ProductsAdapterVertical
+    private lateinit var productsAdapter: ProductsAdapterVertical
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,7 +47,6 @@ class ProductsFragment : Fragment() {
 //        produtoList.clear()
 //        loadProdutosExpirar()
         loadProdutosExpirar()
-
 
 
 //        produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
@@ -73,7 +73,7 @@ class ProductsFragment : Fragment() {
         gv = activity?.application as GlobalClass
 
         produtoList = ArrayList()
-        productsAdapter = ProductsAdapterVertical(requireContext(),produtoList)
+        productsAdapter = ProductsAdapterVertical(requireContext(), produtoList)
         produtosRecyclerView = binding.recyclerView
         produtosRecyclerView.layoutManager = LinearLayoutManager(activity)
         produtosRecyclerView.adapter = productsAdapter
@@ -93,7 +93,7 @@ class ProductsFragment : Fragment() {
         binding.swipeLayout.setOnRefreshListener {
 //            produtoRecyclerView.adapter = produtosAdapter(InfoprodutosArrayList)
 //            getProdutoData()
-            if(produtoList.size<=0) {
+            if (produtoList.size <= 0) {
                 binding.semProduto.visibility = View.VISIBLE
                 binding.recyclerView.visibility = View.GONE
             }
@@ -128,11 +128,10 @@ class ProductsFragment : Fragment() {
                         }
 
 
-
-
                     }
 
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                 }
             })
@@ -152,12 +151,15 @@ class ProductsFragment : Fragment() {
                         for (productSnapshot in snapshot.children) {
 
                             val Infoproduto = productSnapshot.getValue(InfoProduto::class.java)
-
+                            if (!Infoproduto!!.dataValidade.isNullOrEmpty()) {
+                                Infoproduto!!.dataValidadeAux =
+                                    SimpleDateFormat("dd/MM/yyyy").parse(Infoproduto!!.dataValidade)
+                            }
                             currentItem.adicionarInfoProduto(Infoproduto!!)
 
                         }
 
-                        if(produtoList.contains(currentItem)){
+                        if (produtoList.contains(currentItem)) {
                             produtoList.remove(currentItem)
                         }
 
@@ -170,15 +172,16 @@ class ProductsFragment : Fragment() {
 //                            binding.recyclerView.visibility = View.GONE
 //                        }
                         produtoList.add(currentItem)
-                        if(produtoList.size>0){
+                        if (produtoList.size > 0) {
                             binding.semProduto.visibility = View.GONE
-                            binding.recyclerView.visibility =  View.VISIBLE
+                            binding.recyclerView.visibility = View.VISIBLE
                         }
                         produtoList.sortBy { it.nomeProduto }
                         produtosRecyclerView.adapter = productsAdapter
 
                     }
                 }
+
                 override fun onCancelled(error: DatabaseError) {
                 }
             })

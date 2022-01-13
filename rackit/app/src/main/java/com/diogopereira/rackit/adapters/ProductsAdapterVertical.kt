@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.diogopereira.rackit.GlobalClass
 import com.diogopereira.rackit.InfoProdutoActivity
+import com.diogopereira.rackit.classes.InfoProduto
 import com.diogopereira.rackit.classes.Produto
+import com.diogopereira.rackit.classes.ProdutoExpirar
 import com.diogopereira.rackit.v2.R
 import com.diogopereira.rackit.v2.databinding.ItemListaProdutosBinding
 import com.diogopereira.rackit.v2.databinding.RecyclerItemBinding
@@ -46,7 +48,9 @@ class ProductsAdapterVertical :
     override fun onBindViewHolder(holder: HolderProdutoVertical, position: Int) {
         val currentItem = shopListArray[position]
         // TODO: 12/01/2022 verificar se chega a lista de produtos
-        currentItem.listaInfoProduto.sortByDescending { it.dataValidade }
+//        currentItem.listaInfoProduto.sortByDescending { it.dataValidadeAux }
+        currentItem.listaInfoProduto.sortWith(compareBy<InfoProduto,Date?>(nullsLast(), { it.dataValidadeAux }))
+
         holder.nomeProduto.text =
             currentItem.listaInfoProduto.size.toString() + "x " + currentItem.nomeProduto
         if (currentItem.listaInfoProduto[0].dataValidade.isNullOrEmpty()) {

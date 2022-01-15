@@ -30,6 +30,6 @@ Video de demonstração da APP | Resultado final da UI desenvolvida | Resultado 
 
 
 ## Contacto
-* Diogo Pereira A036751 [@diogopereira00](https://github.com/diogopereira00)
-
+* Diogo Pereira [@diogopereira00](https://github.com/diogopereira00)
+https://www.linkedin.com/in/diogopereira23/
 

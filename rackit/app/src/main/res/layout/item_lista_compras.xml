@@ -47,6 +47,6 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="25dp"
             android:src="@drawable/ic_baseline_check_24"
-            app:tint="@color/green" />
+            app:tint="@color/defaultText" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

@@ -14,9 +14,9 @@ O RackIT é um sistema de gestão de inventario doméstico feito para facilitar 
 
 
 ## Galeria
-| VIDEO DEMO | APP LAYOUT PREVIEW |
-:-: | :-: |
-[![Video_Preview](https://github.com/diogopereira00/RackIT/blob/main/docs/images/previewvideo.png)](https://www.youtube.com/watch?v=iz7Q-Qj05Jg) | [![APP Layout](https://github.com/diogopereira00/RackIT/blob/main/docs/images/app.gif)](https://github.com/diogopereira00/RackIT/tree/main/docs/images/appImages)
+| VIDEO DEMO | APP LAYOUT PREVIEW | MOCKUPS |
+:-: | :-: | :-: |
+[![Video_Preview](https://github.com/diogopereira00/RackIT/blob/main/docs/images/previewvideo.png)](https://www.youtube.com/watch?v=iz7Q-Qj05Jg) | [![APP Layout](https://github.com/diogopereira00/RackIT/blob/main/docs/images/app.gif)](https://github.com/diogopereira00/RackIT/tree/main/docs/images/appImages) |  [![mockups](https://github.com/diogopereira00/RackIT/blob/main/docs/images/mockups.gif)](https://github.com/diogopereira00/RackIT/blob/main/docs/mokcups.pdf)
 Video de demonstração da APP | Layout rackIT
 
 ## Tecnologias

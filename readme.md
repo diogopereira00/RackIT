@@ -27,7 +27,7 @@ Video de demonstração da APP | Layout rackIT
 
 
 
-## Responsavel
+## Contacto
 * Diogo Pereira A036751 [@diogopereira00](https://github.com/diogopereira00)
 
 

@@ -19,17 +19,18 @@ O RackIT é um sistema de gestão de inventario doméstico feito para facilitar 
 [![Video_Preview](https://github.com/diogopereira00/RackIT/blob/main/docs/images/previewvideo.png)](https://www.youtube.com/watch?v=iz7Q-Qj05Jg) | [![APP Layout](https://github.com/diogopereira00/RackIT/blob/main/docs/images/app.gif)](https://github.com/diogopereira00/RackIT/tree/main/docs/images/appImages) |  [![mockups](https://github.com/diogopereira00/RackIT/blob/main/docs/images/mockups.gif)](https://github.com/diogopereira00/RackIT/blob/main/docs/mokcups.pdf)
 Video de demonstração da APP | Resultado final da UI desenvolvida | Resultado Inicial da UI
 
-## Tecnologias
-* [Android Studio](https://unity.com/)
+## Tecnologias e Frameworks
+Neste projeto foram utilizadas as seguintes tecnologias e frameworks.
+
 * [Kotlin](https://kotlinlang.org/)
 * [Adalo](https://www.adalo.com/)
-
-### Frameworks
 * [Firebase](https://firebase.google.com/)
+* [XML](https://www.w3schools.com/xml/)
+* [Android Studio](https://developer.android.com/studio)
+
 
 
 
 ## Contacto
-* Diogo Pereira A036751 [@diogopereira00](https://github.com/diogopereira00)
-
+* Diogo Pereira [@diogopereira00](https://github.com/diogopereira00) | [💼 Linkedin](https://www.linkedin.com/in/diogopereira23/)
 

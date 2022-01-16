@@ -32,6 +32,5 @@ Neste projeto foram utilizadas as seguintes tecnologias e frameworks.
 
 
 ## Contacto
-* Diogo Pereira [@diogopereira00](https://github.com/diogopereira00)
-https://www.linkedin.com/in/diogopereira23/
+* Diogo Pereira [@diogopereira00](https://github.com/diogopereira00) | [💼 Linkedin](https://www.linkedin.com/in/diogopereira23/)
 
